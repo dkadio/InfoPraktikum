@@ -34,7 +34,7 @@ public:
 	 * &Uuml;berladen des Vergleichsoperators.<br>
 	 * Dieser wird f&uuml;r die Sortierung der Queue ben&ouml;tigt.
 	 */
-	bool operator <(const Kante * other) const {
+	bool operator <( Kante * other) const {
 		if (this->isVisited()) {
 			return false;
 		} else if (other->isVisited()) {
@@ -46,6 +46,26 @@ public:
 	 Knoten* getNach() const;
 	 Knoten* getVon() const;
 	 Kante* getVorgaengerKante() const;
+	void setVisited(bool visited);
+
+	/**
+	 * Ben&ouml;tigtes Struct f&uuml;r den Pririt&auml;tsvergleich.<br>
+	 * Dieses Struct muss der Queue mitgegeben werden, damit sie die Knoten Objekte
+	 * vergleichen kann.<br>
+	 * Wenn der Linke Comperat schon besucht wurde, wird false zur&uuml;ck gegeben, wenn der
+	 * rechte Comperant besucht wurde, wird true zur&uuml;ck gegeben.
+	 */
+	struct less {
+		bool operator()(Kante* lhs, Kante* rhs) {
+			if (lhs->isVisited()) {
+				return false;
+			} else if (rhs->isVisited()) {
+				return (true);
+			}
+			return lhs->getDistanz() < rhs->getDistanz();
+		}
+	};
+
 
 private:
 	/**
@@ -71,22 +91,5 @@ private:
 	bool visited;
 };
 
-/**
- * Ben&ouml;tigtes Struct f&uuml;r den Pririt&auml;tsvergleich.<br>
- * Dieses Struct muss der Queue mitgegeben werden, damit sie die Knoten Objekte
- * vergleichen kann.<br>
- * Wenn der Linke Comperat schon besucht wurde, wird false zur&uuml;ck gegeben, wenn der
- * rechte Comperant besucht wurde, wird true zur&uuml;ck gegeben.
- */
-struct less {
-	bool operator()(Kante* lhs, Kante* rhs) {
-		if (lhs->isVisited()) {
-			return false;
-		} else if (rhs->isVisited()) {
-			return (true);
-		}
-		return lhs->getDistanz() < rhs->getDistanz();
-	}
-};
 
 #endif /* KANTE_H_ */

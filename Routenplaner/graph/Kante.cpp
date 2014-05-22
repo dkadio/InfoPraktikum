@@ -13,8 +13,9 @@ Kante::Kante(Kante *von, Knoten *nach) {
 		distanz = 0;
         von = NULL;
 	} else {
-		distanz = von->getDistanz() + von->nach->berechneLaenge(nach);
-        this->von = von->nach;
+		Knoten *start = von->nach;
+		distanz = von->getDistanz() + start->berechneLaenge(nach);
+        this->von = start;
 
 	}
 	this->vorgaengerKante = von;
@@ -40,4 +41,8 @@ Knoten* Kante::getVon() const {
 
 Kante* Kante::getVorgaengerKante() const {
 	return vorgaengerKante;
+}
+
+void Kante::setVisited(bool visited) {
+	this->visited = visited;
 }

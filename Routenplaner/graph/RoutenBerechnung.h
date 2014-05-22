@@ -12,6 +12,9 @@
 #include <queue>
 #include <list>
 
+//TODO stdlib wieder entfernen (War Nur zum Testen)
+#include <stdlib.h>
+
 using namespace std;
 /**
  * Die Klasse Routenberechnung &uuml;bernimmt die eigentliche Routenberechnung.<br>
@@ -41,7 +44,7 @@ public:
 	void nachfolgerEinpflegen(Kante *vorgengerKante,Knoten* knoten);
 
 private:
-	priority_queue<Kante*> graph;
+	priority_queue<Kante*,vector<Kante*>, Kante::less> graph;
 
 	/**
 	 * Der Startknoten, von dem aus die Route berechnet werden soll.

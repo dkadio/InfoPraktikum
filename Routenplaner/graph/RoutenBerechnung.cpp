@@ -31,6 +31,8 @@ void RoutenBerechnung::routeBerechnen() {
 	while (aktuellerEndknoten != this->ziel) {
 		//Die schnellste nicht besuchte Kante aus queue ziehen
 		aktuelleEndkante = graph.top();
+		cout<<"\n"<<aktuelleEndkante->getDistanz()<<"\n";
+		aktuelleEndkante->setVisited(true);
 		//Endknoten fuer das Schleifenkriterium und das Einpflegen zuweisen
 		aktuellerEndknoten = aktuelleEndkante->getNach();
 		//Vom besten Weg die Nachfolger einpflegen
