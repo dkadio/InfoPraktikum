@@ -7,11 +7,13 @@
 
 #ifndef BENUTZERINTERFACE_H_
 #define BENUTZERINTERFACE_H_
+
 #define ENDE 0
 #define NAMEN_SUCHEN 1
 #define ID_SUCHEN 2
 #define ALLE_LOKS 3
 #define GEMEINSAMKEITEN 4
+#define ROUTE_BERECHNEN 5
 
 #define NAME_ANZEIGEN 1
 #define UEBERGEORDNETE_LOKATION_ANZEIGEN 2
@@ -26,6 +28,8 @@
 #include  "SuchenKlasse.h"
 #include  <iostream>
 #include  "sicherLesen.h"
+#include  "../graph/RoutenBerechnung.h"
+#include "../graph/Graph.h"
 
 /**
  * Erste Klasse f&uuml;r ein Benutzerinterface.<br>
@@ -80,6 +84,11 @@ public:
 	void gemeinsamkeitenSuchen();
 
 	/**
+	 * Diese Methode f&uuml;hrt durch das Menue um eine Route zu berechnen.
+	 */
+	void routeBerechnen();
+
+	/**
 	 * Diese Methode gibt einen Vector aus. Bei der Ausgbe wird ein Index erstellt,
 	 * um auf die einzelnen Elemente zugreifen zu k&ouml;nnen.
 	 * @param vector Die Referenz auf den Vector, der ausgegeben werden soll.
@@ -92,6 +101,7 @@ public:
 private:
 	LokationsVerwaltung* lokVerwaltung;
 	SuchenKlasse *suchKlasse;
+	Graph *graph;
 };
 
 #endif /* BENUTZERINTERFACE_H_ */

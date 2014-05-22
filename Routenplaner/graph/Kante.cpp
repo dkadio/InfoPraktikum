@@ -9,10 +9,16 @@
 
 Kante::Kante(Kante *von, Knoten *nach) {
 	visited = false;
-	distanz = von->getDistanz() + von->nach->berechneLaenge(nach);
+	if (von == NULL || nach == NULL) {
+		distanz = 0;
+        von = NULL;
+	} else {
+		distanz = von->getDistanz() + von->nach->berechneLaenge(nach);
+        this->von = von->nach;
+
+	}
 	this->vorgaengerKante = von;
-	this->von = von->nach;
-	this->nach = nach;
+    this->nach = nach;
 
 }
 

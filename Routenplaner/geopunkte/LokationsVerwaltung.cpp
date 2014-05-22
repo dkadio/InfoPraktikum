@@ -167,4 +167,15 @@ bool LokationsVerwaltung::checkPunktlokation(vector<string>* zeile) {
 	return (regex_match(zeile->at(TYPE), regex("\"P(.*)")));
 }
 
-
+bool LokationsVerwaltung::validierePunklokation(int id) {
+	try {
+		Gebietslokation *lok = gebieteMap.at(id);
+		if (lok->getType() == PUNKT) {
+			return (true);
+		} else {
+			return (false);
+		}
+	} catch (out_of_range &e) {
+		return (false);
+	}
+}

@@ -10,12 +10,13 @@
 BenutzerInterface::BenutzerInterface(LokationsVerwaltung* lokVerwaltung) {
 	this->lokVerwaltung = lokVerwaltung;
 	this->suchKlasse = new SuchenKlasse(lokVerwaltung);
-
+	this->graph = new Graph(lokVerwaltung->getGebieteMap());
 }
 
 BenutzerInterface::~BenutzerInterface() {
 	delete lokVerwaltung;
 	delete suchKlasse;
+	delete graph;
 }
 //TODO Eingaben Typsicher machen
 void BenutzerInterface::zeigeHauptMenue() {
@@ -28,6 +29,7 @@ void BenutzerInterface::zeigeHauptMenue() {
 		cout << "\n" << ALLE_LOKS << " - gibt alle Lokationen aus";
 		cout << "\n" << GEMEINSAMKEITEN
 				<< " - startet die Suche nach Gemeinsamkeiten";
+		cout << "\n" << ROUTE_BERECHNEN << " - startet die Routenberechnung";
 		cout << "\nAuswahl: ";
 		cin >> auswahl;
 		cin.clear();
@@ -43,6 +45,12 @@ void BenutzerInterface::zeigeHauptMenue() {
 			break;
 		case GEMEINSAMKEITEN:
 			gemeinsamkeitenSuchen();
+			break;
+		case ROUTE_BERECHNEN:
+			routeBerechnen();
+			break;
+		case ENDE:
+			//Nichts
 			break;
 		default:
 			cout << "\nFalsche Auswahl!\n";
@@ -263,28 +271,48 @@ string BenutzerInterface::vectorAusgeben(
 	return (ausgabe.str());
 }
 
- string BenutzerInterface::vectorAusgeben(
- const vector<Linearlokation*>* treffer) {
- ostringstream ausgabe;
- for (int i = 0; i < treffer->size(); i++) {
- ausgabe << "\n\n Stelle: --------------- " << i;
- ausgabe << treffer->at(i)->toString();
- }
- if (treffer->empty()) {
- ausgabe << "\nKeine Treffer enthalten.";
- }
- return (ausgabe.str());
- }
+string BenutzerInterface::vectorAusgeben(
+		const vector<Linearlokation*>* treffer) {
+	ostringstream ausgabe;
+	for (int i = 0; i < treffer->size(); i++) {
+		ausgabe << "\n\n Stelle: --------------- " << i;
+		ausgabe << treffer->at(i)->toString();
+	}
+	if (treffer->empty()) {
+		ausgabe << "\nKeine Treffer enthalten.";
+	}
+	return (ausgabe.str());
+}
 
- string BenutzerInterface::vectorAusgeben(
- const vector<Punktlokation*>* treffer) {
- ostringstream ausgabe;
- for (int i = 0; i < treffer->size(); i++) {
- ausgabe << "\n\n Stelle: --------------- " << i;
- ausgabe << treffer->at(i)->toString();
- }
- if (treffer->empty()) {
- ausgabe << "\nKeine Treffer enthalten.";
- }
- return (ausgabe.str());
- }
+string BenutzerInterface::vectorAusgeben(
+		const vector<Punktlokation*>* treffer) {
+	ostringstream ausgabe;
+	for (int i = 0; i < treffer->size(); i++) {
+		ausgabe << "\n\n Stelle: --------------- " << i;
+		ausgabe << treffer->at(i)->toString();
+	}
+	if (treffer->empty()) {
+		ausgabe << "\nKeine Treffer enthalten.";
+	}
+	return (ausgabe.str());
+}
+
+void BenutzerInterface::routeBerechnen() {
+	cout << "\nGeben Sie die Id des Startpunkts ein: ";
+	int startId = sicherIntLesen();
+	if (!lokVerwaltung->validierePunklokation(startId)) {
+		cout << "\nUngueltige Id fuer den Startpunkt!\n";
+		return;
+	}
+	cout << "\nGeben Sie die Id des Zielpunkts ein: ";
+	int zielId = sicherIntLesen();
+	if (!lokVerwaltung->validierePunklokation(zielId)) {
+		cout << "\nUngueltige Id fuer den Zielpunkt!\n";
+		return;
+	}
+	//Berechnen der Strecke
+	RoutenBerechnung *berechnung = new RoutenBerechnung(
+			graph->getKnoten(startId), graph->getKnoten(zielId));
+	berechnung->routeBerechnen();
+	delete berechnung;
+}

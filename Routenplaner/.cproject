@@ -72,4 +72,5 @@
 			<resource resourceType="PROJECT" workspacePath="/Routenplaner"/>
 		</configuration>
 	</storageModule>
+	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
 </cproject>

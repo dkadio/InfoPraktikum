@@ -76,3 +76,12 @@ string Graph::toString() {
 	s<<"Der Graph enthaelt "<<knotenListe.size()<<" Elemente.\n";
 	return (s.str());
 }
+
+Knoten* Graph::getKnoten(int id) {
+	for(auto it = knotenListe.begin(); it!= knotenListe.end(); it++){
+		if((*it)->getId() == id){
+			return (*it);
+		}
+	}
+	throw out_of_range("Der gesuchte Knoten konnte nicht gefunden werden.");
+}

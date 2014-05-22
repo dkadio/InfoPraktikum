@@ -27,7 +27,7 @@ using namespace std;
 
 /**
  * Diese Klasse verwaltet die verschiedenen Lokationen.<br>
- * Da aus verschiedenen Gründen und Gesichtspunkten auf die Lokalitionen
+ * Da aus verschiedenen Gr��nden und Gesichtspunkten auf die Lokalitionen
  * zugegriffen werden muss, werden die Lokationen in mehreren Speicherstrukturen
  * vorgehalten.
  */
@@ -137,6 +137,14 @@ public:
 	const multimap<string, Gebietslokation*>& getNamenMap() const;
 	const map<int, Gebietslokation*>& getGebieteMap() const;
 
+	/**
+	 * Diese Methode pr&uuml;ft, ob es sich um eine g&uuml;ltige Id zu einer
+	 * Punklokation handelt.
+	 * @param id Die Id der Punklokation, die getestet werden soll.
+	 * @return true, wenn es sich um eine g&uuml;tige Punktlokation handelt, false
+	 * wenn nicht.
+	 */
+	bool validierePunklokation(int id);
 private:
 	/**
 	 * Dieses Attribut ist die prim&auml;re Datenstruktur f&uuml;r die Datens&auml;tze.

@@ -64,6 +64,13 @@ public:
 	 * @return Ein String mit allen enthaltenen Knoten.
 	 */
 	string toString();
+
+	/**
+	 * Diese Methode gibt anhand einer gegebenen Id einen Knoten zur&uuml;ck.
+	 * @param id Die Id des gesuchten Knotens.
+	 * @return Ein Pointer auf den gesuchten Knoten.
+	 */
+	Knoten *getKnoten(int id);
 private:
 	/**
 	 * Diese Liste enth&auml;lt den eigentlichen Graphen.
