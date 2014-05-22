@@ -57,7 +57,8 @@ void RoutenBerechnung::startdijkstra() {
 		}
 		aktuellerKnoten->setBesucht(true);
 		aktuellerKnoten = getKuerzesterNachfolger(aktuellerKnoten);
-		cout<<"\n Distanz Aktueller Kniten: "<<aktuellerKnoten->getDistanz();
+		cout << "\n Distanz Aktueller Knoten: "
+				<< aktuellerKnoten->getDistanz();
 	}
 
 	//den nachfolger nehmen der die kuerzeste distanz hat und besucht auf true setzen
@@ -70,7 +71,7 @@ Knoten* RoutenBerechnung::getKuerzesterNachfolger(Knoten* knoten) {
 	Knoten* ausgbae = (*knoten->getNachfolger().begin());
 	for (auto it = knoten->getNachfolger().begin();
 			it != knoten->getNachfolger().end(); it++) {
-		if ((*it)->getDistanz() < kuerzesteDistanz) {
+		if ((*it)->getDistanz() < kuerzesteDistanz || !(*it)->isBesucht()) {
 			kuerzesteDistanz = (*it)->getDistanz();
 			ausgbae = (*it);
 		}
