@@ -26,6 +26,11 @@ public:
 	Knoten(Punktlokation* punktLokation);
 	virtual ~Knoten();
 	void addNachfolger(Knoten *nachfolger);
+	/**
+	 * Berechnet die Distanz zu einem anderen Knoten.
+	 * @param Der Knoten zu dem die Entfernung berechnet werden soll.
+	 * @return Die Entfernung zu dem anderen Knoten in Kilometern.
+	 */
 	float berechneLaenge(Knoten * derAnnere);
 	int getId();
 
