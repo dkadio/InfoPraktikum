@@ -29,9 +29,9 @@ void Graph::erstelleKnoten(map<int, Knoten*>& konstruktionsMap,
 		//Pruefen, ob Element eine Punklokation ist
 		Punktlokation *pktLok = (Punktlokation*) it->second;
 		if (pktLok->getType() == PUNKT) {
-				Knoten *k = new Knoten(pktLok);
-				knotenListe.push_back(k);
-				konstruktionsMap[k->getEigenschaften()->getId()] = k;
+			Knoten *k = new Knoten(pktLok);
+			knotenListe.push_back(k);
+			konstruktionsMap[k->getEigenschaften()->getId()] = k;
 		}
 	}
 }
@@ -53,12 +53,13 @@ void Graph::verlinkeKnoten(map<int, Knoten*> konstruktionsMap,
 		//Den Intersectioncode als Nachfolgereintragen
 		if (pLok->getIntersectioncode() != NULL) {
 			try {
-					knoten->addNachfolger(
-							konstruktionsMap.at(
-									pLok->getIntersectioncode()->getId()));
-			}catch(out_of_range &e){
-				cout<<"\nIntersectioncode nicht gefunden";
-				cout<<"\nDas Programm wird aufgrund des unerwarteten Fehlers beendet";
+				knoten->addNachfolger(
+						konstruktionsMap.at(
+								pLok->getIntersectioncode()->getId()));
+			} catch (out_of_range &e) {
+				cout << "\nIntersectioncode nicht gefunden";
+				cout
+						<< "\nDas Programm wird aufgrund des unerwarteten Fehlers beendet";
 				exit(EXIT_FAILURE);
 			}
 		}
@@ -73,17 +74,23 @@ string Graph::toString() {
 		s << ((Knoten*) *it)->toString();
 	}
 	s << "\nEnde Graph\n";
-	s<<"Der Graph enthaelt "<<knotenListe.size()<<" Elemente.\n";
+	s << "Der Graph enthaelt " << knotenListe.size() << " Elemente.\n";
 	return (s.str());
 }
 
 Knoten* Graph::getKnoten(int id) {
-	for(auto it = knotenListe.begin(); it!= knotenListe.end(); it++){
-		if((*it)->getId() == id){
+	for (auto it = knotenListe.begin(); it != knotenListe.end(); it++) {
+		if ((*it)->getId() == id) {
 			return (*it);
 		}
 	}
 	throw out_of_range("Der gesuchte Knoten konnte nicht gefunden werden.");
+}
+
+void Graph::clear() {
+	for (auto it = knotenListe.begin(); it != knotenListe.end(); it++) {
+		(*it)->clear();
+	}
 }
 
 const list<Knoten*>& Graph::getKnotenListe() const {

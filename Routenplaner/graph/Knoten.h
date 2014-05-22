@@ -32,7 +32,19 @@ public:
 	 * @return Die Entfernung zu dem anderen Knoten in Kilometern.
 	 */
 	float berechneLaenge(Knoten * derAnnere);
+
+	/**
+	 * Diese Methode &auml;ndert in Abh&auml;ngigkeit, ob sich die Distanz verbessert
+	 * den Vorg&auml;nger des Knotens und die Distanz zu ihm.
+	 */
+	void aendereVorgaenger(Knoten * vorgaenger);
 	int getId();
+
+	/**
+	 * Diese Methode muss aufgerufen werden, bevor eine neue Route berechnet wird.
+	 * <br>Sie setzt visited auf false und l&ouml;scht den Vorg&auml;nger.
+	 */
+	void clear();
 
 	string toString();
 	Punktlokation* getEigenschaften() {

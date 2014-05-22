@@ -14,8 +14,7 @@ Knoten::~Knoten() {
 
 Knoten::Knoten(Punktlokation* punktLokation) {
 	this->eigenschaften = punktLokation;
-	this->besucht = false;
-	this->distanz = 10000000;
+	clear();
 }
 
 void Knoten::addNachfolger(Knoten* nachfolger) {
@@ -33,12 +32,25 @@ int Knoten::getId() {
 
 string Knoten::toString() {
 	ostringstream s;
-	s<<"";
+	s << "";
 	s << "\nName: " << eigenschaften->getFirstName() << " Anzahl Nachfolger: "
-			<< nachfolger.size()<< " Id=" <<this->getEigenschaften()->getId();
+			<< nachfolger.size() << " Id=" << this->getEigenschaften()->getId();
 	return (s.str());
 }
 
 const list<Knoten*>& Knoten::getNachfolger() const {
 	return nachfolger;
+}
+
+void Knoten::aendereVorgaenger(Knoten* vorgaenger) {
+	if (distanz < 0 || berechneLaenge(vorgaenger) < distanz) {
+		this->vorgaenger = vorgaenger;
+		this->distanz = vorgaenger->getDistanz() + berechneLaenge(vorgaenger);
+		//TODO auch besucht setzen?
+	}
+}
+
+void Knoten::clear() {
+	this->besucht = false;
+	this->distanz = -1;
 }

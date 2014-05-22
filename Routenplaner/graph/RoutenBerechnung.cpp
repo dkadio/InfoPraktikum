@@ -47,8 +47,11 @@ void RoutenBerechnung::startdijkstra() {
 		cout << ((Knoten*) *startiterator)->toString();
 	}
 	//nachfolger anschauen, distanzen der nachfolger eintragen und vorgaenger setzen
-
-	//den nachfolger nehmen der die k��rzeste distanz hat und besucht auf true setzen
+	list<Knoten*> nachfolgerListe = start->getNachfolger();
+	for(auto it = nachfolgerListe.begin(); it != nachfolgerListe.end(); it++){
+		((Knoten*)*it)->aendereVorgaenger(start);
+	}
+	//den nachfolger nehmen der die kuerzeste distanz hat und besucht auf true setzen
 
 	//selbes spiel mit diesem nachfolger
 }

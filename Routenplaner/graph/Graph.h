@@ -71,6 +71,13 @@ public:
 	 * @return Ein Pointer auf den gesuchten Knoten.
 	 */
 	Knoten *getKnoten(int id);
+
+	/**
+	 * Diese Methode durchl&auml;ft den Graphen und ruft bei allen Knoten die
+	 * clear() Methode auf.
+	 */
+	void clear();
+
 	const list<Knoten*>& getKnotenListe() const;
 
 private:
