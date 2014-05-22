@@ -71,6 +71,8 @@ public:
 	 * @return Ein Pointer auf den gesuchten Knoten.
 	 */
 	Knoten *getKnoten(int id);
+	const list<Knoten*>& getKnotenListe() const;
+
 private:
 	/**
 	 * Diese Liste enth&auml;lt den eigentlichen Graphen.

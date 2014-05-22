@@ -38,16 +38,17 @@ void RoutenBerechnung::nachfolgerEinpflegen(Kante *vorgengerKante,
 	}
 }
 
-void RoutenBerechnung::startdijkstra(){
+void RoutenBerechnung::startdijkstra() {
 	//startpunkt im graph suchen
 	//Punktlokation* a = dijkstrahraph->knotenListe.front();
-	list<Punktlokation*>::iterator startiterator;
-//	for(startiterator = dijkstrahraph->knotenListe.begin(); startiterator != dijkstrahraph->knotenListe.end(); startiterator++){
-		cout << *startiterator;
-	//}
+	for (auto startiterator = dijkstrahraph->getKnotenListe().begin();
+			startiterator != dijkstrahraph->getKnotenListe().end();
+			startiterator++) {
+		cout << ((Knoten*) *startiterator)->toString();
+	}
 	//nachfolger anschauen, distanzen der nachfolger eintragen und vorgaenger setzen
 
-	//den nachfolger nehmen der die kürzeste distanz hat und besucht auf true setzen
+	//den nachfolger nehmen der die k��rzeste distanz hat und besucht auf true setzen
 
 	//selbes spiel mit diesem nachfolger
 }

@@ -85,3 +85,7 @@ Knoten* Graph::getKnoten(int id) {
 	}
 	throw out_of_range("Der gesuchte Knoten konnte nicht gefunden werden.");
 }
+
+const list<Knoten*>& Graph::getKnotenListe() const {
+	return knotenListe;
+}
