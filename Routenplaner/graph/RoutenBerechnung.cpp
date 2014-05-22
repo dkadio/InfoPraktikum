@@ -48,11 +48,12 @@ void RoutenBerechnung::startdijkstra() {
 	 }*/
 	//nachfolger anschauen, distanzen der nachfolger eintragen und vorgaenger setzen
 	Knoten * aktuellerKnoten = start;
+	start->setDistanz(0);
 	while (!aktuellerKnoten->isBesucht()) {
 		list<Knoten*> nachfolgerListe = aktuellerKnoten->getNachfolger();
 		for (auto it = nachfolgerListe.begin(); it != nachfolgerListe.end();
 				it++) {
-			(*it)->aendereVorgaenger(start);
+			(*it)->aendereVorgaenger(aktuellerKnoten);
 		}
 		aktuellerKnoten->setBesucht(true);
 		aktuellerKnoten = getKuerzesterNachfolger(aktuellerKnoten);

@@ -43,9 +43,12 @@ const list<Knoten*>& Knoten::getNachfolger() const {
 }
 
 void Knoten::aendereVorgaenger(Knoten* vorgaenger) {
-	if (distanz < 0
-			|| (vorgaenger->getDistanz() + berechneLaenge(vorgaenger))
-					< distanz) {
+	if (distanz < 0) {
+		this->vorgaenger = vorgaenger;
+		distanz = vorgaenger->getDistanz();
+		distanz += this->berechneLaenge(vorgaenger);
+	}
+	if ((vorgaenger->getDistanz() + this->berechneLaenge(vorgaenger)) < distanz) {
 		this->vorgaenger = vorgaenger;
 		this->distanz = vorgaenger->getDistanz() + berechneLaenge(vorgaenger);
 	}
