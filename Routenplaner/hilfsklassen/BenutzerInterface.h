@@ -98,6 +98,11 @@ public:
 	string vectorAusgeben(const vector<Linearlokation*> *treffer);
 	string vectorAusgeben(const vector<Punktlokation*> *treffer);
 
+
+	/**
+	 * Gibt an einer beliebigen Stelle des Graphen die Nachfolger aus.
+	 */
+	void nachfolgerAusGraphAusgeben();
 private:
 	LokationsVerwaltung* lokVerwaltung;
 	SuchenKlasse *suchKlasse;

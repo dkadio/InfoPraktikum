@@ -44,11 +44,13 @@ void Graph::verlinkeKnoten(map<int, Knoten*> konstruktionsMap,
 		Punktlokation *pLok = knoten->getEigenschaften();
 		//POffset als Nachfolger eintragen
 		if (pLok->getPositiveOffset() != NULL) {
-			knoten->addNachfolger(konstruktionsMap[pLok->getId()]);
+			knoten->addNachfolger(
+					konstruktionsMap[pLok->getPositiveOffset()->getId()]);
 		}
 		//NOffset als Nachfolger eintragen
 		if (pLok->getNegativeOffset() != NULL) {
-			knoten->addNachfolger(konstruktionsMap[pLok->getId()]);
+			knoten->addNachfolger(
+					konstruktionsMap[pLok->getNegativeOffset()->getId()]);
 		}
 		//Den Intersectioncode als Nachfolgereintragen
 		if (pLok->getIntersectioncode() != NULL) {

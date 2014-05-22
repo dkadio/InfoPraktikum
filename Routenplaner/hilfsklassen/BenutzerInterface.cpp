@@ -316,3 +316,13 @@ void BenutzerInterface::routeBerechnen() {
 	berechnung->routeBerechnen();
 	delete berechnung;
 }
+
+void BenutzerInterface::nachfolgerAusGraphAusgeben(void) {
+	cout << "\nBitte geben Sie die gesuchte Id ein: ";
+	int id = sicherIntLesen();
+	Knoten* knoten = graph->getKnoten(id);
+	for (auto it = knoten->getNachfolger().begin();
+			it != knoten->getNachfolger().end(); ++it) {
+		cout<<"\n"<<(*it)->toString();
+	}
+}
