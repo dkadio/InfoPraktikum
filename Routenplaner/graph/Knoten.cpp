@@ -43,10 +43,11 @@ const list<Knoten*>& Knoten::getNachfolger() const {
 }
 
 void Knoten::aendereVorgaenger(Knoten* vorgaenger) {
-	if (distanz < 0 || berechneLaenge(vorgaenger) < distanz) {
+	if (distanz < 0
+			|| (vorgaenger->getDistanz() + berechneLaenge(vorgaenger))
+					< distanz) {
 		this->vorgaenger = vorgaenger;
 		this->distanz = vorgaenger->getDistanz() + berechneLaenge(vorgaenger);
-		//TODO auch besucht setzen?
 	}
 }
 

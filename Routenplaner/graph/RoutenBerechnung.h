@@ -45,6 +45,14 @@ public:
 	 */
 	void nachfolgerEinpflegen(Kante *vorgengerKante,Knoten* knoten);
 	void startdijkstra();
+
+	/**
+	 * Diese Methode gibt den k&uuml;rzesten Nachfolger zu dem gegebenen
+	 * Knoten.
+	 * @param Der Knoten, dessen Nachfolger gesucht werden sollen.
+	 * @return Der Nachfolger mit der k&uuml;rzesten Distanz.
+	 */
+	Knoten* getKuerzesterNachfolger(Knoten* knoten);
 private:
 	priority_queue<Kante*,vector<Kante*>, Kante::less> graph;
 

@@ -69,18 +69,18 @@ public:
 		this->distanz = distanz;
 	}
 
-	const Punktlokation* getVorgaenger()  {
+	const Knoten* getVorgaenger()  {
 		return vorgaenger;
 	}
 
-	void setVorgaenger( Punktlokation*& vorgaenger) {
+	void setVorgaenger( Knoten*& vorgaenger) {
 		this->vorgaenger = vorgaenger;
 	}
 
 private:
 	Punktlokation* eigenschaften; //getid ist die knotennummer
 	list<Knoten*> nachfolger;
-	Punktlokation* vorgaenger;
+	Knoten* vorgaenger;
 	bool besucht;
 	float distanz;
 };

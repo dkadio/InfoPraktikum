@@ -48,10 +48,27 @@ void RoutenBerechnung::startdijkstra() {
 	}
 	//nachfolger anschauen, distanzen der nachfolger eintragen und vorgaenger setzen
 	list<Knoten*> nachfolgerListe = start->getNachfolger();
-	for(auto it = nachfolgerListe.begin(); it != nachfolgerListe.end(); it++){
-		((Knoten*)*it)->aendereVorgaenger(start);
+	for (auto it = nachfolgerListe.begin(); it != nachfolgerListe.end(); it++) {
+		(*it)->aendereVorgaenger(start);
 	}
+	Knoten* nachfolger = getKuerzesterNachfolger(start);
+
+
+
 	//den nachfolger nehmen der die kuerzeste distanz hat und besucht auf true setzen
 
 	//selbes spiel mit diesem nachfolger
+}
+
+Knoten* RoutenBerechnung::getKuerzesterNachfolger(Knoten* knoten) {
+	float kuerzesteDistanz = (*knoten->getNachfolger().begin())->getDistanz();
+	Knoten* ausgbae = (*knoten->getNachfolger().begin());
+	for (auto it = knoten->getNachfolger().begin();
+			it != knoten->getNachfolger().end(); it++) {
+		if ((*it)->getDistanz() < kuerzesteDistanz) {
+			kuerzesteDistanz = (*it)->getDistanz();
+			ausgbae = (*it);
+		}
+	}
+	return (ausgbae);
 }
