@@ -8,7 +8,9 @@
 #include "Kante.h"
 
 Kante::Kante(Kante *von, Knoten *nach) {
+	visited = false;
 	distanz = von->getDistanz() + von->nach->berechneLaenge(nach);
+	this->vorgaengerKante = von;
 	this->von = von->nach;
 	this->nach = nach;
 

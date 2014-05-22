@@ -26,6 +26,23 @@ public:
 	virtual ~Kante();
 	float getDistanz() const;
 
+	bool isVisited() const {
+		return (visited);
+	}
+
+	/**
+	 * &Uuml;berladen des Vergleichsoperators.<br>
+	 * Dieser wird f&uuml;r die Sortierung der Queue ben&ouml;tigt.
+	 */
+	bool operator <(const Kante * other) const {
+		if (this->isVisited()) {
+			return false;
+		} else if (other->isVisited()) {
+			return (true);
+		}
+		return this->getDistanz() < other->getDistanz();
+	}
+
 private:
 	/**
 	 * Der erste Punkt der Kante.
@@ -35,20 +52,35 @@ private:
 	 * Der zweite Punkt der Kante.
 	 */
 	Knoten * nach;
+
+	/**
+	 * Dieses Attribut dient der Darstellung der Route.
+	 */
+	Kante *vorgaengerKante;
+
 	/**
 	 * Die Distanz vom Startknoten, des Graphen bis zum zweiten Knoten der
 	 * Kante.
 	 */
 	float distanz;
+
+	bool visited;
 };
 
 /**
  * Ben&ouml;tigtes Struct f&uuml;r den Pririt&auml;tsvergleich.<br>
  * Dieses Struct muss der Queue mitgegeben werden, damit sie die Knoten Objekte
- * vergleichen kann.
+ * vergleichen kann.<br>
+ * Wenn der Linke Comperat schon besucht wurde, wird false zur&uuml;ck gegeben, wenn der
+ * rechte Comperant besucht wurde, wird true zur&uuml;ck gegeben.
  */
-struct vergleichDistanzen {
+struct less {
 	bool operator()(Kante* lhs, Kante* rhs) {
+		if (lhs->isVisited()) {
+			return false;
+		} else if (rhs->isVisited()) {
+			return (true);
+		}
 		return lhs->getDistanz() < rhs->getDistanz();
 	}
 };

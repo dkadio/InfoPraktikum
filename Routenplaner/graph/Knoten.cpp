@@ -36,3 +36,7 @@ string Knoten::toString() {
 			<< nachfolger.size()<< " Id=" <<this->getEigenschaften()->getId();
 	return (s.str());
 }
+
+const list<Knoten*>& Knoten::getNachfolger() const {
+	return nachfolger;
+}

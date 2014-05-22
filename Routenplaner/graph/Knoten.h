@@ -39,6 +39,8 @@ public:
 		return (eigenschaften);
 	}
 
+	const list<Knoten*>& getNachfolger() const;
+
 private:
 	Punktlokation* eigenschaften; //getid ist die knotennummer
 	list<Knoten*> nachfolger;
