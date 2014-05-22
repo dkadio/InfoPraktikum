@@ -41,19 +41,23 @@ void RoutenBerechnung::nachfolgerEinpflegen(Kante *vorgengerKante,
 void RoutenBerechnung::startdijkstra() {
 	//startpunkt im graph suchen
 	//Punktlokation* a = dijkstrahraph->knotenListe.front();
-	for (auto startiterator = dijkstrahraph->getKnotenListe().begin();
-			startiterator != dijkstrahraph->getKnotenListe().end();
-			startiterator++) {
-		cout << ((Knoten*) *startiterator)->toString();
-	}
+	/*	for (auto startiterator = dijkstrahraph->getKnotenListe().begin();
+	 startiterator != dijkstrahraph->getKnotenListe().end();
+	 startiterator++) {
+	 cout << ((Knoten*) *startiterator)->toString();
+	 }*/
 	//nachfolger anschauen, distanzen der nachfolger eintragen und vorgaenger setzen
-	list<Knoten*> nachfolgerListe = start->getNachfolger();
-	for (auto it = nachfolgerListe.begin(); it != nachfolgerListe.end(); it++) {
-		(*it)->aendereVorgaenger(start);
+	Knoten * aktuellerKnoten = start;
+	while (!aktuellerKnoten->isBesucht()) {
+		list<Knoten*> nachfolgerListe = aktuellerKnoten->getNachfolger();
+		for (auto it = nachfolgerListe.begin(); it != nachfolgerListe.end();
+				it++) {
+			(*it)->aendereVorgaenger(start);
+		}
+		aktuellerKnoten->setBesucht(true);
+		aktuellerKnoten = getKuerzesterNachfolger(start);
+		cout<<"\n Distanz Aktueller Kniten: "<<aktuellerKnoten->getDistanz();
 	}
-	Knoten* nachfolger = getKuerzesterNachfolger(start);
-
-
 
 	//den nachfolger nehmen der die kuerzeste distanz hat und besucht auf true setzen
 
