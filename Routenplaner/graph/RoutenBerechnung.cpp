@@ -14,14 +14,28 @@ RoutenBerechnung::RoutenBerechnung(Knoten *start, Knoten *ziel) {
 
 RoutenBerechnung::~RoutenBerechnung() {
 	//TODO Destruktor testen
-	while(!graph.empty()){
+	while (!graph.empty()) {
 		delete graph.top();
 		graph.pop();
 	}
 }
 
 void RoutenBerechnung::routeBerechnen() {
+	//Die ersten Kanten aufbauen
 	nachfolgerEinpflegen(NULL, start);
+	//Den ersten Endknoten initialisieren
+	Knoten *aktuellerEndknoten = start;
+	Kante *aktuelleEndkante;
+
+	//Solange der beste Weg, bzw. dessen Endknoten nicht das Ziel ist
+	while (aktuellerEndknoten != this->ziel) {
+		//Die schnellste nicht besuchte Kante aus queue ziehen
+		aktuelleEndkante = graph.top();
+		//Endknoten fuer das Schleifenkriterium und das Einpflegen zuweisen
+		aktuellerEndknoten = aktuelleEndkante->getNach();
+		//Vom besten Weg die Nachfolger einpflegen
+		nachfolgerEinpflegen(aktuelleEndkante, aktuellerEndknoten);
+	}
 }
 
 void RoutenBerechnung::kanteErstellen(Kante* vorgaengerKante,
@@ -29,8 +43,10 @@ void RoutenBerechnung::kanteErstellen(Kante* vorgaengerKante,
 	graph.push(new Kante(vorgaengerKante, endKnoten));
 }
 
-void RoutenBerechnung::nachfolgerEinpflegen(Kante *vorgengerKante,Knoten* knoten) {
-	for(auto it = knoten->getNachfolger().begin(); it != knoten->getNachfolger().end(); it++){
-		kanteErstellen(vorgengerKante,*it);
+void RoutenBerechnung::nachfolgerEinpflegen(Kante *vorgengerKante,
+		Knoten* knoten) {
+	for (auto it = knoten->getNachfolger().begin();
+			it != knoten->getNachfolger().end(); it++) {
+		kanteErstellen(vorgengerKante, *it);
 	}
 }

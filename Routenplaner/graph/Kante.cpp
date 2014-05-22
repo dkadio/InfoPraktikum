@@ -23,3 +23,15 @@ Kante::~Kante() {
 float Kante::getDistanz() const {
 	return distanz;
 }
+
+Knoten* Kante::getNach() const {
+	return nach;
+}
+
+Knoten* Kante::getVon() const {
+	return von;
+}
+
+Kante* Kante::getVorgaengerKante() const {
+	return vorgaengerKante;
+}

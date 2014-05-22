@@ -43,6 +43,10 @@ public:
 		return this->getDistanz() < other->getDistanz();
 	}
 
+	 Knoten* getNach() const;
+	 Knoten* getVon() const;
+	 Kante* getVorgaengerKante() const;
+
 private:
 	/**
 	 * Der erste Punkt der Kante.
