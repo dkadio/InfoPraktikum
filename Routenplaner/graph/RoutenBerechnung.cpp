@@ -55,7 +55,7 @@ void RoutenBerechnung::startdijkstra() {
 			(*it)->aendereVorgaenger(start);
 		}
 		aktuellerKnoten->setBesucht(true);
-		aktuellerKnoten = getKuerzesterNachfolger(start);
+		aktuellerKnoten = getKuerzesterNachfolger(aktuellerKnoten);
 		cout<<"\n Distanz Aktueller Kniten: "<<aktuellerKnoten->getDistanz();
 	}
 
