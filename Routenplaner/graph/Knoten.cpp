@@ -14,6 +14,8 @@ Knoten::~Knoten() {
 
 Knoten::Knoten(Punktlokation* punktLokation) {
 	this->eigenschaften = punktLokation;
+	this->besucht = false;
+	this->distanz = 10000000;
 }
 
 void Knoten::addNachfolger(Knoten* nachfolger) {

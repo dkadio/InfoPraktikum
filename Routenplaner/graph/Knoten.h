@@ -41,8 +41,35 @@ public:
 
 	const list<Knoten*>& getNachfolger() const;
 
+	bool isBesucht() const {
+		return besucht;
+	}
+
+	void setBesucht(bool besucht) {
+		this->besucht = besucht;
+	}
+
+	float getDistanz() const {
+		return distanz;
+	}
+
+	void setDistanz(float distanz) {
+		this->distanz = distanz;
+	}
+
+	const Punktlokation* getVorgaenger()  {
+		return vorgaenger;
+	}
+
+	void setVorgaenger( Punktlokation*& vorgaenger) {
+		this->vorgaenger = vorgaenger;
+	}
+
 private:
 	Punktlokation* eigenschaften; //getid ist die knotennummer
 	list<Knoten*> nachfolger;
+	Punktlokation* vorgaenger;
+	bool besucht;
+	float distanz;
 };
 #endif /* KNOTEN_H_ */

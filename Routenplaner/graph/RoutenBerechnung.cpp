@@ -7,9 +7,10 @@
 
 #include "RoutenBerechnung.h"
 
-RoutenBerechnung::RoutenBerechnung(Knoten *start, Knoten *ziel) {
+RoutenBerechnung::RoutenBerechnung(Knoten *start, Knoten *ziel, Graph* graph) {
 	this->start = start;
 	this->ziel = ziel;
+	this->dijkstrahraph = graph;
 }
 
 RoutenBerechnung::~RoutenBerechnung() {
@@ -21,23 +22,7 @@ RoutenBerechnung::~RoutenBerechnung() {
 }
 
 void RoutenBerechnung::routeBerechnen() {
-	//Die ersten Kanten aufbauen
-	nachfolgerEinpflegen(NULL, start);
-	//Den ersten Endknoten initialisieren
-	Knoten *aktuellerEndknoten = start;
-	Kante *aktuelleEndkante;
-
-	//Solange der beste Weg, bzw. dessen Endknoten nicht das Ziel ist
-	while (aktuellerEndknoten != this->ziel) {
-		//Die schnellste nicht besuchte Kante aus queue ziehen
-		aktuelleEndkante = graph.top();
-		cout<<"\n"<<aktuelleEndkante->getDistanz()<<"\n";
-		aktuelleEndkante->setVisited(true);
-		//Endknoten fuer das Schleifenkriterium und das Einpflegen zuweisen
-		aktuellerEndknoten = aktuelleEndkante->getNach();
-		//Vom besten Weg die Nachfolger einpflegen
-		nachfolgerEinpflegen(aktuelleEndkante, aktuellerEndknoten);
-	}
+	startdijkstra();
 }
 
 void RoutenBerechnung::kanteErstellen(Kante* vorgaengerKante,
@@ -51,4 +36,18 @@ void RoutenBerechnung::nachfolgerEinpflegen(Kante *vorgengerKante,
 			it != knoten->getNachfolger().end(); it++) {
 		kanteErstellen(vorgengerKante, *it);
 	}
+}
+
+void RoutenBerechnung::startdijkstra(){
+	//startpunkt im graph suchen
+	//Punktlokation* a = dijkstrahraph->knotenListe.front();
+	list<Punktlokation*>::iterator startiterator;
+//	for(startiterator = dijkstrahraph->knotenListe.begin(); startiterator != dijkstrahraph->knotenListe.end(); startiterator++){
+		cout << *startiterator;
+	//}
+	//nachfolger anschauen, distanzen der nachfolger eintragen und vorgaenger setzen
+
+	//den nachfolger nehmen der die kürzeste distanz hat und besucht auf true setzen
+
+	//selbes spiel mit diesem nachfolger
 }

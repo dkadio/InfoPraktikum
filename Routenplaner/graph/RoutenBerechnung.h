@@ -11,6 +11,8 @@
 #include "Kante.h"
 #include <queue>
 #include <list>
+#include <algorithm>
+#include "Graph.h"
 
 //TODO stdlib wieder entfernen (War Nur zum Testen)
 #include <stdlib.h>
@@ -22,7 +24,7 @@ using namespace std;
  */
 class RoutenBerechnung {
 public:
-	RoutenBerechnung(Knoten *start, Knoten *ziel);
+	RoutenBerechnung(Knoten *start, Knoten *ziel, Graph *graph);
 	virtual ~RoutenBerechnung();
 
 	/**
@@ -42,7 +44,7 @@ public:
 	 * @param knoten Der Knoten, dessen Nachfolger eingepfelgt werden sollen.
 	 */
 	void nachfolgerEinpflegen(Kante *vorgengerKante,Knoten* knoten);
-
+	void startdijkstra();
 private:
 	priority_queue<Kante*,vector<Kante*>, Kante::less> graph;
 
@@ -54,6 +56,7 @@ private:
 	 * Der Zielknoten, von dem aus die Route berechnet werden soll.
 	 */
 	Knoten *ziel;
+	Graph *dijkstrahraph;
 };
 
 #endif /* ROUTENBERECHNUNG_H_ */

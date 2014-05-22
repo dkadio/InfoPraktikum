@@ -312,7 +312,7 @@ void BenutzerInterface::routeBerechnen() {
 	}
 	//Berechnen der Strecke
 	RoutenBerechnung *berechnung = new RoutenBerechnung(
-			graph->getKnoten(startId), graph->getKnoten(zielId));
+			graph->getKnoten(startId), graph->getKnoten(zielId), graph);
 	berechnung->routeBerechnen();
 	delete berechnung;
 }
