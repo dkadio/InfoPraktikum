@@ -39,6 +39,7 @@ void RoutenBerechnung::nachfolgerEinpflegen(Kante *vorgengerKante,
 }
 
 void RoutenBerechnung::startdijkstra() {
+	int i = 0;
 	//startpunkt im graph suchen
 	//Punktlokation* a = dijkstrahraph->knotenListe.front();
 	/*	for (auto startiterator = dijkstrahraph->getKnotenListe().begin();
@@ -48,10 +49,14 @@ void RoutenBerechnung::startdijkstra() {
 	 }*/
 	//nachfolger anschauen, distanzen der nachfolger eintragen und vorgaenger setzen
 	Knoten * aktuellerKnoten = start;
+	Knoten * vorherigerKnoten = start;
 	start->setDistanz(0);
 	while (!aktuellerKnoten->isBesucht()) {
+		i++;
+
 		cout << "\nstarte dijkstra\n\n";
-		cout << "suche nachfolgervon  \n" << aktuellerKnoten->getEigenschaften()->getId() << "\n";
+		cout << "knoten " << i << "\n";
+		cout << "suche nachfolgervon " << aktuellerKnoten->getEigenschaften()->getId() << "\n";
 		list<Knoten*> nachfolgerListe = aktuellerKnoten->getNachfolger();
 		for (auto it = nachfolgerListe.begin(); it != nachfolgerListe.end();
 						it++) {
@@ -81,7 +86,7 @@ void RoutenBerechnung::startdijkstra() {
 
 Knoten* RoutenBerechnung::getKuerzesterNachfolger(Knoten* knoten) {
 	float kuerzesteDistanz = -1;// = (*knoten->getNachfolger().begin())->getDistanz();
-	Knoten* ausgbae = (*knoten->getNachfolger().begin());
+	Knoten* ausgbae = ziel; //(*knoten->getNachfolger().begin());
 cout << "\n########suche kuerzeste distanz: \n";
 	for (auto it = knoten->getNachfolger().begin();
 			it != knoten->getNachfolger().end(); it++) {
@@ -105,6 +110,8 @@ cout << "\n########suche kuerzeste distanz: \n";
 
 			cout << "kuerzeste distanz ist: ";
 			cout << kuerzesteDistanz;
+		}else{
+			cout << "wurde bereits besucht\n";
 		}
 
 	/*	if ((*it)->getDistanz() < kuerzesteDistanz && !(*it)->isBesucht()) {
