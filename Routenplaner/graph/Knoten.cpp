@@ -22,8 +22,15 @@ void Knoten::addNachfolger(Knoten* nachfolger) {
 }
 
 float Knoten::berechneLaenge(Knoten * derAnnere) {
-	return (derAnnere->getEigenschaften()->getGeoKoordinate()->entfernungBerechnen(
+	 float a = (derAnnere->getEigenschaften()->getGeoKoordinate()->entfernungBerechnen(
 			this->eigenschaften->getGeoKoordinate()));
+	 cout << "\nberechnete laenge in berechne laenge von ";
+	 cout << derAnnere->getEigenschaften()->getId();
+	 cout << " nach ";
+	 cout <<  this->getEigenschaften()->getId();
+	 cout << ": ";
+	 cout << a;
+	 return a;
 }
 
 int Knoten::getId() {
@@ -46,6 +53,8 @@ void Knoten::aendereVorgaenger(Knoten* vorgaenger) {
 	if (distanz < 0) {
 		this->vorgaenger = vorgaenger;
 		distanz = vorgaenger->getDistanz();
+		cout << "\n** laenge des vorgaengers :";
+		cout << distanz;
 		distanz += this->berechneLaenge(vorgaenger);
 	}
 	if ((vorgaenger->getDistanz() + this->berechneLaenge(vorgaenger)) < distanz) {
