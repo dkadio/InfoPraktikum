@@ -20,9 +20,10 @@ RoutenBerechnung::~RoutenBerechnung() {
 	}
 }
 
+/*
 void RoutenBerechnung::routeBerechnen() {
 	//Die ersten Kanten aufbauen
-	nachfolgerEinpflegen(NULL, start);
+    kanteErstellen(NULL, start);
 	//Den ersten Endknoten initialisieren
 	Knoten *aktuellerEndknoten = start;
 	Kante *aktuelleEndkante;
@@ -31,7 +32,7 @@ void RoutenBerechnung::routeBerechnen() {
 	while (aktuellerEndknoten != this->ziel) {
 		//Die schnellste nicht besuchte Kante aus queue ziehen
 		aktuelleEndkante = graph.top();
-		cout<<"\n"<<aktuelleEndkante->getDistanz()<<"\n";
+		cout<<"\n"<<aktuelleEndkante->getDistanz()<< "Id: "<<aktuelleEndkante->getVon()->getId()<<"\n";
 		aktuelleEndkante->setVisited(true);
 		//Endknoten fuer das Schleifenkriterium und das Einpflegen zuweisen
 		aktuellerEndknoten = aktuelleEndkante->getNach();
@@ -39,6 +40,8 @@ void RoutenBerechnung::routeBerechnen() {
 		nachfolgerEinpflegen(aktuelleEndkante, aktuellerEndknoten);
 	}
 }
+*/
+
 
 void RoutenBerechnung::kanteErstellen(Kante* vorgaengerKante,
 		Knoten* endKnoten) {

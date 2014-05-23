@@ -14,7 +14,7 @@ Kante::Kante(Kante *von, Knoten *nach) {
         von = NULL;
 	} else {
 		Knoten *start = von->nach;
-		distanz = von->getDistanz() + start->berechneLaenge(nach);
+		this->distanz = von->getDistanz() + start->berechneLaenge(nach);
         this->von = start;
 
 	}
