@@ -50,17 +50,23 @@ const list<Knoten*>& Knoten::getNachfolger() const {
 }
 
 void Knoten::aendereVorgaenger(Knoten* vorgaenger) {
-	if (distanz < 0) {
+	if (this->getDistanz() < 0) {
+		cout << "\n andere vorgaenger von distanz < 0";
 		this->vorgaenger = vorgaenger;
 		distanz = vorgaenger->getDistanz();
-		cout << "\n** laenge des vorgaengers :";
-		cout << distanz;
 		distanz += this->berechneLaenge(vorgaenger);
 	}
-	if ((vorgaenger->getDistanz() + this->berechneLaenge(vorgaenger)) < distanz) {
+	else if ((vorgaenger->getDistanz() + this->berechneLaenge(vorgaenger)) < this->getDistanz()) {
+		cout << "\n andere vorgaenger von distanz ist besser";
 		this->vorgaenger = vorgaenger;
 		this->distanz = vorgaenger->getDistanz() + berechneLaenge(vorgaenger);
+
 	}
+	cout << "\n** laenge des vorgaengers :";
+	cout << distanz;
+
+	//cout << "\nvorgaenger von " << this->getId() << " ist " << this->getVorgaenger()->getId();
+
 }
 
 void Knoten::clear() {

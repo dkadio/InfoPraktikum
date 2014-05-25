@@ -69,7 +69,7 @@ public:
 		this->distanz = distanz;
 	}
 
-	const Knoten* getVorgaenger()  {
+	Knoten* getVorgaenger()  {
 		return vorgaenger;
 	}
 
