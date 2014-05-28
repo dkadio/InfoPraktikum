@@ -28,6 +28,7 @@
 #include  "SuchenKlasse.h"
 #include  <iostream>
 #include  "sicherLesen.h"
+#include "../graph/Dijkstra.h"
 
 #include "../graph/Graph.h"
 
