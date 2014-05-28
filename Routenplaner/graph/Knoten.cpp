@@ -13,6 +13,7 @@ Knoten::~Knoten() {
 }
 
 Knoten::Knoten(Punktlokation* punktLokation) {
+	clear();
 	this->eigenschaften = punktLokation;
 }
 
@@ -31,12 +32,17 @@ int Knoten::getId() {
 
 string Knoten::toString() {
 	ostringstream s;
-	s<<"";
+	s << "";
 	s << "\nName: " << eigenschaften->getFirstName() << " Anzahl Nachfolger: "
-			<< nachfolger.size()<< " Id=" <<this->getEigenschaften()->getId();
+			<< nachfolger.size() << " Id=" << this->getEigenschaften()->getId();
 	return (s.str());
 }
 
 const list<Knoten*>& Knoten::getNachfolger() const {
 	return nachfolger;
+}
+
+void Knoten::clear() {
+	this->vorgaenger = NULL;
+	this->distanz = INFINITY;
 }

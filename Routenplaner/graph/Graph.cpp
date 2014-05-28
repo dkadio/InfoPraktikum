@@ -88,3 +88,6 @@ Knoten* Graph::getKnoten(int id) {
 	}
 	throw out_of_range("Der gesuchte Knoten konnte nicht gefunden werden.");
 }
+
+void Graph::clear() {
+}

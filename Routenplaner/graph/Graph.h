@@ -71,6 +71,12 @@ public:
 	 * @return Ein Pointer auf den gesuchten Knoten.
 	 */
 	Knoten *getKnoten(int id);
+
+	/**
+	 * Diese Methode durchl&auml;ft alle Knoten des Graphen und setzt ihre Vorg&auml;nger
+	 * auf NULL und ihre Strecken auf INFINITY.
+	 */
+	void clear();
 private:
 	/**
 	 * Diese Liste enth&auml;lt den eigentlichen Graphen.

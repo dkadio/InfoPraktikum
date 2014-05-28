@@ -7,6 +7,8 @@
 
 #ifndef KNOTEN_H_
 #define KNOTEN_H_
+
+#define INFINITY -1
 #include <list>
 #include "../geopunkte/Punktlokation.h"
 
@@ -35,14 +37,31 @@ public:
 	int getId();
 
 	string toString();
+
 	Punktlokation* getEigenschaften() {
 		return (eigenschaften);
 	}
 
+	/**
+	 * Diese Methode setzt den Vorg&auml;nger des Knotens auf NULL und die Distanz#
+	 * auf INFINITY.
+	 */
+	void clear();
 	const list<Knoten*>& getNachfolger() const;
 
 private:
+	/**
+	 * Der Vorgaenger des Knoten, dieser dient der sp&auml;teren Verfolgung des
+	 * k&uuml;zesten Weges.
+	 */
+	Knoten * vorgaenger;
+
 	Punktlokation* eigenschaften; //getid ist die knotennummer
 	list<Knoten*> nachfolger;
+
+	/**
+	 * Enth&auml;lt die Distanz bis zum Startknoten.
+	 */
+	float distanz;
 };
 #endif /* KNOTEN_H_ */
