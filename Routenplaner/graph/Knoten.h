@@ -47,7 +47,7 @@ public:
 	 * auf INFINITY.
 	 */
 	void clear();
-	const list<Knoten*>& getNachfolger() const;
+	list<Knoten*> getNachfolger() const;
 
 	bool isBesucht() const;
 	float getDistanz() const;

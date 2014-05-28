@@ -10,6 +10,12 @@
 
 #include "Graph.h"
 
+/**
+ * Diese Klasse stellt eine Priority Queue dar.<br>
+ * Sie ist speziell auf die Bed&uuml;rfnisse des Dijkstra Algorithmus zugeschnitten.<br>
+ * Das Flag, ob ein Knoten besucht wurde wird hier st&auml;rker ber&uuml;cksichtigt, als
+ * bei der Queue der STL.
+ */
 class PriorityQueue {
 public:
 	/**
@@ -69,6 +75,13 @@ public:
 	 * @param knoten Der Knoten, der relaxiert werden soll.
 	 */
 	void knotenRelaxieren(Knoten* vorgaenger, Knoten* knoten);
+
+	/**
+	 * Diese Methode gibt die Anzahl der Elemente zur&uuml;ck, die
+	 * in der Queue gespeichert sind.
+	 * @return Die Anzahl der Elemente, die in der Queue gespeichert sind.
+	 */
+	int getSize();
 private:
 	map<int, Knoten*> queue;
 };

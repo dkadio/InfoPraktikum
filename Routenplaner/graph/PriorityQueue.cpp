@@ -29,20 +29,11 @@ void PriorityQueue::knotenEintragen(Knoten* vorgaenger, Knoten* knoten) {
 			queue.at(knoten->getId());
 		} catch (out_of_range &e) {
 			//Wenn nicht eintragen
-			//TODO Die insert Methode testen
-			queue[knoten->getId()]= knoten;
+			queue[knoten->getId()] = knoten;
 		}
 	}
 	//Dann checken, ob sich was verbessert, quasi relaxieren
-	float distanzAktuell = knoten->getDistanz();
-	float distanzNeu = vorgaenger->getDistanz();
-	distanzNeu +=
-			knoten->getEigenschaften()->getGeoKoordinate()->entfernungBerechnen(
-					vorgaenger->getEigenschaften()->getGeoKoordinate());
-	if (distanzAktuell == IN_FINITY || distanzNeu < distanzAktuell) {
-		knoten->setVorgaenger(vorgaenger);
-		knoten->setDistanz(distanzNeu);
-	}
+	knotenRelaxieren(vorgaenger, knoten);
 }
 
 void PriorityQueue::nacholfgerEintragen(Knoten* knoten) {
@@ -79,4 +70,23 @@ Knoten* PriorityQueue::getFirst() throw (out_of_range) {
 	} else {
 		return (rueckgabe);
 	}
+}
+
+void PriorityQueue::knotenRelaxieren(Knoten* vorgaenger, Knoten* knoten) {
+	float distanzAktuell = knoten->getDistanz();
+	float distanzNeu = vorgaenger->getDistanz();
+	distanzNeu +=
+			knoten->getEigenschaften()->getGeoKoordinate()->entfernungBerechnen(
+					vorgaenger->getEigenschaften()->getGeoKoordinate());
+	if (distanzAktuell == IN_FINITY || distanzNeu < distanzAktuell) {
+		knoten->setVorgaenger(vorgaenger);
+		knoten->setDistanz(distanzNeu);
+		//Sorgt dafuer, dass von hier aus neu relaxiert wird.
+		//TODO Testen, ob hier Fehler auftreten (wie z.B. Dauerschleifen ;-))
+		knoten->setBesucht(false);
+	}
+}
+
+int PriorityQueue::getSize() {
+	return (queue.size());
 }

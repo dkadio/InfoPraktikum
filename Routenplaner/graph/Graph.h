@@ -77,6 +77,11 @@ public:
 	 * auf NULL und ihre Strecken auf INFINITY.
 	 */
 	void clear();
+	/**
+	 * Diese Methode gibt die Anzahl der Knoten zur&uuml;ck, die im Graph entahlten sind.
+	 * @return Die Anzahl der Elemente, die im Graphen enthalten sind.
+	 */
+	int size();
 private:
 	/**
 	 * Diese Liste enth&auml;lt den eigentlichen Graphen.

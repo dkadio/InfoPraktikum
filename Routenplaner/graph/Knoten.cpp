@@ -38,7 +38,7 @@ string Knoten::toString() {
 	return (s.str());
 }
 
-const list<Knoten*>& Knoten::getNachfolger() const {
+ list<Knoten*> Knoten::getNachfolger() const {
 	return nachfolger;
 }
 

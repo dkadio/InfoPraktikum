@@ -94,3 +94,7 @@ void Graph::clear() {
 		(*it)->clear();
 	}
 }
+
+int Graph::size() {
+	return (knotenListe.size());
+}
