@@ -44,5 +44,29 @@ const list<Knoten*>& Knoten::getNachfolger() const {
 
 void Knoten::clear() {
 	this->vorgaenger = NULL;
-	this->distanz = INFINITY;
+	this->distanz = IN_FINITY;
+}
+
+bool Knoten::isBesucht() const {
+	return besucht;
+}
+
+float Knoten::getDistanz() const {
+	return distanz;
+}
+
+ Knoten* Knoten::getVorgaenger() const {
+	return vorgaenger;
+}
+
+void Knoten::setBesucht(bool besucht) {
+	this->besucht = besucht;
+}
+
+void Knoten::setDistanz(float distanz) {
+	this->distanz = distanz;
+}
+
+void Knoten::setVorgaenger(Knoten* vorgaenger) {
+	this->vorgaenger = vorgaenger;
 }

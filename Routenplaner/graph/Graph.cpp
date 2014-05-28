@@ -90,4 +90,7 @@ Knoten* Graph::getKnoten(int id) {
 }
 
 void Graph::clear() {
+	for (auto it = knotenListe.begin(); it != knotenListe.end(); it++) {
+		(*it)->clear();
+	}
 }

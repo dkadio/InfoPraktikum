@@ -8,7 +8,7 @@
 #ifndef KNOTEN_H_
 #define KNOTEN_H_
 
-#define INFINITY -1
+#define IN_FINITY -1
 #include <list>
 #include "../geopunkte/Punktlokation.h"
 
@@ -49,6 +49,13 @@ public:
 	void clear();
 	const list<Knoten*>& getNachfolger() const;
 
+	bool isBesucht() const;
+	float getDistanz() const;
+	Knoten* getVorgaenger() const;
+	void setBesucht(bool besucht);
+	void setDistanz(float distanz);
+	void setVorgaenger(Knoten* vorgaenger);
+
 private:
 	/**
 	 * Der Vorgaenger des Knoten, dieser dient der sp&auml;teren Verfolgung des
@@ -63,5 +70,7 @@ private:
 	 * Enth&auml;lt die Distanz bis zum Startknoten.
 	 */
 	float distanz;
+
+	bool besucht;
 };
 #endif /* KNOTEN_H_ */
