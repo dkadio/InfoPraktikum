@@ -52,7 +52,7 @@ public:
 	 * @param Der Knoten, dessen Nachfolger gesucht werden sollen.
 	 * @return Der Nachfolger mit der k&uuml;rzesten Distanz.
 	 */
-	Knoten* getKuerzesterNachfolger(Knoten* knoten);
+	Knoten* getKuerzesterNachfolger();
 private:
 	priority_queue<Kante*,vector<Kante*>, Kante::less> graph;
 

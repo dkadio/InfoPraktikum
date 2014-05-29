@@ -299,7 +299,7 @@ string BenutzerInterface::vectorAusgeben(
 
 void BenutzerInterface::routeBerechnen() {
 	cout << "\nGeben Sie die Id des Startpunkts ein: ";
-	int startId = 12084;
+	int startId = 12048;
 	if (!lokVerwaltung->validierePunklokation(startId)) {
 		cout << "\nUngueltige Id fuer den Startpunkt!\n";
 		return;

@@ -39,134 +39,56 @@ void RoutenBerechnung::nachfolgerEinpflegen(Kante *vorgengerKante,
 }
 
 void RoutenBerechnung::startdijkstra() {
-	int i = 0;
-	//startpunkt im graph suchen
-	//Punktlokation* a = dijkstrahraph->knotenListe.front();
-	/*	for (auto startiterator = dijkstrahraph->getKnotenListe().begin();
-	 startiterator != dijkstrahraph->getKnotenListe().end();
-	 startiterator++) {
-	 cout << ((Knoten*) *startiterator)->toString();
-	 }*/
-	//nachfolger anschauen, distanzen der nachfolger eintragen und vorgaenger setzen
+
+	bool allebesucht = false;
 	Knoten * aktuellerKnoten = start;
-	Knoten * vorherigerKnoten = start;
-	Knoten * check;
 	start->setDistanz(0);
-	while (!aktuellerKnoten->isBesucht()
-			|| aktuellerKnoten->getId() != start->getId()) {
-		i++;
+	start->setVorgaenger(start);
 
-		cout
-				<< "#########################\n\n\nstarte dijkstra###################\n";
-		cout << "knoten " << i << "\n";
-		cout << "suche nachfolgervon "
-				<< aktuellerKnoten->getEigenschaften()->getId() << "\n";
+	while (!allebesucht) {
 		list<Knoten*> nachfolgerListe = aktuellerKnoten->getNachfolger();
-		for (auto it = nachfolgerListe.begin(); it != nachfolgerListe.end();
-				it++) {
-
-			cout << (*it)->getEigenschaften()->getId();
-			cout << "\n";
-
-		}
-
 		for (auto it = nachfolgerListe.begin(); it != nachfolgerListe.end();
 				it++) {
 
 			cout << "\n\naendereVorgaenger ";
 			cout << (*it)->getEigenschaften()->getId();
 			(*it)->aendereVorgaenger(aktuellerKnoten);
+
 		}
 		aktuellerKnoten->setBesucht(true);
-		check = aktuellerKnoten;
-		cout << "\ncheck knoten = " << check->getId();
-		aktuellerKnoten = getKuerzesterNachfolger(aktuellerKnoten);
-		cout << "\n Distanz Aktueller Knoten: " << aktuellerKnoten->getDistanz()
-				<< " id: " << aktuellerKnoten->getEigenschaften()->getId();
-		if (check->getId() == aktuellerKnoten->getId()) {
-			if (aktuellerKnoten->getVorgaenger()->getId() == start->getId()) {
-				cout << "\nvorgaenger ist start knoten! suche nach nachfolgern!"
-						<< "\n";
-				aktuellerKnoten = getKuerzesterNachfolger(start);
-				if (aktuellerKnoten->getId() == start->getId()) {
-					cout << "Ende des Algorithmus";
-				}
-			} else {
-
-				aktuellerKnoten = aktuellerKnoten->getVorgaenger();
-				aktuellerKnoten->setBesucht(false);
-				cout << "\nsetze besucht auf false von "
-						<< aktuellerKnoten->getId() << " : "
-						<< aktuellerKnoten->isBesucht() << " " << false;
-
-				cout << "\nAktueller knoten ist: " << aktuellerKnoten->getId();
+		aktuellerKnoten = getKuerzesterNachfolger();
+		allebesucht = true;
+		for (auto it = dijkstrahraph->getKnotenListe().begin();
+				it != dijkstrahraph->getKnotenListe().end(); it++) {
+			if (!(*it)->isBesucht()) {
+				allebesucht = false;
 			}
 		}
-		/*cout << "\nvorgaenger von "
-		 << aktuellerKnoten->getEigenschaften()->getId() << " ist "
-		 << aktuellerKnoten->getVorgaenger()->getId();
-		 */
 		cout << "\n #####################################";
 	}
-
-	// suche hier nach knoten die noch nicht besucht wurden
 }
 
-Knoten* RoutenBerechnung::getKuerzesterNachfolger(Knoten* knoten) {
-	float kuerzesteDistanz = -1;// = (*knoten->getNachfolger().begin())->getDistanz();
-	Knoten* ausgbae = ziel; //(*knoten->getNachfolger().begin());
-	cout << "\n########suche kuerzeste distanz: \n";
-	for (auto it = knoten->getNachfolger().begin();
-			it != knoten->getNachfolger().end(); it++) {
+// suche hier nach knoten die noch nicht besucht wurden
 
-		cout << "\nuntersuche ";
-		cout << (*it)->getEigenschaften()->getId();
-		cout << "\n";
-
-		if (!(*it)->isBesucht()) {
-			cout << "wurde noch nicht besucht\n";
-			if (kuerzesteDistanz == -1) {
-				cout << "\ndistanz war kleiner = -1 \n";
-				kuerzesteDistanz = (*it)->getDistanz();
-				ausgbae = (*it);
-				cout << "\n distanz = " << kuerzesteDistanz << "\n";
-			}
-			if (kuerzesteDistanz > -1) {
-				if ((*it)->getDistanz() < kuerzesteDistanz) {
-					kuerzesteDistanz = (*it)->getDistanz();
-					ausgbae = (*it);
-					cout << "\n distanz = " << kuerzesteDistanz << "\n";
-				}
-			}
-
-			cout << "kuerzeste distanz ist: ";
-			cout << kuerzesteDistanz;
-		} else {
-			cout << " wurde bereits besucht!" << "\n";
+Knoten* RoutenBerechnung::getKuerzesterNachfolger() {
+	//durchsuche den ganzen graphen nach den knoten die die geringste distanz aufweisen
+	Knoten* naechsterknoten;
+	vector<Knoten*> min;
+	auto first = min.begin();
+	auto last = min.end();
+	auto smallest = first;
+	for (auto it = dijkstrahraph->getKnotenListe().begin();
+			it != dijkstrahraph->getKnotenListe().end(); it++) {
+		if ((*it)->getDistanz() > -1 && !(*it)->isBesucht()) {
+			min.push_back(*it);
 		}
-
-		/*	if ((*it)->getDistanz() < kuerzesteDistanz && !(*it)->isBesucht()) {
-		 kuerzesteDistanz = (*it)->getDistanz();
-		 ausgbae = (*it);
-		 cout << ausgbae->getEigenschaften()->getId();
-
-		 }*/
-
 	}
-	if (kuerzesteDistanz == -1) {
-		cout
-				<< "\nKein knoten der noch nicht besucht ist, nimm den vorgaenger von ";
-		cout << knoten->getId();
-		//	cout << " also: " << knoten->getVorgaenger()->getId();
-		if (knoten->getId() == start->getId()) {
-			cout
-					<< "\nstart knoten wieder erreicht - und keine Knoten von hier aus der nicht besucht ist!\n";
-
-		}
-		return knoten;
-	}
-	cout << "\n**aktueller kürzester knoten \n";
-	cout << ausgbae->getEigenschaften()->getId();
-	return (ausgbae);
+	while (++first!=last)
+	    if ((*first)->getDistanz()<(*smallest)->getDistanz())    // or: if (comp(*first,*smallest)) for version (2)
+	      smallest=first;
+	  naechsterknoten = (*smallest);
+	  cout << "\n\n kuerzeste distannz " << naechsterknoten->getDistanz() << "\n \n";
+	cout << "return "<< naechsterknoten->getId();
+	return naechsterknoten;
 }
 

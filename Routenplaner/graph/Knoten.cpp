@@ -62,8 +62,7 @@ void Knoten::aendereVorgaenger(Knoten* vorgaenger) {
 		this->distanz = vorgaenger->getDistanz() + berechneLaenge(vorgaenger);
 
 	}
-	cout << "\n** laenge des vorgaengers :";
-	cout << distanz;
+
 
 	//cout << "\nvorgaenger von " << this->getId() << " ist " << this->getVorgaenger()->getId();
 
