@@ -314,8 +314,13 @@ void BenutzerInterface::routeBerechnen() {
 		return;
 	}
 	//Berechnen der Strecke
+	cout << "\nDijkstra Objekt erzeugt";
 	Dijkstra *berechnung = new Dijkstra(graph);
-	berechnung->starteDijkstra(graph->getKnoten(startId),
-			graph->getKnoten(zielId));
+	cout << "\nDijkstra Berechnung gestartet";
+	list<Knoten*> ergebnis = berechnung->starteDijkstra(
+			graph->getKnoten(startId), graph->getKnoten(zielId));
+	for (auto it = ergebnis.begin(); it != ergebnis.end(); it++) {
+		cout<<"\nId: "<<(*it)->getId();
+	}
 	delete berechnung;
 }

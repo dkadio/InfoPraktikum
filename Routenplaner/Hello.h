@@ -16,6 +16,7 @@
 #include <cmath>
 #include <unistd.h>
 #include "graph/Graph.h"
+#include "graph/Dijkstra.h"
 //#include "hilfsklassen/SuchenKlasse.h"
 
 class Hello {

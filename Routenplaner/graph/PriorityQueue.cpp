@@ -37,8 +37,9 @@ void PriorityQueue::knotenEintragen(Knoten* vorgaenger, Knoten* knoten) {
 }
 
 void PriorityQueue::nacholfgerEintragen(Knoten* knoten) {
-	for (auto it = knoten->getNachfolger().begin();
-			it != knoten->getNachfolger().end(); it++) {
+	list<Knoten*> nachfolger = knoten->getNachfolger();
+	knoten->setBesucht(true);
+	for (auto it = nachfolger.begin(); it != nachfolger.end(); it++) {
 		knotenEintragen(knoten, *it);
 	}
 
@@ -53,19 +54,21 @@ Knoten* PriorityQueue::getFirst() throw (out_of_range) {
 	auto it = queue.begin();
 //Das erste nicht besuchte Element finden
 	do {
-		if (it++->second->isBesucht()) {
+		if (!it++->second->isBesucht()) {
 			rueckgabe = it->second;
 		}
-	} while (!it->second->isBesucht());
+		it++;
+	} while (rueckgabe == NULL && it != queue.end());
 //Die kleinste nicht besuchte Distanz suchen
 	while (it != queue.end()) {
-		if (it->second->isBesucht()) {
+		if (!it->second->isBesucht()) {
 			if (it->second->getDistanz() < rueckgabe->getDistanz()) {
 				rueckgabe = it->second;
 			}
 		}
+		it++;
 	}
-	if (rueckgabe == NULL) {
+	if (rueckgabe == NULL && it != queue.end()) {
 		throw(out_of_range("Es gibt keine weiteren Elemente in der Queue"));
 	} else {
 		return (rueckgabe);
@@ -83,7 +86,7 @@ void PriorityQueue::knotenRelaxieren(Knoten* vorgaenger, Knoten* knoten) {
 		knoten->setDistanz(distanzNeu);
 		//Sorgt dafuer, dass von hier aus neu relaxiert wird.
 		//TODO Testen, ob hier Fehler auftreten (wie z.B. Dauerschleifen ;-))
-		knoten->setBesucht(false);
+		//knoten->setBesucht(false);
 	}
 }
 

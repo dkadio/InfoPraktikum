@@ -18,14 +18,18 @@ Dijkstra::~Dijkstra() {
 
 list<Knoten*> Dijkstra::starteDijkstra(Knoten* startKnoten, Knoten* endKnoten) {
 	PriorityQueue queue = PriorityQueue(graph, startKnoten);
+	queue.queueInitialisieren(startKnoten);
 	try {
 		//Ich weiss, boehhse
 		while (true) {
 			Knoten * aktuellerKnoten = queue.getFirst();
+			cout << "\nNachfolger: "
+					<< aktuellerKnoten->getEigenschaften()->getFirstName();
 			queue.nacholfgerEintragen(aktuellerKnoten);
 		}
 	} catch (out_of_range &e) {
 		if (graph->size() != queue.getSize()) {
+			std::cout << "\n\nDijsktra abgeschlossen\n\n";
 			//Keine Ahnung irgendwas sollte man da machen, auch wenns nur ne Exception ist
 		}
 	}

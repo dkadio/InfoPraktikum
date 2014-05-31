@@ -38,55 +38,23 @@ int main() {                                             // Hauptfunktion
 	delete datei;
 
 	Graph *g = new Graph(lokVerwaltung->getGebieteMap());
-	cout << g->toString();
+	//cout << g->toString();
+	
+
+	//BenutzerInterface interface = BenutzerInterface(lokVerwaltung);
+	//interface.zeigeHauptMenue();
+	
+
+	cout << "\nVor Objekt erstellen";
+	Dijkstra *dijkstra = new Dijkstra(g);
+	cout << "\nVor Routenberechnung";
+	Knoten* start = g->getKnoten(12048);
+	Knoten* ende = g->getKnoten(12049);
+	dijkstra->starteDijkstra(start, ende);
 	delete g;
+	delete dijkstra;
+	delete lokVerwaltung;
 
-	BenutzerInterface interface = BenutzerInterface(lokVerwaltung);
-	interface.zeigeHauptMenue();
-	/* (auto it = lokVerwaltung->getNamenMap().begin();
-	 it != lokVerwaltung->getNamenMap().end(); it++) {
-	 cout << "\nName: " << it->first << "Value: " << it->second->toString();
-	 }*/
-	/*
-	 * Suche
-	 * */
-	/*
-	 string eingabe = "";
-	 vector<Gebietslokation*> gefundeneLokationen;
-	 while (eingabe != "end") {
-	 eingabe = "";
-	 cout << "\nBitte den gesuchten Begriff eingeben: (end fuer ende)\n";
-	 cin >> eingabe;
-	 gefundeneLokationen = lokVerwaltung->suchen(eingabe);
-
-	 if (gefundeneLokationen.empty()) {
-	 cout << "\nDer Datensatz konnte nicht gefunden werden.\n";
-	 } else {
-	 for (auto it = gefundeneLokationen.begin();
-	 it != gefundeneLokationen.end(); it++) {
-	 cout << ((Gebietslokation*) *it)->toString();
-	 }
-	 }
-	 gefundeneLokationen.clear();
-	 }
-
-	 Punktlokation *wallerFangen = (Punktlokation*) lokVerwaltung->suchen(
-	 "Wallerfangen").at(1);
-	 Punktlokation *slsMitte = (Punktlokation*) lokVerwaltung->suchen(
-	 "Saarlouis-Mitte").at(0);
-
-	 cout << "\nVergleich von " << wallerFangen->getFirstName() << " und "
-	 << slsMitte->getFirstName();
-	 cout << "\nGeokoord Wallerfangen: "
-	 << wallerFangen->getGeoKoordinate()->toString();
-	 cout << "\nGeokoord SLS Mitte: " << slsMitte->getGeoKoordinate()->toString();
-	 cout << "\nDer Abstand zwischen den beiden: "
-	 << wallerFangen->getGeoKoordinate()->entfernungBerechnen(
-	 slsMitte->getGeoKoordinate()) << "\n";
-	 delete datei;
-	 delete lokVerwaltung;*/
-
-	//sleep(30); //Um zu sehen, was der Speicher macht
-	return (EXIT_SUCCESS);          // Optionale R��ckgabe an das Betriebssystem
+	return (EXIT_SUCCESS);          // Optionale Rueckgabe an das Betriebssystem
 }
 
