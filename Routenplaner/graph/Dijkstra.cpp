@@ -19,26 +19,23 @@ Dijkstra::~Dijkstra() {
 list<Knoten*> Dijkstra::starteDijkstra(Knoten* startKnoten, Knoten* endKnoten) {
 	PriorityQueue queue = PriorityQueue(graph, startKnoten);
 	queue.queueInitialisieren(startKnoten);
-	try {
-		//Ich weiss, boehhse
-		Knoten * aktuellerKnoten = NULL;
-		do {
-			aktuellerKnoten = queue.getFirst();
-			queue.nacholfgerEintragen(aktuellerKnoten);
-			if (aktuellerKnoten == NULL) {
-				cout << "\n\n\nNullknoten gefunden\n\n\n";
-			}
-		} while (aktuellerKnoten != NULL);
-	} catch (out_of_range &e) {
-		if (graph->size() != queue.getSize()) {
-			//Keine Ahnung irgendwas sollte man da machen, auch wenns nur ne Exception ist
+	Knoten * aktuellerKnoten = queue.getFirst();
+	while (aktuellerKnoten != NULL) {
+		queue.nacholfgerEintragen(aktuellerKnoten);
+		aktuellerKnoten = queue.getFirst();
+		if (aktuellerKnoten == NULL) {
+			cout << "\n\nDijkstra fertisch";
 		}
 	}
+
+	//Hier noch pruefen, ob alle Knoten verlinkt sind
+
 	//Ergebnis vom Endknoten aus aufbauen
 	cout << "\nVor erster Liste";
 	list<Knoten*> rueckwaertsErgebnis;
 	Knoten* ergebnisKnoten = endKnoten;
 	while (ergebnisKnoten != NULL) {
+        cout<<"\nErgebnis: "<<ergebnisKnoten->getVorgaenger()->getEigenschaften()->getFirstName();
 		rueckwaertsErgebnis.push_back(ergebnisKnoten);
 		ergebnisKnoten = ergebnisKnoten->getVorgaenger();
 	}

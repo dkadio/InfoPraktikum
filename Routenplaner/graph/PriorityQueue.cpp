@@ -37,9 +37,6 @@ void PriorityQueue::knotenEintragen(Knoten* vorgaenger, Knoten* knoten) {
 }
 
 void PriorityQueue::nacholfgerEintragen(Knoten* knoten) {
-	if (knoten == NULL) {
-		return;
-	}
 	list<Knoten*> nachfolger = knoten->getNachfolger();
 	//Wenn die Nachfolger eines Knoten eingetragen wurden, dann setze ihn auf besucht
 	knoten->setBesucht(true);
@@ -66,7 +63,6 @@ Knoten* PriorityQueue::getFirst() throw (out_of_range) {
 	//Wenn es keine nicht besuchten Knoten gibt->aussteigen
 	if (rueckgabe == NULL) {
 		return rueckgabe;
-		throw(out_of_range("Es gibt keine weiteren Elemente in der Queue"));
 	}
 	//Die kleinste nicht besuchte Distanz suchen
 	//Wenn noch nicht besucht, dann pruefe, ob der Iterator kleiner
@@ -79,12 +75,7 @@ Knoten* PriorityQueue::getFirst() throw (out_of_range) {
 		}
 		it++;
 	}
-	if (rueckgabe == NULL || it != queue.end()) {
-		return (rueckgabe);
-		throw(out_of_range("Es gibt keine weiteren Elemente in der Queue"));
-	} else {
-		return (rueckgabe);
-	}
+	return (rueckgabe);
 }
 
 void PriorityQueue::knotenRelaxieren(Knoten* vorgaenger, Knoten* knoten) {
