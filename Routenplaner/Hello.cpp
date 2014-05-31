@@ -39,18 +39,22 @@ int main() {                                             // Hauptfunktion
 
 	Graph *g = new Graph(lokVerwaltung->getGebieteMap());
 	//cout << g->toString();
-	
 
 	//BenutzerInterface interface = BenutzerInterface(lokVerwaltung);
 	//interface.zeigeHauptMenue();
-	
 
 	cout << "\nVor Objekt erstellen";
 	Dijkstra *dijkstra = new Dijkstra(g);
 	cout << "\nVor Routenberechnung";
 	Knoten* start = g->getKnoten(12048);
 	Knoten* ende = g->getKnoten(12049);
-	dijkstra->starteDijkstra(start, ende);
+	list<Knoten*> ergebnis = dijkstra->starteDijkstra(start, ende);
+
+	cout << "\n\nRoute: ";
+	for (auto it = ergebnis.begin(); it != ergebnis.end(); it++) {
+		cout << "\n" << (*it)->getEigenschaften()->getFirstName();
+	}
+
 	delete g;
 	delete dijkstra;
 	delete lokVerwaltung;

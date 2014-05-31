@@ -21,19 +21,21 @@ list<Knoten*> Dijkstra::starteDijkstra(Knoten* startKnoten, Knoten* endKnoten) {
 	queue.queueInitialisieren(startKnoten);
 	try {
 		//Ich weiss, boehhse
-		while (true) {
-			Knoten * aktuellerKnoten = queue.getFirst();
-			cout << "\nNachfolger: "
-					<< aktuellerKnoten->getEigenschaften()->getFirstName();
+		Knoten * aktuellerKnoten = NULL;
+		do {
+			aktuellerKnoten = queue.getFirst();
 			queue.nacholfgerEintragen(aktuellerKnoten);
-		}
+			if (aktuellerKnoten == NULL) {
+				cout << "\n\n\nNullknoten gefunden\n\n\n";
+			}
+		} while (aktuellerKnoten != NULL);
 	} catch (out_of_range &e) {
 		if (graph->size() != queue.getSize()) {
-			std::cout << "\n\nDijsktra abgeschlossen\n\n";
 			//Keine Ahnung irgendwas sollte man da machen, auch wenns nur ne Exception ist
 		}
 	}
 	//Ergebnis vom Endknoten aus aufbauen
+	cout << "\nVor erster Liste";
 	list<Knoten*> rueckwaertsErgebnis;
 	Knoten* ergebnisKnoten = endKnoten;
 	while (ergebnisKnoten != NULL) {
@@ -41,6 +43,7 @@ list<Knoten*> Dijkstra::starteDijkstra(Knoten* startKnoten, Knoten* endKnoten) {
 		ergebnisKnoten = ergebnisKnoten->getVorgaenger();
 	}
 	list<Knoten*> ergebnis;
+	cout << "\nIn die erste Liste geschaufelt";
 	for (auto it = rueckwaertsErgebnis.rbegin();
 			it != rueckwaertsErgebnis.rend(); it++) {
 		ergebnis.push_back(*it);

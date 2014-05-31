@@ -37,7 +37,11 @@ void PriorityQueue::knotenEintragen(Knoten* vorgaenger, Knoten* knoten) {
 }
 
 void PriorityQueue::nacholfgerEintragen(Knoten* knoten) {
+	if (knoten == NULL) {
+		return;
+	}
 	list<Knoten*> nachfolger = knoten->getNachfolger();
+	//Wenn die Nachfolger eines Knoten eingetragen wurden, dann setze ihn auf besucht
 	knoten->setBesucht(true);
 	for (auto it = nachfolger.begin(); it != nachfolger.end(); it++) {
 		knotenEintragen(knoten, *it);
@@ -54,12 +58,19 @@ Knoten* PriorityQueue::getFirst() throw (out_of_range) {
 	auto it = queue.begin();
 //Das erste nicht besuchte Element finden
 	do {
-		if (!it++->second->isBesucht()) {
+		if (!(it->second->isBesucht())) {
 			rueckgabe = it->second;
 		}
 		it++;
 	} while (rueckgabe == NULL && it != queue.end());
-//Die kleinste nicht besuchte Distanz suchen
+	//Wenn es keine nicht besuchten Knoten gibt->aussteigen
+	if (rueckgabe == NULL) {
+		return rueckgabe;
+		throw(out_of_range("Es gibt keine weiteren Elemente in der Queue"));
+	}
+	//Die kleinste nicht besuchte Distanz suchen
+	//Wenn noch nicht besucht, dann pruefe, ob der Iterator kleiner
+	//als das aktuell kleinste Element
 	while (it != queue.end()) {
 		if (!it->second->isBesucht()) {
 			if (it->second->getDistanz() < rueckgabe->getDistanz()) {
@@ -68,7 +79,8 @@ Knoten* PriorityQueue::getFirst() throw (out_of_range) {
 		}
 		it++;
 	}
-	if (rueckgabe == NULL && it != queue.end()) {
+	if (rueckgabe == NULL || it != queue.end()) {
+		return (rueckgabe);
 		throw(out_of_range("Es gibt keine weiteren Elemente in der Queue"));
 	} else {
 		return (rueckgabe);
