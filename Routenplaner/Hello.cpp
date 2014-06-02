@@ -40,28 +40,14 @@ int main() {                                             // Hauptfunktion
 	Graph *g = new Graph(lokVerwaltung->getGebieteMap());
 	//cout << g->toString();
 
+
+	Benutzerabfrage* ba = new Benutzerabfrage(g);
+	ba->startebenutzerabfrage();
 	//BenutzerInterface interface = BenutzerInterface(lokVerwaltung);
 	//interface.zeigeHauptMenue();
-
-	cout << "\nVor Objekt erstellen";
-	Dijkstra *dijkstra = new Dijkstra(g);
-	cout << "\nVor Routenberechnung";
-	Knoten* start = g->getKnoten(24178);
-	Knoten* ende = g->getKnoten(772);
-	list<Knoten*> ergebnis = dijkstra->starteDijkstra(start, ende);
-
-	cout << "\n\nRoute: ";
-	for (auto it = ergebnis.begin(); it != ergebnis.end(); it++) {
-		cout << "\n" << (*it)->getEigenschaften()->getFirstName()
-				<< " Strasse: " << (*it)->getEigenschaften()->getRoadNumber()
-				<< " Entfernung: " << (*it)->getDistanz();
-	}
-	cout << "\n";
-
+	delete ba;
 	delete g;
-	delete dijkstra;
 	delete lokVerwaltung;
-
 	return (EXIT_SUCCESS);          // Optionale Rueckgabe an das Betriebssystem
 }
 

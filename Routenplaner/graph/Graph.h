@@ -82,6 +82,12 @@ public:
 	 * @return Die Anzahl der Elemente, die im Graphen enthalten sind.
 	 */
 	unsigned long size();
+
+	/**
+	 * Die Methode sucht nach einem Suchstring in allen vorhandenen Punktlokationen in RoadNumber und oder Roadname, Firstname, secondname
+	 * und gibt alle gefundenen Lokationen als Vector zurueck
+	 */
+	vector<Knoten*> sucheName(string);
 private:
 	/**
 	 * Diese Liste enth&auml;lt den eigentlichen Graphen.
