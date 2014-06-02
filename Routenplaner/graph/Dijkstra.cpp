@@ -22,26 +22,23 @@ list<Knoten*> Dijkstra::starteDijkstra(Knoten* startKnoten, Knoten* endKnoten) {
 	Knoten * aktuellerKnoten = queue.getFirst();
 	while (aktuellerKnoten != NULL) {
 		queue.nacholfgerEintragen(aktuellerKnoten);
-		aktuellerKnoten = queue.getFirst();
 		if (aktuellerKnoten == NULL) {
-			cout << "\n\nDijkstra fertisch";
+			cout << "Dijkstra fertig";
 		}
+		aktuellerKnoten = queue.getFirst();
 	}
 
 	//Hier noch pruefen, ob alle Knoten verlinkt sind
 
 	//Ergebnis vom Endknoten aus aufbauen
-	cout << "\nVor erster Liste";
 	list<Knoten*> rueckwaertsErgebnis;
 	Knoten* ergebnisKnoten = endKnoten;
 	while (ergebnisKnoten != NULL && ergebnisKnoten != startKnoten) {
-		cout << "\nErgebnis: "
-				<< ergebnisKnoten->getVorgaenger()->getEigenschaften()->getFirstName();
 		rueckwaertsErgebnis.push_back(ergebnisKnoten);
 		ergebnisKnoten = ergebnisKnoten->getVorgaenger();
 	}
 	list<Knoten*> ergebnis;
-	cout << "\nIn die erste Liste geschaufelt";
+	//Jetzt die Liste umdrehen, damit die Strecke nicht von Ende nach Start angezeigt wird
 	for (auto it = rueckwaertsErgebnis.rbegin();
 			it != rueckwaertsErgebnis.rend(); it++) {
 		ergebnis.push_back(*it);

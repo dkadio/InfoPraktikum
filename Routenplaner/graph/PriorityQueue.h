@@ -81,7 +81,7 @@ public:
 	 * in der Queue gespeichert sind.
 	 * @return Die Anzahl der Elemente, die in der Queue gespeichert sind.
 	 */
-	int getSize();
+	unsigned long getSize();
 private:
 	map<int, Knoten*> queue;
 };

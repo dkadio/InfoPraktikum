@@ -46,8 +46,8 @@ int main() {                                             // Hauptfunktion
 	cout << "\nVor Objekt erstellen";
 	Dijkstra *dijkstra = new Dijkstra(g);
 	cout << "\nVor Routenberechnung";
-	Knoten* start = g->getKnoten(12048);
-	Knoten* ende = g->getKnoten(12489);
+	Knoten* start = g->getKnoten(24178);
+	Knoten* ende = g->getKnoten(12049);
 	list<Knoten*> ergebnis = dijkstra->starteDijkstra(start, ende);
 
 	cout << "\n\nRoute: ";

@@ -95,6 +95,6 @@ void Graph::clear() {
 	}
 }
 
-int Graph::size() {
+unsigned long Graph::size() {
 	return (knotenListe.size());
 }

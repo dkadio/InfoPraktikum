@@ -89,11 +89,10 @@ void PriorityQueue::knotenRelaxieren(Knoten* vorgaenger, Knoten* knoten) {
 		knoten->setVorgaenger(vorgaenger);
 		knoten->setDistanz(distanzNeu);
 		//Sorgt dafuer, dass von hier aus neu relaxiert wird.
-		//TODO Testen, ob hier Fehler auftreten (wie z.B. Dauerschleifen ;-))
-		//knoten->setBesucht(false);
+	//	knoten->setBesucht(false);
 	}
 }
 
-int PriorityQueue::getSize() {
+unsigned long PriorityQueue::getSize() {
 	return (queue.size());
 }

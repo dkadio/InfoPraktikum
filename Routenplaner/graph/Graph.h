@@ -81,7 +81,7 @@ public:
 	 * Diese Methode gibt die Anzahl der Knoten zur&uuml;ck, die im Graph entahlten sind.
 	 * @return Die Anzahl der Elemente, die im Graphen enthalten sind.
 	 */
-	int size();
+	unsigned long size();
 private:
 	/**
 	 * Diese Liste enth&auml;lt den eigentlichen Graphen.
