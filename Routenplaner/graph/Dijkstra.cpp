@@ -34,8 +34,9 @@ list<Knoten*> Dijkstra::starteDijkstra(Knoten* startKnoten, Knoten* endKnoten) {
 	cout << "\nVor erster Liste";
 	list<Knoten*> rueckwaertsErgebnis;
 	Knoten* ergebnisKnoten = endKnoten;
-	while (ergebnisKnoten != NULL) {
-        cout<<"\nErgebnis: "<<ergebnisKnoten->getVorgaenger()->getEigenschaften()->getFirstName();
+	while (ergebnisKnoten != NULL && ergebnisKnoten != startKnoten) {
+		cout << "\nErgebnis: "
+				<< ergebnisKnoten->getVorgaenger()->getEigenschaften()->getFirstName();
 		rueckwaertsErgebnis.push_back(ergebnisKnoten);
 		ergebnisKnoten = ergebnisKnoten->getVorgaenger();
 	}

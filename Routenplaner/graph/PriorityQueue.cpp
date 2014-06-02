@@ -41,16 +41,17 @@ void PriorityQueue::nacholfgerEintragen(Knoten* knoten) {
 	//Wenn die Nachfolger eines Knoten eingetragen wurden, dann setze ihn auf besucht
 	knoten->setBesucht(true);
 	for (auto it = nachfolger.begin(); it != nachfolger.end(); it++) {
-		knotenEintragen(knoten, *it);
+		if (*it != knoten) {
+			knotenEintragen(knoten, *it);
+		}
 	}
-
 }
 
 void PriorityQueue::queueInitialisieren(Knoten* startknoten) {
 	nacholfgerEintragen(startknoten);
 }
 
-Knoten* PriorityQueue::getFirst() throw (out_of_range) {
+Knoten * PriorityQueue::getFirst() throw (out_of_range) {
 	Knoten * rueckgabe = NULL;
 	auto it = queue.begin();
 //Das erste nicht besuchte Element finden
