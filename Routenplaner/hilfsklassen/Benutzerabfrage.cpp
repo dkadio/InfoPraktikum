@@ -43,11 +43,11 @@ void Benutzerabfrage::leseitemein(int eingabe) {
 		break;
 	case ZIEL_EINLESEN:
 		//starte einlesen nach namen
-		sucheNachNamen(ziel);
+		this->ziel = sucheNachNamen();
 		break;
 	case START_EINLESEN:
 		//starte einlesen nach namen
-		sucheNachNamen(start);
+		this->start = sucheNachNamen();
 		break;
 
 	default:
@@ -57,7 +57,7 @@ void Benutzerabfrage::leseitemein(int eingabe) {
 
 }
 
-void Benutzerabfrage::sucheNachNamen(Knoten* knoten) {
+Knoten* Benutzerabfrage::sucheNachNamen() {
 	cout << "\nGeben Sie den Namen der gesuchten Lokation ein: ";
 	string suchString = "";
 	cin >> suchString;
@@ -66,7 +66,7 @@ void Benutzerabfrage::sucheNachNamen(Knoten* knoten) {
 	//gib die ergebnisse aus und les die id des knotens ein
 	auto begin = ergebnisliste.begin();
 	auto end = ergebnisliste.end();
-	for (begin; begin != end; begin++) {
+	for (begin != end; begin++) {
 		cout << (*begin)->getEigenschaften()->toString();
 	}
 	cout << "\nBitte geben Sie die Id des Knotens ein" << "\n";
@@ -74,7 +74,7 @@ void Benutzerabfrage::sucheNachNamen(Knoten* knoten) {
 
 	cin >> knotenId;
 
-	knoten = graph->getKnoten(knotenId);
+	return graph->getKnoten(knotenId);
 
 	/*
 	 cout << "\nVor Objekt erstellen";
@@ -86,6 +86,8 @@ void Benutzerabfrage::sucheNachNamen(Knoten* knoten) {
 }
 
 void Benutzerabfrage::routeberechnen() {
+	//this->ziel = graph->getKnoten(772);
+	//this->start = graph->getKnoten(24178)
 	Dijkstra *dijkstra = new Dijkstra(this->graph);
 
 	cout << " dijkstra erstellt\n";

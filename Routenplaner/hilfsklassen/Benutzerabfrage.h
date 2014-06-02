@@ -31,7 +31,7 @@ private:
 	Knoten* start;
 	void zeigemenu();
 	void leseitemein(int);
-	void sucheNachNamen(Knoten*);
+	Knoten* sucheNachNamen();
 	void routeberechnen();
 };
 
