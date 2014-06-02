@@ -47,13 +47,16 @@ int main() {                                             // Hauptfunktion
 	Dijkstra *dijkstra = new Dijkstra(g);
 	cout << "\nVor Routenberechnung";
 	Knoten* start = g->getKnoten(12048);
-	Knoten* ende = g->getKnoten(12480);
+	Knoten* ende = g->getKnoten(12489);
 	list<Knoten*> ergebnis = dijkstra->starteDijkstra(start, ende);
 
 	cout << "\n\nRoute: ";
 	for (auto it = ergebnis.begin(); it != ergebnis.end(); it++) {
-		cout << "\n" << (*it)->getEigenschaften()->getFirstName();
+		cout << "\n" << (*it)->getEigenschaften()->getFirstName()
+				<< " Strasse: " << (*it)->getEigenschaften()->getRoadNumber()
+				<< " Entfernung: " << (*it)->getDistanz();
 	}
+	cout << "\n";
 
 	delete g;
 	delete dijkstra;
