@@ -101,7 +101,6 @@ unsigned long Graph::size() {
 
 vector<Knoten*> Graph::sucheName(string allocator) {
 	vector<Knoten*> ergebnis;
-	cout << "suche gestartet";
 	for(auto it = knotenListe.begin(); it != knotenListe.end(); it++){
 
 		if(((*it)->getEigenschaften()->getFirstName().find(allocator) != string::npos) || ((*it)->getEigenschaften()->getRoadNumber().find(allocator) != string::npos) || ((*it)->getEigenschaften()->getSecondName().find(allocator) != string::npos) || ((*it)->getEigenschaften()->getRoadName().find(allocator) != string::npos)){

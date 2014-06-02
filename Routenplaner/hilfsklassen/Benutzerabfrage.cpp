@@ -10,6 +10,8 @@
 Benutzerabfrage::Benutzerabfrage(Graph* graph) {
 	// TODO Auto-generated constructor stub
 	this->graph = graph;
+	this->ziel = NULL;
+	this->start = NULL;
 }
 
 Benutzerabfrage::~Benutzerabfrage() {
@@ -25,7 +27,7 @@ void Benutzerabfrage::startebenutzerabfrage() {
 }
 
 void Benutzerabfrage::zeigemenu() {
-	cout << "Ende: " << ENDE << "\n";
+	cout << "\nEnde: " << ENDE << "\n";
 	cout << "Berechne die Route: " << ROUTE_BERECHNEN << "\n";
 	cout << "Ziel eingeben: " << ZIEL_EINLESEN << "\n";
 	cout << "Start eingeben: " << START_EINLESEN << "\n";
@@ -35,11 +37,19 @@ void Benutzerabfrage::leseitemein(int eingabe) {
 
 	switch (eingabe) {
 	case ENDE:
-		cout << "Programm wird beendet\n";
+		cout << "\nProgramm wird beendet\n";
 		break;
 	case ROUTE_BERECHNEN:
 		//starte dijkstraklasse
-		routeberechnen();
+		if(ziel != NULL || start != NULL){
+			routeberechnen();
+		}else{
+			if(ziel != NULL){
+				cout << "Bitte Start knoten angeben\n";
+			}else{
+				cout << "Bitte Ziel Knoten angeben\n";
+			}
+		}
 		break;
 	case ZIEL_EINLESEN:
 		//starte einlesen nach namen
@@ -51,30 +61,36 @@ void Benutzerabfrage::leseitemein(int eingabe) {
 		break;
 
 	default:
-		cout << "Ungueltige Einagbe\n";
+		cout << "\nUngueltige Einagbe\n";
 		break;
 	}
 
 }
 
 Knoten* Benutzerabfrage::sucheNachNamen() {
+	vector<Knoten*> ergebnisliste;
+	do{
 	cout << "\nGeben Sie den Namen der gesuchten Lokation ein: ";
 	string suchString = "";
 	cin >> suchString;
-	cout << "\nihre eingabe: " << suchString;
-	vector<Knoten*> ergebnisliste = this->graph->sucheName(suchString);
+	ergebnisliste = this->graph->sucheName(suchString);
 	//gib die ergebnisse aus und les die id des knotens ein
 	auto begin = ergebnisliste.begin();
 	auto end = ergebnisliste.end();
-	for (begin != end; begin++) {
+	int i = 0;
+	for (;begin != end; begin++) {
+		cout << "\nKnotennummer: " << i;
 		cout << (*begin)->getEigenschaften()->toString();
+		cout << "\n\n################################################\n";
 	}
-	cout << "\nBitte geben Sie die Id des Knotens ein" << "\n";
+	cout << "\ngefundene elemente: " << ergebnisliste.size();
+	}while(ergebnisliste.size() == 0);
+	cout << "\nBitte geben Sie die Knotennummer. ein" << "\n";
 	int knotenId = 0;
 
 	cin >> knotenId;
 
-	return graph->getKnoten(knotenId);
+	return ergebnisliste.at(knotenId);
 
 	/*
 	 cout << "\nVor Objekt erstellen";

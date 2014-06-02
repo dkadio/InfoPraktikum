@@ -197,7 +197,7 @@ void Linearlokation::verweiseAufbauen(map<int, Gebietslokation*>* gebieteMap,
 	speichereIntersectionCode(gebieteMap, zeile);
 }
 
-string Linearlokation::toString() {
+/*string Linearlokation::toString() {
 	stringstream s;
 	s << Gebietslokation::toString();
 	s << "\nRoad Number: " << this->roadNumber;
@@ -237,6 +237,23 @@ string Linearlokation::toString() {
 	}
 	return (s.str());
 }
+*/
+
+string Linearlokation::toString() {
+	stringstream s;
+	s << Gebietslokation::toString();
+
+	if(!(this->secondName.empty()) || !(this->secondName == ""))
+		s << " " << this->secondName << ", ";
+
+	if(!(this->roadNumber.empty()) || !(this->roadNumber == ""))
+	s << " " << this->roadNumber<< ", ";
+	if(!(this->roadName.empty()) || !(this->roadName == ""))
+	s << " " << this->roadName<< ", ";
+	return (s.str());
+}
+
+
 
 int Linearlokation::getType() {
 	return (LINEAR);

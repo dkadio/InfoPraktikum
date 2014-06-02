@@ -53,8 +53,8 @@ float GeoKoordinate::entfernungBerechnen(GeoKoordinate* ziel) {
 string GeoKoordinate::toString() {
 	stringstream s;
 
-	s << "Breite: " << this->breitenGrad << "\nLaenge: " << this->laengenGrad
-			<< "\nCopy: " << this->breitenGrad << " " << this->laengenGrad;
+	/*s << "Breite: " << this->breitenGrad << "\nLaenge: " << this->laengenGrad*/
+			s << "\nKoordinaten: " << this->breitenGrad << " " << this->laengenGrad;
 	return (s.str());
 }
 

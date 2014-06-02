@@ -44,7 +44,7 @@ Punktlokation::~Punktlokation() {
 string Punktlokation::toString() {
 	stringstream s;
 	s << Linearlokation::toString();
-	s << "\nLinear Reference: ";
+/*	s << "\nLinear Reference: ";
 	if (this->linearReference != NULL) {
 		s << this->linearReference->getFirstName() << ", Id: "
 				<< this->linearReference->getId();
@@ -52,8 +52,7 @@ string Punktlokation::toString() {
 		s << "Keine Linear Reference hinterlegt.";
 	}
 	s << "\nNetzknotennummer vor der Lokation: " << this->netzKontenNummerVor;
-	s << "\nNetzknotennummer nach der Lokation: " << this->netzKontenNummerNach;
-	s << "\nGeokoordinate: ";
+*/	s << "\nNetzknotennummer nach der Lokation: " << this->netzKontenNummerNach;
 	if (this->geoKoordinate != NULL) {
 		s << this->geoKoordinate->toString();
 	}
