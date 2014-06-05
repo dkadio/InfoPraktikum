@@ -156,8 +156,6 @@ void Linearlokation::addPktLokation(Punktlokation* pktLocation) {
 	this->punktLokations.push_back(pktLocation);
 }
 
-//TODO Hier checken, ob stoi typensicher werden soll oder ob es Sinn macht, einfach den
-//Fehler zu unterdruecken
 void Linearlokation::speichereOffset(map<int, Gebietslokation*>* gebieteMap,
 		vector<string> *zeile) {
 	try {
@@ -198,62 +196,60 @@ void Linearlokation::verweiseAufbauen(map<int, Gebietslokation*>* gebieteMap,
 }
 
 /*string Linearlokation::toString() {
-	stringstream s;
-	s << Gebietslokation::toString();
-	s << "\nRoad Number: " << this->roadNumber;
-	s << "\nRoad Name:" << this->roadName;
-	s << "\nSecond Name: " << this->secondName;
-	if (this->areaReference != NULL) {
-		s << "\nArea Reference: " << this->areaReference->getFirstName()
-				<< ", Id: " << this->areaReference->getId();
-	}
-	s << "\nNegative Offset: ";
-	if (this->negativeOffset != NULL) {
-		s << this->negativeOffset->getFirstName() << ", Id: "
-				<< this->negativeOffset->getId();
-	} else {
-		s << " Es ist kein Negative Offset hinterlegt.";
-	}
-	s << "\nPositive Offset: ";
-	if (this->positiveOffset != NULL) {
-		s << this->positiveOffset->getFirstName() << ", Id: "
-				<< this->positiveOffset->getId();
-	} else {
-		s << " Es ist kein positive Offset hinterlegt.";
-	}
-	s << "\nIntersection Code:";
-	if (this->intersectioncode != NULL) {
-		s << this->intersectioncode->getFirstName() << ", Id: "
-				<< this->intersectioncode->getId();
-	} else {
-		s << " Es ist kein Intersectioncode hinterlegt.";
-	}
-	s << "\nInterrupts Road";
-	if (this->interruptsRoad != NULL) {
-		s << this->interruptsRoad->getFirstName() << ", Id: "
-				<< this->interruptsRoad->getId();
-	} else {
-		s << " Es ist kein Interrupts Road hinterlegt hinterlegt.";
-	}
-	return (s.str());
-}
-*/
+ stringstream s;
+ s << Gebietslokation::toString();
+ s << "\nRoad Number: " << this->roadNumber;
+ s << "\nRoad Name:" << this->roadName;
+ s << "\nSecond Name: " << this->secondName;
+ if (this->areaReference != NULL) {
+ s << "\nArea Reference: " << this->areaReference->getFirstName()
+ << ", Id: " << this->areaReference->getId();
+ }
+ s << "\nNegative Offset: ";
+ if (this->negativeOffset != NULL) {
+ s << this->negativeOffset->getFirstName() << ", Id: "
+ << this->negativeOffset->getId();
+ } else {
+ s << " Es ist kein Negative Offset hinterlegt.";
+ }
+ s << "\nPositive Offset: ";
+ if (this->positiveOffset != NULL) {
+ s << this->positiveOffset->getFirstName() << ", Id: "
+ << this->positiveOffset->getId();
+ } else {
+ s << " Es ist kein positive Offset hinterlegt.";
+ }
+ s << "\nIntersection Code:";
+ if (this->intersectioncode != NULL) {
+ s << this->intersectioncode->getFirstName() << ", Id: "
+ << this->intersectioncode->getId();
+ } else {
+ s << " Es ist kein Intersectioncode hinterlegt.";
+ }
+ s << "\nInterrupts Road";
+ if (this->interruptsRoad != NULL) {
+ s << this->interruptsRoad->getFirstName() << ", Id: "
+ << this->interruptsRoad->getId();
+ } else {
+ s << " Es ist kein Interrupts Road hinterlegt hinterlegt.";
+ }
+ return (s.str());
+ }
+ */
 
 string Linearlokation::toString() {
 	stringstream s;
 	s << Gebietslokation::toString();
 
-	if(!(this->secondName.empty()) || !(this->secondName == ""))
+	if (!(this->secondName.empty()) || !(this->secondName == ""))
 		s << " " << this->secondName << ", ";
 
-	if(!(this->roadNumber.empty()) || !(this->roadNumber == ""))
-	s << " " << this->roadNumber<< ", ";
-	if(!(this->roadName.empty()) || !(this->roadName == ""))
-	s << " " << this->roadName<< ", ";
+	if (!(this->roadNumber.empty()) || !(this->roadNumber == ""))
+		s << " " << this->roadNumber << ", ";
+	if (!(this->roadName.empty()) || !(this->roadName == ""))
+		s << " " << this->roadName << ", ";
 	return (s.str());
 }
-
-
 
 int Linearlokation::getType() {
 	return (LINEAR);

@@ -17,8 +17,7 @@
 #include <sstream>
 #include <cmath>
 
-
-#include  <iostream> //TODO nachdem cout raus, dann das auch raus
+#include  <iostream>
 
 using namespace std;
 
@@ -73,7 +72,6 @@ public:
 	 * @param ziel die entfernte Geokoordinate zu der der Weg berechnet wrden soll
 	 */
 	float entfernungBerechnen(GeoKoordinate *ziel);
-
 
 	string toString();
 	float getBreitenGrad() const;

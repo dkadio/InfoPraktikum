@@ -15,7 +15,7 @@ Gebietslokation::Gebietslokation(vector<string> *zeile) {
 	this->feinTyp = stoi(zeile->at(SUBTYPE));
 	string str = zeile->at(FIRST_NAME);
 	//Der Name ist mit "" angegeben. Diese muessen raus.
-	//TODO mal sehen, ob das schneller geht
+	//TODON mal sehen, ob das schneller geht -> War schnell genug
 	str.erase(str.begin());
 	str.erase(str.end() - 1);
 	this->firstName = str;

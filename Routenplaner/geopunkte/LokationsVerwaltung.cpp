@@ -60,7 +60,6 @@ void LokationsVerwaltung::speicherePunkLokation(vector<string>* zeile) {
 		areaReference = gebieteMap.at(stoi(zeile->at(AREA_REFERENCE)));
 	}
 
-	//TODO Hier suchen, wenn seltsame Fehler auftreten.
 	//(Linearreference und Georeference sind NULL)
 	punkLokation = new Punktlokation(zeile, areaReference, linearReference);
 	if (linearReference != NULL) {
@@ -137,7 +136,6 @@ vector<Gebietslokation*> LokationsVerwaltung::suchen(int id) {
 
 vector<Gebietslokation*> LokationsVerwaltung::suchen(string name,
 		bool uebereinstimmung) {
-	//TODO Suche testen
 	vector<Gebietslokation*> vec;
 	if (uebereinstimmung) {
 		for (auto it = gebieteMap.begin(); it != gebieteMap.end(); it++) {
@@ -146,7 +144,6 @@ vector<Gebietslokation*> LokationsVerwaltung::suchen(string name,
 			}
 		}
 	} else {
-		//TODO Suche testen und ggf effizient gestalten
 		string regEx = "(.*)";
 		regEx += name;
 		regEx += "(.*)";

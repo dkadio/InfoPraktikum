@@ -11,7 +11,6 @@ Graph_OLD::Graph_OLD(map<int, Gebietslokation*> rohDaten) {
 	map<int, Knoten*> konstruktionsMap;
 	erstelleKnoten(konstruktionsMap, rohDaten);
 	verlinkeKnoten(konstruktionsMap, rohDaten);
-	//TODO Pruefen, ob hier Destruktoren aufgerufen werden
 	konstruktionsMap.clear();
 }
 
@@ -74,7 +73,6 @@ void Graph_OLD::verlinkeKnoten(map<int, Knoten*> konstruktionsMap,
 			} catch (out_of_range &e) {
 				cout << "\n" << i++ << " Id: "
 						<< pLok->getIntersectioncode()->getPositiveOffset()->getId();
-				//TODO Ueberlegen, welche Auswrikung es hat, wenn hier nichts gefunden wird
 			}
 			try {
 				if (knoten->getEigenschaften()->getIntersectioncode()->getNegativeOffset() != NULL) {
@@ -85,7 +83,6 @@ void Graph_OLD::verlinkeKnoten(map<int, Knoten*> konstruktionsMap,
 			} catch (out_of_range &e) {
 				cout << "\n" << i++ << " Id: "
 						<< pLok->getIntersectioncode()->getNegativeOffset()->getId();
-				//TODO Ueberlegen, welche Auswrikung es hat, wenn hier nichts gefunden wird
 			}
 		}
 	}

@@ -23,7 +23,6 @@
 
 //#include "Linearlokation.h"
 
-#include  <iostream> //TODO nachdem cout raus, dann das auch raus
 
 using namespace std;
 /**
@@ -125,7 +124,7 @@ protected:
 	string firstName;
 
 	/**
-	 * Dieses Attribut gibt an, welches Bundesland für die Bearbeitung zuständig ist.
+	 * Dieses Attribut gibt an, welches Bundesland f��r die Bearbeitung zust��ndig ist.
 	 * Dieses Attribut wird im aktuellen Release nicht genutzt, ist aber dennoch der
 	 * Vollst&auml;ndigkeit halber enthalten.
 	 */

@@ -76,7 +76,7 @@ static inline double sicherDoubleLesen() {
  throw "\nUnbekannter Fehler bei der Eingabe!\n";
  }
  return out;
- }*/ // TODO Bei Abhname fragen warum das Einlesen beim 1. Wert ubersprungen wird
+ }*/
 static inline string sicherStringLesen() {
 	string in;
 	cin >> in;

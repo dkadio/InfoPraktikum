@@ -18,7 +18,7 @@ BenutzerInterface::~BenutzerInterface() {
 	delete suchKlasse;
 	delete graph;
 }
-//TODO Eingaben Typsicher machen
+//TODOD Eingaben Typsicher machen
 void BenutzerInterface::zeigeHauptMenue() {
 	unsigned int auswahl = ENDE;
 	do {
@@ -137,7 +137,7 @@ void BenutzerInterface::zeigeFeinMenue(Gebietslokation* lok) {
 		cout << "\nJetzt waehlen: ";
 		cin >> eingabe;
 
-		//TODO evtl. noch Pruefung vor dem casten
+		//TODOD evtl. noch Pruefung vor dem casten
 		switch (eingabe) {
 		case NAME_ANZEIGEN:
 			cout << "\n" << lok->getFirstName();

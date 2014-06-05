@@ -18,7 +18,7 @@ PriorityQueue::PriorityQueue(Graph* graph, Knoten* startKnoten) :
 }
 
 PriorityQueue::~PriorityQueue() {
-	// TODO Auto-generated destructor stub
+	// Die Queue braucht selber nicht zu destruieren.
 }
 
 void PriorityQueue::knotenEintragen(Knoten* vorgaenger, Knoten* knoten) {

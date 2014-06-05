@@ -269,8 +269,6 @@ public:
 	 */
 	vector<Gebietslokation*> suchInterruptsRoad(int id);
 
-	//TODO evtl. Suchfkt. fuer Flags schreiben
-
 	/**
 	 * Diese Methode sucht Lokationen anhand ihrers TERN Flags.
 	 * @param tern Das Flag, das gesucht werden soll.
@@ -344,7 +342,8 @@ private:
 };
 
 template<class Funktion, typename suchWert>
-inline vector<Gebietslokation*> SuchenKlasse::sucheTemplate(Funktion f, suchWert wert) {
+inline vector<Gebietslokation*> SuchenKlasse::sucheTemplate(Funktion f,
+		suchWert wert) {
 	auto first = (lokalitaetsVerwaltung->getGebieteMap()).begin();
 	auto last = lokalitaetsVerwaltung->getGebieteMap().end();
 	vector<Gebietslokation*> vec;

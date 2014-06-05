@@ -11,7 +11,6 @@ Graph::Graph(map<int, Gebietslokation*> rohDaten) {
 	map<int, Knoten*> konstruktionsMap;
 	erstelleKnoten(konstruktionsMap, rohDaten);
 	verlinkeKnoten(konstruktionsMap, rohDaten);
-	//TODO Pruefen, ob hier Destruktoren aufgerufen werden
 	konstruktionsMap.clear();
 }
 

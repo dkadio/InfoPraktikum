@@ -89,7 +89,7 @@ void Aktualitaet::datumEinlesen(int* sekunde, int* minute, int* stunde,
 	const regex pattern("\\d+");
 
 	const sregex_token_iterator end;
-	int ergebisArray[SEKUNDE+1];
+	int ergebisArray[SEKUNDE + 1];
 	int anzahlWerte = 0;
 	for (sregex_token_iterator i(datum.begin(), datum.end(), pattern); i != end;
 			++i, ++anzahlWerte) {
@@ -152,12 +152,12 @@ void Aktualitaet::ckeckDatum(int tag, int monat, int jahr, int stunde,
 
 string Aktualitaet::toString() {
 	stringstream erg;
-//TODO Hierfuer noch ne schoene Fkt. finden
+//Bei Bedarf mit strftime aufbereiten
 	erg << zeit->tm_mday << "." << zeit->tm_mon << "." << zeit->tm_year << " "
 			<< zeit->tm_hour << ":" << zeit->tm_min << ":" << zeit->tm_sec;
 	return (erg.str());
 }
 
- struct tm Aktualitaet::getZeit() const {
+struct tm Aktualitaet::getZeit() const {
 	return (*zeit);
 }

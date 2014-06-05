@@ -36,6 +36,9 @@
  * Erste Klasse f&uuml;r ein Benutzerinterface.<br>
  * Sie erlaubt das genaue Betrachten von Lokationen und
  * bietet hierf&uuml;r eine Men&uuml;f&uuml;hrung an.
+ *
+ * @deprecated Diese Klasse wird nicht mehr benutzt und gepflegt. Sie war
+ * zum Testen gedacht und wurde duch die Klasse Benutzerabfrage abgel&ouml;st.
  */
 class BenutzerInterface {
 public:

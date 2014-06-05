@@ -17,8 +17,6 @@
 #include "AttributDefines.h"
 #include <regex>
 
-#include  <iostream> //TODO nachdem cout raus, dann das auch raus
-
 #define GEBIETSLOKATION A
 #define LINLOKATION L
 #define PUNKTLOKATION P

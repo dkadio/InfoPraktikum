@@ -30,7 +30,7 @@ public:
 	virtual int getType();
 
 	GeoKoordinate* getGeoKoordinate() const;
-	 Linearlokation* getLinearReference() const;
+	Linearlokation* getLinearReference() const;
 	int getNetzKontenNummerNach() const;
 	int getNetzKontenNummerVor() const;
 	int getStation() const;
@@ -41,17 +41,16 @@ private:
 	 */
 	Linearlokation *linearReference;
 
-	//exitNumber; TODO rausfinden, was man damit macht und was f&uuml;r ein Datentyp das ist
+	//exitNumber; -> Weder Datentyp noch Zweck von Exitnumber gefunden
 
-	//diversionPositive TODO rausfinden, was man damit macht und was f&uuml;r ein Datentyp das ist
+	//diversionPositive -> Weder Datentyp noch Zweck von Exitnumber gefunden
 
-	//diversionNegative TODO rausfinden, was man damit macht und was f&uuml;r ein Datentyp das ist
+	//diversionNegative -> Weder Datentyp, noch Zweck von diversionNegative gefunden
 
 	/**
 	 * Netzknotennummer der Lokation oder Netzknotennummer des vor der Lokation
 	 * liegenden Netzknoten.
 	 */
-	//TODO Netzknotennummer evtl. als Referenz
 	unsigned int netzKontenNummerVor;
 
 	/**
