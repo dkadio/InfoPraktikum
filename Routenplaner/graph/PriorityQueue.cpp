@@ -41,6 +41,7 @@ void PriorityQueue::nacholfgerEintragen(Knoten* knoten) {
 }
 
 void PriorityQueue::queueInitialisieren(Knoten* startknoten) {
+	clear();
 	nacholfgerEintragen(startknoten);
 }
 
@@ -88,4 +89,11 @@ void PriorityQueue::knotenRelaxieren(Knoten* vorgaenger, Knoten* knoten) {
 
 unsigned long PriorityQueue::getSize() {
 	return (queue.size());
+}
+
+void PriorityQueue::clear() {
+	for (auto it = queue.begin(); it != queue.end(); it++) {
+		it->second->clear();
+	}
+	queue.clear();
 }

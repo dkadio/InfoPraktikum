@@ -18,10 +18,9 @@ void Graph::erstelleKnoten(map<int, Knoten*>& konstruktionsMap,
 		const map<int, Gebietslokation*>& rohdaten) {
 	//Alle Elemente durchlaufen
 	for (auto it = rohdaten.begin(); it != rohdaten.end(); it++) {
-		//TODO Diese Pruefung vor dem Casten machen
 		//Pruefen, ob Element eine Punklokation ist
-		Punktlokation *pktLok = (Punktlokation*) it->second;
-		if (pktLok->getType() == PUNKT) {
+		if (it->second->getType() == PUNKT) {
+			Punktlokation *pktLok = (Punktlokation*) it->second;
 			Knoten *k = new Knoten(pktLok);
 			knotenListe.push_back(k);
 			konstruktionsMap[k->getEigenschaften()->getId()] = k;

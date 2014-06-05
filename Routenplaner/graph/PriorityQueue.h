@@ -44,7 +44,8 @@ public:
 	void nacholfgerEintragen(Knoten *knoten);
 
 	/**
-	 * Diese Methode erstellt die ersten Eintr&auml;ge der Queue.<br>
+	 * Diese Methode erstellt die ersten Eintr&auml;ge der Queue und muss vor
+	 * jeder Suche aufgerufen werden.<br>
 	 * Sie tr&auml;gt die Nachfolger des Startknotens ein.
 	 */
 	void queueInitialisieren(Knoten* startknoten);
@@ -75,7 +76,13 @@ public:
 	 */
 	unsigned long getSize();
 
-	//TODO queue.clear()
+	/**
+	 * Diese Methode leert die Queue und ruft bei allen Knoten die clear()
+	 * Methode auf.<br>
+	 * Sie muss aufgerufen werden, wenn eine Route mit anderem Startknoten
+	 * berechnet werden soll.
+	 */
+	void clear();
 private:
 	/**
 	 * Diese Map ist die Datenstruktur, die der Queue zu Grunde liegt.<br>
