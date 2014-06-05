@@ -1,22 +1,17 @@
-/*
- * Graph.h
- *
- *  Created on: 13.05.2014
- *      Author: deniz
- */
-
 /**
  * Diese Klasse stellt einen Graph dar. Die enth&auml;lt neben
  * einer geeigneten Datenstruktur auch Methoden um den Graph aufzubauen.<br>
  * Ein Knoten ist durch maximal 3 Nachfolger gekennzeichnet.<br>
- * Die Knoten sind alle in einer doppelt verketteten Liste enthalten.
+ * Die Knoten sind alle in einer doppelt verketteten Liste enthalten.<br>
+ * Beim Aufbu des Graphen wird eine Konstruktionsmap genutzt. Diese hat den Vorteil,
+ * dass die vielen Zugriffe auf eine Id schnell abgearbeitet werden k&ouml;nnen.
+ * Sie wird nach dem Aufbau des Graphen verworfen.
  */
 #ifndef GRAPH_H_
 #define GRAPH_H_
 
 #include <map>
 #include "Knoten.h"
-
 
 using namespace std;
 
@@ -25,6 +20,7 @@ public:
 	/**
 	 * Der Standardkonstrukor. Er baut den Graphen ohne Wertung der einzelnen
 	 * Knoten auf.
+	 * @param rohDaten Eine Map mit Lokationen.
 	 */
 	Graph(map<int, Gebietslokation*> rohDaten);
 	/**
@@ -34,26 +30,24 @@ public:
 	virtual ~Graph();
 
 	/**
-	 * Diese Methode erstellt die erste Spalte der Adjazenzmatrix (n=0).<br>
-	 * Dabei werden neue Knoten erstellt und in die Liste eingepflegt.
-	 * @param konstruktionsMap Die Konstruktionsmap, dort sind die neuen
-	 * Knoten zusammen mit einer Id gespeichert.
-	 * @param rohdaten Eine Map mit den Rohdaten, also allen Lokationen.
+	 * Diese Methode durchl&auml;ft alle Lokationen.<br>
+	 * Ist die aktuelle Lokation eine Punklokation, wird daraus ein Knoten erstellt.<br>
+	 * Dessen Pointer wird in die Liste mit den Knoten aufgenommen.
+	 * @param konstruktionsMap Die Konstruktionsmap. In ihr sind alle erstellten Knoten
+	 * enthalten. Bzw. Pointer auf sie.
+	 * @param rohdaten Eine Map mit Lokationen.
 	 */
 	void erstelleKnoten(map<int, Knoten*> &konstruktionsMap,
 			const map<int, Gebietslokation*> &rohdaten);
 
 	/**
-	 * Diese Methode baut die eigentloch Adjazenzliste auf. Hierzu werden die
-	 * Spalten n>0 gef&uuml;llt.<br>
-	 * Der Einlesevorgang l&auml;ft in zwei Stufen. Erst wird aus jeder Punktlokation
-	 * ein Knoten erzeugt.<br>
-	 * Im zweiten Schritt wird in jedem Knoten, dessen Punktlokation einen
-	 * Intersectioncode hat, der Intersectioncode als Nachfolger eingetragen.<br>
-	 * Da die Knoten der Intersectioncodes w&auml;hrend dem ersten Erstellen noch nicht
-	 * existieren m&uuml;ssen wird, verlinkt diese Methode sie im zweiten Schritt.
-	 * @param konstruktionsMap Die Kkonstruktionsmap erlaubt einen schnellen Zugriff
-	 * auf ein Knotenobjekt.
+	 * Diese Methode verlinkt die Knoten.<br>
+	 * Der Hintergrund ist, dass die Nachfolger eines Knotens selber wieder Knoten sind.<br>
+	 * Diese Objekte sind aber w&auml;hrend des Einlesen noch nicht zwangsl&auml;fig
+	 * erstellt.
+	 * @param konstruktionsMap Die Konstruktionsmap. In ihr sind alle erstellten Knoten
+	 * enthalten. Bzw. Pointer auf sie.
+	 * @param rohdaten Eine Map mit Lokationen.
 	 */
 	void verlinkeKnoten(map<int, Knoten*> konstruktionsMap,
 			const map<int, Gebietslokation*> &rohdaten);
@@ -93,7 +87,5 @@ private:
 	 */
 	list<Knoten*> knotenListe;
 };
-
-//knoten.getitem().getnachfolger().getitem().getentfernung();
 
 #endif /* GRAPH_H_ */

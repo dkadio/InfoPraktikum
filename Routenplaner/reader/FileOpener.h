@@ -1,10 +1,3 @@
-/*
- * FileOpener.h
- *
- *  Created on: 25.04.2014
- *      Author: christoph
- */
-
 #ifndef FILEOPENER_H_
 #define FILEOPENER_H_
 
@@ -45,6 +38,7 @@ public:
 	 */
 	void spalteZeilen(void);
 
+	//Getter
 	const vector<vector<string> >& getDatensatz() const {
 		return (datenSatz);
 	}

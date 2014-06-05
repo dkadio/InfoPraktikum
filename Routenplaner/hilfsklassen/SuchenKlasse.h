@@ -47,11 +47,22 @@
 #include "../exceptions/TypProblemEcxeption.h"
 
 /**
- * Diese Klasse ist ein Container f&uuml;r alle m&ouml;glichen
- * Suchen, die man auf die Lokationsobjekte ansetzen kann.<br>
+ * Diese Klasse erlaubt Suchen nach allen Attributen des Datensatzes.<br>
+ * Die eigentliche Suche wird von der Methode sucheTemplate() ausgef&uuml;hrt.<br>
+ * Alle anderen Methoden rufen diese mit einem Struct auf, das einen
+ * &uum;berschriebenen ()-Opertor hat.
+ *
+ * @deprecated Diese Klasse ist voll funktionsf&auml;hig, stammt aber aus einem
+ * fr&uuml;hen Stadium des Projekts. Sie war bildlich gesehen der Holzhammer, mit dem
+ * Informationen aus den Datens&auml;tzen gewonnne werden sollten.
  */
 class SuchenKlasse {
 public:
+	/**
+	 * Der Konstruktor dieser Klasse.
+	 * @param Ein Pointer auf ein LokalitaetsVerwalung Objekt. Auf diesem wird die
+	 * Suche ausgef&uuml;hrt.
+	 */
 	SuchenKlasse(LokationsVerwaltung const *lokV);
 	virtual ~SuchenKlasse();
 
@@ -79,16 +90,52 @@ public:
 	 */
 	string getSuchZeile(int Kommando, string beschreibung);
 
+	/**
+	 * Die Obersuchmethode f&uuml;r Bool Werte.<br>
+	 * Sie ruft anhand des Modus die entsprechende Suchmethode auf.
+	 * @param vergleich Der Ausdruck, nach dem gesucht werden soll.
+	 * @return Ein Vector mit den Ergebnissen.
+	 */
 	vector<Gebietslokation*> suchen(int modus, bool vergleich)
 			throw (TypProblemEcxeption);
+	/**
+	 * Die Obersuchmethode f&uuml;r int Werte.<br>
+	 * Sie ruft anhand des Modus die entsprechende Suchmethode auf.
+	 * @param vergleich Der Ausdruck, nach dem gesucht werden soll.
+	 * @return Ein Vector mit den Ergebnissen.
+	 */
 	vector<Gebietslokation*> suchen(int modus, int vergleich)
 			throw (TypProblemEcxeption);
+	/**
+	 * Die Obersuchmethode f&uuml;r char Werte.<br>
+	 * Sie ruft anhand des Modus die entsprechende Suchmethode auf.
+	 * @param vergleich Der Ausdruck, nach dem gesucht werden soll.
+	 * @return Ein Vector mit den Ergebnissen.
+	 */
 	vector<Gebietslokation*> suchen(int modus, char vergleich)
 			throw (TypProblemEcxeption);
+	/**
+	 * Die Obersuchmethode f&uuml;r string Werte.<br>
+	 * Sie ruft anhand des Modus die entsprechende Suchmethode auf.
+	 * @param vergleich Der Ausdruck, nach dem gesucht werden soll.
+	 * @return Ein Vector mit den Ergebnissen.
+	 */
 	vector<Gebietslokation*> suchen(int modus, string vergleich)
 			throw (TypProblemEcxeption);
+	/**
+	 * Die Obersuchmethode f&uuml;r Gebietslokation-Pointer Werte.<br>
+	 * Sie ruft anhand des Modus die entsprechende Suchmethode auf.
+	 * @param vergleich Der Ausdruck, nach dem gesucht werden soll.
+	 * @return Ein Vector mit den Ergebnissen.
+	 */
 	vector<Gebietslokation*> suchen(int modus, Gebietslokation* vergleich)
 			throw (TypProblemEcxeption);
+	/**
+	 * Die Obersuchmethode f&uuml;r unsigned int Werte.<br>
+	 * Sie ruft anhand des Modus die entsprechende Suchmethode auf.
+	 * @param vergleich Der Ausdruck, nach dem gesucht werden soll.
+	 * @return Ein Vector mit den Ergebnissen.
+	 */
 	vector<Gebietslokation*> suchen(int modus, unsigned int vergleich)
 			throw (TypProblemEcxeption);
 

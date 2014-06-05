@@ -11,23 +11,38 @@
 #include"./Gebietslokation.h"
 /**
  * Diese Klasse stellt eine Linearlocation dar.<br> In ihr sind alle Atribute enthalten,
- * die eine Linearlocation enth&auml;lt.
+ * die eine Linearlocation zus&auml;tzlich zu einer Gebietslokation enth&auml;lt.<br>
+ * Sie erbt von der Klasse @link Gebietslokation @endlink.
  */
 class Punktlokation;
 class Linearlokation: public Gebietslokation {
 public:
+	/**
+	 * Dieser Konstruktor ist der Standardkonstruktor dieser Klasse. Er enth&auml;lt
+	 * die Zeile, die schon in der Gebietslokation beschrieben wurde und zus&auml;tzlich
+	 * einen Pointer auf eine Area Reference.
+	 * @param zeile Die Zeile der Datei, aus der die Linearlokation ausgelesen werden
+	 * soll.
+	 * @param areaReference Ein Pointer auf die Gebietslokation, in der sich diese
+	 * Linearlokation befindet.
+	 *
+	 */
 	Linearlokation(vector<string> *zeile, Gebietslokation *areaReference);
 	virtual ~Linearlokation();
 
 	/**
-	 * Mit dieser Methode wird eine Punklokation in die Linearlokation eingetragen.
+	 * Mit dieser Methode wird eine Punklokation in die Linearlokation eingetragen.<br>
+	 * Diese Klasse enth&auml,t einen Vector, in dem alle Punklokationen gespeichert sind,
+	 * die in dieser Linearlokation enthalten sind.
 	 * @param pktLocation Der Pointer auf die einzutragende Punktlokation.
 	 */
 	void addPktLokation(Punktlokation *pktLocation);
 
 	/**
 	 * Diese Methode baut die Verweise zu anderen Linearlokationen auf,
-	 * die zum Zeitpunkt der Konstruktion des Objekts noch nicht feststanden.
+	 * die zum Zeitpunkt der Konstruktion des Objekts noch nicht feststanden.<br>
+	 * Dadurch k&ouml;nnen alle direkten Nachbarn (auf der Karte gesehen) direkt
+	 * adressiert werden.
 	 * Diese Verweise sind:<br>
 	 * <ul>
 	 * 	<li>Positive Offset</li>
@@ -44,7 +59,7 @@ public:
 			vector<string> *zeile);
 
 	/**
-	 * Gibt einen String mit Optionen &uuml;ber das Obejket zur&uuml;ck.
+	 * Gibt einen String mit Informationen &uuml;ber das Objket zur&uuml;ck.
 	 * @return Ein String mit den Informationen &uuml;ber das Objekt.
 	 */
 	virtual string toString();
@@ -55,6 +70,7 @@ public:
 	 */
 	virtual int getType();
 
+	//Nur Getter und Setter, brauchen nicht weiter kommentiert zu werden.
 	const string& getAdminCounty() const;
 	Gebietslokation* getAreaReference();
 	bool isInNegative() const;

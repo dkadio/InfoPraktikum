@@ -1,19 +1,11 @@
-/*
- * Aktualitaet.h
- *
- *  Created on: 25.04.2014
- *      Author: christoph
- */
-
 #ifndef AKTUALITAET_H_
 #define AKTUALITAET_H_
-#include <cstring>
+
 #include<time.h>
 #include<string>
 #include <sstream>
 #include <regex>
 #include "./../exceptions/ZeitException.h"
-
 
 #define TAG 0
 #define MONAT 1
@@ -23,6 +15,12 @@
 #define SEKUNDE 5
 
 using namespace std;
+/**
+ * Diese Klasse stellt die die Aktualit&auml;t eines Datensatzes dar.<br>
+ * Sie basiert auf dem struct tm und erweitert dieses um Methoden, die geeignet sind,
+ * um einen String einzulesen, sowie Konstruktoren, die eine komfortable Handhabung
+ * erm&ouml;glichen.
+ */
 class Aktualitaet {
 public:
 	/**
@@ -69,9 +67,14 @@ public:
 	 * @return Das Datum in der Form, wie es in die Datei geh&ouml;rt.
 	 */
 	string toString();
+
+	//Nur Getter
 	struct tm getZeit() const;
 
 private:
+	/**
+	 * Dieses Attribut speichert die eingelesene Zeit.
+	 */
 	struct tm *zeit;
 	/**
 	 * Dieser Funktion erlaubt es, das Datum aus der Datei einzulesen. Die einzelnen Werte des
@@ -147,27 +150,5 @@ private:
 	 */
 	int checkJahr(int jahr);
 };
-/*
-bool operator==(Aktualitaet & lhs, Aktualitaet & rhs) {
-	if (lhs.getZeit().tm_sec != rhs.getZeit().tm_sec) {
-		return (false);
-	}
-	if (lhs.getZeit().tm_min != rhs.getZeit().tm_min) {
-		return (false);
-	}
-	if (lhs.getZeit().tm_hour != rhs.getZeit().tm_hour) {
-		return (false);
-	}
-	if (lhs.getZeit().tm_year != rhs.getZeit().tm_year) {
-		return (false);
-	}
-	if (lhs.getZeit().tm_mon != rhs.getZeit().tm_mon) {
-		return (false);
-	}
-	if (lhs.getZeit().tm_mday != rhs.getZeit().tm_mday) {
-		return (false);
-	}
-	return (true);
-}*/
 
 #endif /* AKTUALITAET_H_ */

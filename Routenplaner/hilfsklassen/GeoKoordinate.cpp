@@ -1,10 +1,3 @@
-/*
- * GeoKoordinate.cpp
- *
- *  Created on: 28.04.2014
- *      Author: christoph
- */
-
 #include "GeoKoordinate.h"
 
 GeoKoordinate::GeoKoordinate(string xKoordinate, string yKoordinate) {
@@ -31,7 +24,7 @@ void GeoKoordinate::gradEinlesen(string zeichen, float* angabe) {
 				+ (((stoi(nachkommastellen)) / (pow(10, NACHKOMMA_STELLEN))));
 	} catch (const invalid_argument &e) {
 		//Dieser Fehler duerfte eigentlch nicht auftreten.
-		std::cerr << "\n" << e.what() << "\nFehler in der Datei" << "\n";
+		throw("Fehler beim Einlesen einer Koordinate");
 	}
 }
 

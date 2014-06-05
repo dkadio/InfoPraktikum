@@ -1,10 +1,3 @@
-/*
- * PriorityQueue.cpp
- *
- *  Created on: 28.05.2014
- *      Author: christoph
- */
-
 #include "PriorityQueue.h"
 
 PriorityQueue::PriorityQueue(Graph * graph) {
@@ -51,7 +44,7 @@ void PriorityQueue::queueInitialisieren(Knoten* startknoten) {
 	nacholfgerEintragen(startknoten);
 }
 
-Knoten * PriorityQueue::getFirst() throw (out_of_range) {
+Knoten * PriorityQueue::getFirst() {
 	Knoten * rueckgabe = NULL;
 	auto it = queue.begin();
 //Das erste nicht besuchte Element finden

@@ -1,10 +1,3 @@
-/*
- * Punktlokation.cpp
- *
- *  Created on: 25.04.2014
- *      Author: christoph
- */
-
 #include "Punktlokation.h"
 
 Punktlokation::Punktlokation(vector<string> *zeile,
@@ -44,15 +37,16 @@ Punktlokation::~Punktlokation() {
 string Punktlokation::toString() {
 	stringstream s;
 	s << Linearlokation::toString();
-/*	s << "\nLinear Reference: ";
-	if (this->linearReference != NULL) {
-		s << this->linearReference->getFirstName() << ", Id: "
-				<< this->linearReference->getId();
-	} else {
-		s << "Keine Linear Reference hinterlegt.";
-	}
-	s << "\nNetzknotennummer vor der Lokation: " << this->netzKontenNummerVor;
-*/	s << "\nNetzknotennummer nach der Lokation: " << this->netzKontenNummerNach;
+	/*	s << "\nLinear Reference: ";
+	 if (this->linearReference != NULL) {
+	 s << this->linearReference->getFirstName() << ", Id: "
+	 << this->linearReference->getId();
+	 } else {
+	 s << "Keine Linear Reference hinterlegt.";
+	 }
+	 s << "\nNetzknotennummer vor der Lokation: " << this->netzKontenNummerVor;
+	 */s << "\nNetzknotennummer nach der Lokation: "
+			<< this->netzKontenNummerNach;
 	if (this->geoKoordinate != NULL) {
 		s << this->geoKoordinate->toString();
 	}
@@ -86,9 +80,9 @@ int Punktlokation::getStation() const {
 
 void Punktlokation::initialisieren() {
 	this->linearReference = NULL;
-	this->netzKontenNummerVor=0;
-	this->netzKontenNummerNach=0;
-	this->station=0;
-	this->geoKoordinate=NULL;
+	this->netzKontenNummerVor = 0;
+	this->netzKontenNummerNach = 0;
+	this->station = 0;
+	this->geoKoordinate = NULL;
 
 }

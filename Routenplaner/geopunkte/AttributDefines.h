@@ -1,17 +1,10 @@
-/*
- * AttributDefines.h
- *
- *  Created on: 26.04.2014
- *      Author: christoph
- */
-
 #ifndef ATTRIBUTDEFINES_H_
 #define ATTRIBUTDEFINES_H_
 
-
 /*
  * Die folgenden Defines entsprechen der Doku des Bundesamtes. Sie erleichtern den Zugriff
- * auf die Daten innerhalb des eingelesenen und zerlegten Datensatzes.
+ * auf die Daten innerhalb des eingelesenen und zerlegten Datensatzes.<br>
+ * Abgesehen von den defines enth&auml;lt diese Datei nichts.
  */
 #define LOCATIONCODE 0
 #define TYPE 1
@@ -58,7 +51,5 @@
 #define SPECIAL8 42
 #define SPECIAL9 43
 #define SPECIAL10 44
-
-
 
 #endif /* ATTRIBUTDEFINES_H_ */

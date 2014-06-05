@@ -22,14 +22,8 @@ list<Knoten*> Dijkstra::starteDijkstra(Knoten* startKnoten, Knoten* endKnoten) {
 	Knoten * aktuellerKnoten = queue.getFirst();
 	while (aktuellerKnoten != NULL) {
 		queue.nacholfgerEintragen(aktuellerKnoten);
-		if (aktuellerKnoten == NULL) {
-			cout << "Dijkstra fertig";
-		}
 		aktuellerKnoten = queue.getFirst();
 	}
-
-	//Hier noch pruefen, ob alle Knoten verlinkt sind
-
 	//Ergebnis vom Endknoten aus aufbauen
 	list<Knoten*> rueckwaertsErgebnis;
 	Knoten* ergebnisKnoten = endKnoten;

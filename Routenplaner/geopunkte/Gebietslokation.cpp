@@ -55,11 +55,11 @@ string Gebietslokation::toString() {
 		s << "-------Linearlokation-------";
 		break;
 	case PUNKT:
-		/*s << "-------Punktlokation-------";*/
+		s << "-------Punktlokation-------";
 		break;
 	}
 	s << "\n" << this->id << ", ";
-	s <<  this->firstName << ", ";
+	s << this->firstName << ", ";
 	return (s.str());
 }
 
@@ -77,7 +77,7 @@ const string& Gebietslokation::getAdminBundesLand() const {
 	return (adminBundesLand);
 }
 
- Aktualitaet* Gebietslokation::getAktualitaet() const {
+Aktualitaet* Gebietslokation::getAktualitaet() const {
 	return (aktualitaet);
 }
 

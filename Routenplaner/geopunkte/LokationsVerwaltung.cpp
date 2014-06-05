@@ -1,28 +1,21 @@
-/*
- * LokationsVerwaltung.cpp
- *
- *  Created on: 26.04.2014
- *      Author: christoph
- */
-
 #include "LokationsVerwaltung.h"
 LokationsVerwaltung::LokationsVerwaltung(vector<vector<string> > *datenSatz) {
 	objekteErstellen(datenSatz);
 }
 LokationsVerwaltung::~LokationsVerwaltung() {
-	/**
-	 * Alle Daten l&ouml;schen.
-	 */
+	//  Alle Daten l&ouml;schen.
 	for (map<int, Gebietslokation*>::iterator it = gebieteMap.begin();
 			it != gebieteMap.end(); it++) {
 		delete it->second;
 	}
+	//Danach die leeren Pointer aus den Datenstrukturen entfernen
 	gebieteVector.clear();
 	gebieteMap.clear();
 	namenMap.clear();
 
 }
 
+//Achtung, Fehlerhaft und deprecated
 void LokationsVerwaltung::objektErstellen(vector<string> *zeile,
 		string pattern) {
 	if (checkGebietsLokation(zeile)) {
@@ -30,7 +23,7 @@ void LokationsVerwaltung::objektErstellen(vector<string> *zeile,
 	} else if (checkLineaLokation(zeile)) {
 		new Linearlokation(zeile, (Gebietslokation*) NULL);
 	} else if (checkPunktlokation(zeile)) {
-		cout << "Spalte 32  " << zeile->at(31) << "\n";
+		//cout << "Spalte 32  " << zeile->at(31) << "\n";
 	}
 }
 
@@ -166,6 +159,7 @@ bool LokationsVerwaltung::checkPunktlokation(vector<string>* zeile) {
 
 bool LokationsVerwaltung::validierePunklokation(int id) {
 	try {
+		//Testen, ob das gefundene Objekt eine Pkt Lok ist
 		Gebietslokation *lok = gebieteMap.at(id);
 		if (lok->getType() == PUNKT) {
 			return (true);
@@ -173,6 +167,7 @@ bool LokationsVerwaltung::validierePunklokation(int id) {
 			return (false);
 		}
 	} catch (out_of_range &e) {
+		//Wenn kein Objekt hinter dieser Id steht
 		return (false);
 	}
 }

@@ -1,10 +1,3 @@
-/*
- * Knoten.cpp
- *
- *  Created on: 13.05.2014
- *      Author: deniz
- */
-
 #include "Knoten.h"
 
 Knoten::~Knoten() {
@@ -38,7 +31,7 @@ string Knoten::toString() {
 	return (s.str());
 }
 
- list<Knoten*> Knoten::getNachfolger() const {
+list<Knoten*> Knoten::getNachfolger() const {
 	return nachfolger;
 }
 
@@ -55,7 +48,7 @@ float Knoten::getDistanz() const {
 	return distanz;
 }
 
- Knoten* Knoten::getVorgaenger() const {
+Knoten* Knoten::getVorgaenger() const {
 	return vorgaenger;
 }
 

@@ -1,10 +1,3 @@
-/*
- * Knoten.h
- *
- *  Created on: 13.05.2014
- *      Author: deniz
- */
-
 #ifndef KNOTEN_H_
 #define KNOTEN_H_
 
@@ -14,13 +7,11 @@
 
 /**
  * Diese Klasse repr&auml;sentiert einen Knotenpunkt im Graph.<br>
- * Ein Knoten hat maximal 3 Nachfolger,<br>
- * <ol>
- * 	<li>Positive Offset </li>
- * 	<li>Negative Offset </li>
- * 	<li>Intersection Code </li>
- * </ol><br>
- *
+ * Ein Knoten hat einen Nachfolger, ein besucht Flag und eine Distanz.
+ * Zus&auml;tzlich enth&auml;lt er einen Pointer auf eine Punklokation und
+ * eine Liste mit Nachfolgern.<br>
+ * Der Vorg&auml;nger ergibt sich aus der Dijkstraberechnung. Die Nachfolger
+ * ergeben sich aus dem Datensatz.
  */
 using namespace std;
 class Knoten {
@@ -43,12 +34,13 @@ public:
 	}
 
 	/**
-	 * Diese Methode setzt den Vorg&auml;nger des Knotens auf NULL und die Distanz#
+	 * Diese Methode setzt den Vorg&auml;nger des Knotens auf NULL und die Distanz
 	 * auf INFINITY.
 	 */
 	void clear();
 	list<Knoten*> getNachfolger() const;
 
+	//Nur Getter und Setter
 	bool isBesucht() const;
 	float getDistanz() const;
 	Knoten* getVorgaenger() const;
@@ -63,14 +55,31 @@ private:
 	 */
 	Knoten * vorgaenger;
 
+	/**
+	 * Die Eigenschaften des Knotens sind eine Punklokation, bzw. ein Pointer
+	 * darauf.<br>
+	 * Die Id eines Knotens ist der Einfachheit halber die Id der dazu geh&ouml;rigen
+	 * Punktlokation.
+	 */
 	Punktlokation* eigenschaften; //getid ist die knotennummer
+
+	/**
+	 * Die Nachfolger des Knotens sind Knoten, die von diesem erreicht werden
+	 * k&ouml;nen.<br>
+	 * Vereinfacht gesagt, sind das die Knoten, die zum Positive Offset, dem Negative
+	 * Offset und dem Intersectioncode der Eigenschaften geh&ouml;ren.
+	 */
 	list<Knoten*> nachfolger;
 
 	/**
-	 * Enth&auml;lt die Distanz bis zum Startknoten.
+	 * Enth&auml;lt die Distanz bis zum Startknoten in Kilometern.
 	 */
 	float distanz;
 
+	/**
+	 * Ein Knoten ist besucht, wenn seine Nachfolger in die Queue aufgenommen
+	 * wurden.
+	 */
 	bool besucht;
 };
 #endif /* KNOTEN_H_ */

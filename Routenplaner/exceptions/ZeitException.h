@@ -1,10 +1,3 @@
-/*
- * ZeitException.h
- *
- *  Created on: 25.04.2014
- *      Author: christoph
- */
-
 #ifndef ZEITEXCEPTION_H_
 #define ZEITEXCEPTION_H_
 #include <exception>
@@ -18,16 +11,14 @@
 class ZeitException: public std::exception {
 public:
 	ZeitException(const char* message);
-	virtual ~ZeitException() throw(){};
+	virtual ~ZeitException() throw () {
+	}
+	;
 	/**
 	 * Methode, die den Grund der Exception zur&uuml;ck gibt.
 	 * @return Den Grund des Fehlers.
 	 */
 	const char * what() const throw () {
-		return meldung.c_str();
-	}
-
-	const char* toString() {
 		return meldung.c_str();
 	}
 

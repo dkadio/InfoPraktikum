@@ -1,10 +1,3 @@
-/*
- * FileNotFoundException.h
- *
- *  Created on: 25.04.2014
- *      Author: christoph
- */
-
 #ifndef FILENOTFOUNDEXCEPTION_H_
 #define FILENOTFOUNDEXCEPTION_H_
 

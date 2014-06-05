@@ -1,10 +1,3 @@
-/*
- * GeoKoordinate.h
- *
- *  Created on: 28.04.2014
- *      Author: christoph
- */
-
 #ifndef GEOKOORDINATE_H_
 #define GEOKOORDINATE_H_
 
@@ -15,9 +8,6 @@
 #include <string>
 #include <cmath>
 #include <sstream>
-#include <cmath>
-
-#include  <iostream>
 
 using namespace std;
 

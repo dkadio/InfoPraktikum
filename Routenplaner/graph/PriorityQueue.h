@@ -1,10 +1,3 @@
-/*
- * PriorityQueue.h
- *
- *  Created on: 28.05.2014
- *      Author: christoph
- */
-
 #ifndef PRIORITYQUEUE_H_
 #define PRIORITYQUEUE_H_
 
@@ -35,8 +28,8 @@ public:
 	/**
 	 * Diese Methode speichert einen Knoten in die Prio Queue.<br>
 	 * Ist dieser Knoten bereits enthalten, wird gepr&uuml;ft, ob sich eine
-	 * Verbesserung ergibt und dem entsprechend die Distanz und der Vorg&auml;nger
-	 * ge&auml;ndert.<br>
+	 * k&uuml;rzere Distanz ergibt und dem entsprechend die Distanz und der
+	 * Vorg&auml;nger ge&auml;ndert.<br>
 	 * Verbessert sich die Distanz nicht, passiert nichts.
 	 * @param vorgaenger Der Knoten, der der Vorg&auml;nger des einzutragenden Knoten ist.
 	 * @param knoten Der Knoten, der eingetragen werden soll.
@@ -58,14 +51,13 @@ public:
 
 	/**
 	 * Diese Methode gibt den Knoten mit der h&ouml;chsten Priorit&auml;t aus.<br>
-	 * Also den Knoten, der die niedrigste Distanz zum Startknoten hat und noch nicht
-	 * besucht wurde.
+	 * Der Knoten, der die niedrigste Distanz zum Startknoten hat und noch nicht
+	 * besucht wurde hat die h&ouml;chste Priorit&auml;t.
 	 * @return Der Knoten mit der niedrigsten Distanz zum Startknoten, der noch nicht
-	 * besucht wurde.
-	 * @throws out_of_range Exception, wenn es keine Elemente mehr gibt, die noch
-	 * nicht besucht wurden.
+	 * besucht wurde. Gibt es keinen Knoten mehr, der noch nicht besucht wurde, wird
+	 * NULL zur&uuml;ck gegeben.
 	 */
-	Knoten * getFirst() throw (out_of_range);
+	Knoten * getFirst();
 
 	/**
 	 * Diese Methode pr&uuml;ft, ob sich die Distanz des Knoten mit dem neuen Vorg&auml;nger
@@ -82,7 +74,13 @@ public:
 	 * @return Die Anzahl der Elemente, die in der Queue gespeichert sind.
 	 */
 	unsigned long getSize();
+
+	//TODO queue.clear()
 private:
+	/**
+	 * Diese Map ist die Datenstruktur, die der Queue zu Grunde liegt.<br>
+	 * Effizient beim Zugriff auf Id und iterierbar.
+	 */
 	map<int, Knoten*> queue;
 };
 

@@ -1,10 +1,3 @@
-/*
- * TypProblemEcxeption.cpp
- *
- *  Created on: 08.05.2014
- *      Author: christoph
- */
-
 #include "TypProblemEcxeption.h"
 
 TypProblemEcxeption::TypProblemEcxeption(string fehler) {

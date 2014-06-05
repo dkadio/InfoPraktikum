@@ -1,23 +1,19 @@
-/*
- * Graph.h
- *
- *  Created on: 13.05.2014
- *      Author: deniz
- */
-
 /**
- * Diese Klasse stellt einen Graph dar. Die enth&auml;lt neben
+ * Diese Klasse stellt einen Graphen dar. Sie enth&auml;lt neben
  * einer geeigneten Datenstruktur auch Methoden um den Graph aufzubauen.<br>
  * Ein Knoten ist durch maximal 3 Nachfolger gekennzeichnet.<br>
  * Die Knoten sind alle in einer doppelt verketteten Liste enthalten.
+ *
+ * @deprecated Da die Datenstruktur des Knoten grunds&auml;tzlich ge&auml;ndert wurde,
+ * musste diese Klasse von Grund auf neu aufgebaut werden. Tore seid gewarnt, dieser Weg
+ * f&uuml;rt nicht zum Ziel.
  */
+
 #ifndef GRAPH_OLD_H_
 #define GRAPH_OLD_H_
 
 #include <map>
 #include "Knoten.h"
-
-
 
 class Graph_OLD {
 public:

@@ -1,10 +1,3 @@
-/*
- * Graph.cpp
- *
- *  Created on: 13.05.2014
- *      Author: deniz
- */
-
 #include "Graph_OLD.h"
 
 Graph_OLD::Graph_OLD(map<int, Gebietslokation*> rohDaten) {
@@ -71,8 +64,8 @@ void Graph_OLD::verlinkeKnoten(map<int, Knoten*> konstruktionsMap,
 									pLok->getIntersectioncode()->getPositiveOffset()->getId()));
 				}
 			} catch (out_of_range &e) {
-				cout << "\n" << i++ << " Id: "
-						<< pLok->getIntersectioncode()->getPositiveOffset()->getId();
+				/*cout << "\n" << i++ << " Id: "
+				 << pLok->getIntersectioncode()->getPositiveOffset()->getId();*/
 			}
 			try {
 				if (knoten->getEigenschaften()->getIntersectioncode()->getNegativeOffset() != NULL) {
@@ -81,8 +74,8 @@ void Graph_OLD::verlinkeKnoten(map<int, Knoten*> konstruktionsMap,
 									pLok->getIntersectioncode()->getNegativeOffset()->getId()));
 				}
 			} catch (out_of_range &e) {
-				cout << "\n" << i++ << " Id: "
-						<< pLok->getIntersectioncode()->getNegativeOffset()->getId();
+				/*	cout << "\n" << i++ << " Id: "
+				 << pLok->getIntersectioncode()->getNegativeOffset()->getId(); */
 			}
 		}
 	}

@@ -1,10 +1,3 @@
-/*
- * Graph.cpp
- *
- *  Created on: 13.05.2014
- *      Author: deniz
- */
-
 #include "Graph.h"
 
 Graph::Graph(map<int, Gebietslokation*> rohDaten) {
@@ -25,6 +18,7 @@ void Graph::erstelleKnoten(map<int, Knoten*>& konstruktionsMap,
 		const map<int, Gebietslokation*>& rohdaten) {
 	//Alle Elemente durchlaufen
 	for (auto it = rohdaten.begin(); it != rohdaten.end(); it++) {
+		//TODO Diese Pruefung vor dem Casten machen
 		//Pruefen, ob Element eine Punklokation ist
 		Punktlokation *pktLok = (Punktlokation*) it->second;
 		if (pktLok->getType() == PUNKT) {
@@ -43,25 +37,41 @@ void Graph::verlinkeKnoten(map<int, Knoten*> konstruktionsMap,
 		Punktlokation *pLok = knoten->getEigenschaften();
 		//POffset als Nachfolger eintragen
 		if (pLok->getPositiveOffset() != NULL) {
-			knoten->addNachfolger(
-					konstruktionsMap[pLok->getPositiveOffset()->getId()]);
+			try {
+				knoten->addNachfolger(
+						konstruktionsMap.at(
+								pLok->getPositiveOffset()->getId()));
+			} catch (out_of_range &e) {
+				string fehler = "Der Positive Offset mit der Id ";
+				fehler += pLok->getIntersectioncode()->getId();
+				fehler += " konnte nicht gefunden werden.";
+				throw(fehler);
+			}
 		}
 		//NOffset als Nachfolger eintragen
 		if (pLok->getNegativeOffset() != NULL) {
-			knoten->addNachfolger(
-					konstruktionsMap[pLok->getNegativeOffset()->getId()]);
+			try {
+				knoten->addNachfolger(
+						konstruktionsMap.at(
+								pLok->getNegativeOffset()->getId()));
+			} catch (out_of_range &e) {
+				string fehler = "Der Negative Offset mit der Id ";
+				fehler += pLok->getIntersectioncode()->getId();
+				fehler += " konnte nicht gefunden werden.";
+				throw(fehler);
+			}
 		}
-		//Den Intersectioncode als Nachfolgereintragen
+		//Den Intersectioncode als Nachfolger eintragen
 		if (pLok->getIntersectioncode() != NULL) {
 			try {
 				knoten->addNachfolger(
 						konstruktionsMap.at(
 								pLok->getIntersectioncode()->getId()));
 			} catch (out_of_range &e) {
-				cout << "\nIntersectioncode nicht gefunden";
-				cout
-						<< "\nDas Programm wird aufgrund des unerwarteten Fehlers beendet";
-				exit(EXIT_FAILURE);
+				string fehler = "Der Intersectioncode mit der Id ";
+				fehler += pLok->getIntersectioncode()->getId();
+				fehler += " konnte nicht gefunden werden.";
+				throw(fehler);
 			}
 		}
 	}
@@ -100,9 +110,16 @@ unsigned long Graph::size() {
 
 vector<Knoten*> Graph::sucheName(string allocator) {
 	vector<Knoten*> ergebnis;
-	for(auto it = knotenListe.begin(); it != knotenListe.end(); it++){
+	for (auto it = knotenListe.begin(); it != knotenListe.end(); it++) {
 
-		if(((*it)->getEigenschaften()->getFirstName().find(allocator) != string::npos) || ((*it)->getEigenschaften()->getRoadNumber().find(allocator) != string::npos) || ((*it)->getEigenschaften()->getSecondName().find(allocator) != string::npos) || ((*it)->getEigenschaften()->getRoadName().find(allocator) != string::npos)){
+		if (((*it)->getEigenschaften()->getFirstName().find(allocator)
+				!= string::npos)
+				|| ((*it)->getEigenschaften()->getRoadNumber().find(allocator)
+						!= string::npos)
+				|| ((*it)->getEigenschaften()->getSecondName().find(allocator)
+						!= string::npos)
+				|| ((*it)->getEigenschaften()->getRoadName().find(allocator)
+						!= string::npos)) {
 
 			ergebnis.push_back((*it));
 		}

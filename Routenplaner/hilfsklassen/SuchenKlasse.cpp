@@ -1,10 +1,3 @@
-/*
- * SuchenKlasse.cpp
- *
- *  Created on: 07.05.2014
- *      Author: christoph
- */
-
 #include "SuchenKlasse.h"
 
 SuchenKlasse::SuchenKlasse(LokationsVerwaltung const *lokV) {

@@ -1,10 +1,3 @@
-/*
- * Gebietslokation.h
- *
- *  Created on: 26.04.2014
- *      Author: christoph
- */
-
 #ifndef GEBIETSLOKATION_H_
 #define GEBIETSLOKATION_H_
 
@@ -20,9 +13,6 @@
 #include "../hilfsklassen/Aktualitaet.h"
 #include "AttributDefines.h"
 #include<sstream>
-
-//#include "Linearlokation.h"
-
 
 using namespace std;
 /**
@@ -43,7 +33,9 @@ public:
 
 	/**
 	 * Mit dieser Methode kann dem Vector mit den Linearlokationen ein
-	 * Element angeh&auml;ngt werden.
+	 * Element angeh&auml;ngt werden.<br>
+	 * Der Vektor enth&auml;lt alle Linearlokationen, die in diesem Gebiet
+	 * liegen.
 	 * @param lokation Die Linearlokation, die angeh&auml;ngt werden soll.
 	 */
 	void addLinLokation(Linearlokation *lokation);
@@ -55,11 +47,14 @@ public:
 	virtual string toString();
 
 	/**
-	 * M&ouml;glichkeit um den Typ der Klasse zu pr&uuml;fen.
-	 * @return Gibt das define LINEAR zurueck.
+	 * M&ouml;glichkeit um den Typ der Klasse zu pr&uuml;fen.<br>
+	 * Die M&ouml;glichen R&uuml;ckgabewerte sind zu Beginn der Klasse
+	 * als define gesetzt.
+	 * @return Gibt das define GEBIET zurueck.
 	 */
 	virtual int getType();
 
+	//Alles Getter, nicht weiter kommentierwuerdig
 	const string& getFirstName() const;
 	int getId() const;
 	const string& getAdminBundesLand() const;
@@ -124,7 +119,7 @@ protected:
 	string firstName;
 
 	/**
-	 * Dieses Attribut gibt an, welches Bundesland f��r die Bearbeitung zust��ndig ist.
+	 * Dieses Attribut gibt an, welches Bundesland f&uuml;r die Bearbeitung zust&auml;ndig ist.
 	 * Dieses Attribut wird im aktuellen Release nicht genutzt, ist aber dennoch der
 	 * Vollst&auml;ndigkeit halber enthalten.
 	 */
@@ -143,7 +138,7 @@ protected:
 
 	/**
 	 * Diese Methode initialisiert alle Werte der Klasse mit
-	 * 0, false, NULL.
+	 * 0, false oder NULL.
 	 */
 	virtual void initialisieren();
 };

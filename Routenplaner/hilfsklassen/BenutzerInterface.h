@@ -39,6 +39,7 @@
  *
  * @deprecated Diese Klasse wird nicht mehr benutzt und gepflegt. Sie war
  * zum Testen gedacht und wurde duch die Klasse Benutzerabfrage abgel&ouml;st.
+ * Dementsprechend sind die Kommentare und die Dokumentation.
  */
 class BenutzerInterface {
 public:

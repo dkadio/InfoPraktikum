@@ -1,18 +1,23 @@
-/*
- * Punktlokation.h
- *
- *  Created on: 25.04.2014
- *      Author: christoph
- */
-
 #ifndef PUNKTLOKATION_H_
 #define PUNKTLOKATION_H_
 
 #include"Linearlokation.h"
 #include "../hilfsklassen/GeoKoordinate.h"
 
+/**
+ * Diese Klasse repr&auml;sentiert eine Punklokation. Sie erbt von Gebietslokation
+ * und Linearlokation und enth&auml;lt die Attribute, die speziell f&uuml;r eine
+ * Punklokation sind.<br>
+ * Sie enth&auml;lt Methoden um ihre Attribute aus den Rohdaten einzulesen.
+ */
 class Punktlokation: public Linearlokation {
 public:
+	/**
+	 * Der Standardkonstruktor dieser Klasse.
+	 * @param zeile Eine Zeile des Datensatzes.
+	 * @param Die &uuml;bergeordnete Gebietslokation.
+	 * @param Die &uuml;bergeordnete Linearlokation.
+	 */
 	Punktlokation(vector<string> *zeile, Gebietslokation *areaReference,
 			Linearlokation *linearReference);
 	virtual ~Punktlokation();
@@ -25,10 +30,11 @@ public:
 
 	/**
 	 * M&ouml;glichkeit um den Typ der Klasse zu pr&uuml;fen.
-	 * @return Gibt das define LINEAR zurueck.
+	 * @return Gibt das define PUNKT zurueck.
 	 */
 	virtual int getType();
 
+	//Nur Getter
 	GeoKoordinate* getGeoKoordinate() const;
 	Linearlokation* getLinearReference() const;
 	int getNetzKontenNummerNach() const;

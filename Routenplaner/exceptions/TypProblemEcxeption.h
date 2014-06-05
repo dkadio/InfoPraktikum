@@ -1,10 +1,3 @@
-/*
- * TypProblemEcxeption.h
- *
- *  Created on: 08.05.2014
- *      Author: christoph
- */
-
 #ifndef TYPPROBLEMECXEPTION_H_
 #define TYPPROBLEMECXEPTION_H_
 #include <exception>
@@ -12,14 +5,18 @@
 
 using namespace std;
 
+/**
+ * Diese Exception wird geworfen, wenn es bei einer Typumwandlung zu einem Problem gekommen
+ * ist.
+ */
 class TypProblemEcxeption {
 public:
 	TypProblemEcxeption(string fehler);
 	virtual ~TypProblemEcxeption();
 
-    virtual const char * what() const throw();
+	virtual const char * what() const throw ();
 private:
-    string fehler;
+	string fehler;
 };
 
 #endif /* TYPPROBLEMECXEPTION_H_ */
