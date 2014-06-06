@@ -41,7 +41,6 @@ string UserInterface::switchMenueEingabe(int eingabe) {
 		} catch (exception &e) {
 			ausgabe << "Fehler beim Einlesen des Startknotens";
 			startKnoten = NULL;
-			break;
 		}
 		break;
 	case ZIEL:
@@ -49,11 +48,10 @@ string UserInterface::switchMenueEingabe(int eingabe) {
 			zielKnoten = knotenEinlesen();
 			ergebnis = dijkstra->getRoute(startKnoten, zielKnoten);
 			ausgabe << listeAusgeben(ergebnis);
-			break;
 		} catch (exception &e) {
 			ausgabe << "Fehler beim eingegebenen Zielknoten";
-			break;
 		}
+		break;
 	default:
 		ausgabe << "\nIhre Eingabe war leider ungueltig";
 	}
