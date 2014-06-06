@@ -27,6 +27,20 @@ public:
 	 *
 	 */
 	list<Knoten*> starteDijkstra(Knoten* startKnoten, Knoten *endKnoten);
+
+	/**
+	 * Diese Methode sortiert die Reihenfolge einer Liste um.
+	 */
+	list<Knoten*> dreheListe(list<Knoten*> * liste);
+
+	/**
+	 * Diese Methode berechnet die k&uuml;zeste Route in einem fertigen
+	 * Graphen.<br>
+	 * Bevor diese Methode aufgerufen werden darf, m&uuml;ssen die k&uuml;zesten
+	 * Wege bereits von einem Startknoten aus berechnet worden sein.
+	 */
+	list<Knoten*> getRoute(Knoten* startKnoten, Knoten* endKnoten);
+
 private:
 	/**
 	 * Dieses Attribut enth&auml;lt den eigentlichen Graphen.<br>

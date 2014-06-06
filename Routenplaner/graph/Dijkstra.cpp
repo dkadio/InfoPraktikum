@@ -39,3 +39,25 @@ list<Knoten*> Dijkstra::starteDijkstra(Knoten* startKnoten, Knoten* endKnoten) {
 	}
 	return (ergebnis);
 }
+
+list<Knoten*> Dijkstra::dreheListe(list<Knoten*>* liste) {
+	list<Knoten*> rueckwaertsErgebnis;
+	list<Knoten*> ergebnis;
+	//Jetzt die Liste umdrehen, damit die Strecke nicht von Ende nach Start angezeigt wird
+	for (auto it = rueckwaertsErgebnis.rbegin();
+			it != rueckwaertsErgebnis.rend(); it++) {
+		ergebnis.push_back(*it);
+	}
+	return (ergebnis);
+
+}
+
+list<Knoten*> Dijkstra::getRoute(Knoten* startKnoten, Knoten* endKnoten) {
+	//Ergebnis vom Endknoten aus aufbauen
+	list<Knoten*> rueckwaertsErgebnis;
+	Knoten* ergebnisKnoten = endKnoten;
+	while (ergebnisKnoten != NULL && ergebnisKnoten != startKnoten) {
+		rueckwaertsErgebnis.push_back(ergebnisKnoten);
+		ergebnisKnoten = ergebnisKnoten->getVorgaenger();
+	}
+}
