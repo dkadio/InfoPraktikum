@@ -10,15 +10,8 @@
 
 #include "./reader/FileOpener.h"
 #include "geopunkte/LokationsVerwaltung.h"
-#include "hilfsklassen/BenutzerInterface.h"
-#include <vector>
-#include <regex>
-#include <cmath>
-#include <unistd.h>
 #include "graph/Graph.h"
 #include "graph/Dijkstra.h"
-#include "hilfsklassen/Benutzerabfrage.h"
-//#include "hilfsklassen/SuchenKlasse.h"
 #include "hilfsklassen/UserInterface.h"
 
 class Hello {

@@ -1,15 +1,5 @@
 #include "UserInterface.h"
 
-UserInterface::UserInterface() {
-	FileOpener *datei = oeffneDatei();
-	vector<vector<string> > erg = datei->getDatensatz();
-	this->lokalitaetsVerwaltung = new LokationsVerwaltung(&erg);
-	delete datei;
-	this->graph = new Graph(this->lokalitaetsVerwaltung->getGebieteMap());
-	this->dijkstra = new Dijkstra(graph);
-	this->startKnoten = NULL;
-}
-
 UserInterface::UserInterface(Graph * graph) {
 	this->graph = graph;
 	this->dijkstra = new Dijkstra(graph);
@@ -17,24 +7,10 @@ UserInterface::UserInterface(Graph * graph) {
 }
 
 UserInterface::~UserInterface() {
-	delete this->graph;
-	//delete this->lokalitaetsVerwaltung;
+	//Graph wird in der Main destruiert
+	delete this->dijkstra;
 }
-/*
- int main(void) {
- cout
- << "\nDie Datensaetze werden vorbereitet\nDies kann eine Weile dauern...\n";
- UserInterface *userInterface = new UserInterface();
- int eingabe = -1;
 
- while (eingabe != 0) {
- cout << userInterface->getMenue();
- eingabe = sicherIntLesen();
- userInterface->switchMenueEingabe(eingabe);
- }
- delete userInterface;
- }
- */
 string UserInterface::getMenue() {
 	ostringstream ausgabe;
 	ausgabe << "\n";

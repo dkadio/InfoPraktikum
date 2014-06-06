@@ -37,6 +37,12 @@ public:
 	virtual ~UserInterface();
 
 	/**
+	 * Diese Methode startet die Men&uuml;f&uuml;hrung des Programms.
+	 */
+	void start();
+
+private:
+	/**
 	 * Diese Methode gibt das Hauptmen&uuml; des Programms aus.<br>
 	 * Das Men&uuml; wird in Abh&auml;ngigkeit der vorhandenen Daten angezeigt.
 	 * @return ein Menue mit der Auswahl f&uuml;r den Benutzer.
@@ -86,12 +92,7 @@ public:
 	 * @return Ein String, der die Elemente der Liste enth&auml;lt.
 	 */
 	string listeAusgeben(list<Knoten*> &liste);
-	void start();
-private:
-	/**
-	 * Dieses Attribut enth&auml;lt die Lokationen.
-	 */
-	LokationsVerwaltung * lokalitaetsVerwaltung;
+
 	/**
 	 * Der Graph aus dem die Route berechnet werden soll.
 	 */
