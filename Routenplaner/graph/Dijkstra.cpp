@@ -22,7 +22,8 @@ list<Knoten*> Dijkstra::starteDijkstra(Knoten* startKnoten, Knoten* endKnoten) {
 }
 
 void Dijkstra::starteDijkstra(Knoten* startKnoten) {
-    Knoten * aktuellerKnoten = NULL;
+   startKnoten->setDistanz(0);
+	Knoten * aktuellerKnoten = NULL;
     PriorityQueue queue =  PriorityQueue(graph, startKnoten);
 	aktuellerKnoten = queue.getFirst();
 	while (aktuellerKnoten != NULL) {
