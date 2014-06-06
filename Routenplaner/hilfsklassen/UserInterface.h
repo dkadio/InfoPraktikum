@@ -32,6 +32,7 @@ static const char* dateiPfad =
 class UserInterface {
 public:
 	UserInterface();
+	UserInterface(Graph * graph);
 
 	virtual ~UserInterface();
 
@@ -75,6 +76,17 @@ public:
 	 * @return ein FileOpener Pointer.
 	 */
 	FileOpener * oeffneDatei();
+
+	/**
+	 * Diese Methode gibt eine Liste aus.<br>
+	 * Dazu durchl&auml;ft sie die Liste und ruft die toString() Methode der
+	 * Elemente auf.<br>
+	 * Sie wird haupts&auml;chlich f&uuml;r die berechneten Routen gebutzt.
+	 * @param Ein Pointer auf die Liste, die ausgegeben werden soll.
+	 * @return Ein String, der die Elemente der Liste enth&auml;lt.
+	 */
+	string listeAusgeben(list<Knoten*> &liste);
+	void start();
 private:
 	/**
 	 * Dieses Attribut enth&auml;lt die Lokationen.

@@ -92,7 +92,7 @@ unsigned long PriorityQueue::getSize() {
 }
 
 void PriorityQueue::clear() {
-	for (auto it = queue.begin(); it != queue.end(); it++) {
+    for (auto it = queue.begin(); it != queue.end(); it++) {
 		it->second->clear();
 	}
 	queue.clear();

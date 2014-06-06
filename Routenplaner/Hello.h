@@ -19,6 +19,7 @@
 #include "graph/Dijkstra.h"
 #include "hilfsklassen/Benutzerabfrage.h"
 //#include "hilfsklassen/SuchenKlasse.h"
+#include "hilfsklassen/UserInterface.h"
 
 class Hello {
 public:

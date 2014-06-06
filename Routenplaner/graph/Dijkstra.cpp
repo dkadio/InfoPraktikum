@@ -18,14 +18,14 @@ Dijkstra::~Dijkstra() {
 
 list<Knoten*> Dijkstra::starteDijkstra(Knoten* startKnoten, Knoten* endKnoten) {
 	starteDijkstra(startKnoten);
-	/*PriorityQueue queue = PriorityQueue(graph, startKnoten);
+	PriorityQueue queue = PriorityQueue(graph, startKnoten);
 	 queue.queueInitialisieren(startKnoten);
 	 Knoten * aktuellerKnoten = queue.getFirst();
 	 while (aktuellerKnoten != NULL) {
 	 queue.nacholfgerEintragen(aktuellerKnoten);
 	 aktuellerKnoten = queue.getFirst();
-	 }*/
-	/*//Ergebnis vom Endknoten aus aufbauen
+	 }
+	//Ergebnis vom Endknoten aus aufbauen
 	 list<Knoten*> rueckwaertsErgebnis;
 	 Knoten* ergebnisKnoten = endKnoten;
 	 while (ergebnisKnoten != NULL && ergebnisKnoten != startKnoten) {
@@ -37,8 +37,9 @@ list<Knoten*> Dijkstra::starteDijkstra(Knoten* startKnoten, Knoten* endKnoten) {
 	 for (auto it = rueckwaertsErgebnis.rbegin();
 	 it != rueckwaertsErgebnis.rend(); it++) {
 	 ergebnis.push_back(*it);
-	 }*/
-	return (getRoute(startKnoten, endKnoten));
+	 }
+    return(ergebnis);
+	//return (getRoute(startKnoten, endKnoten));
 }
 
 void Dijkstra::starteDijkstra(Knoten* startKnoten) {
@@ -55,8 +56,8 @@ list<Knoten*> Dijkstra::dreheListe(list<Knoten*>* liste) {
 	list<Knoten*> rueckwaertsErgebnis;
 	list<Knoten*> ergebnis;
 	//Jetzt die Liste umdrehen, damit die Strecke nicht von Ende nach Start angezeigt wird
-	for (auto it = rueckwaertsErgebnis.rbegin();
-			it != rueckwaertsErgebnis.rend(); it++) {
+	for (auto it = liste->rbegin();
+			it != liste->rend(); it++) {
 		ergebnis.push_back(*it);
 	}
 	return (ergebnis);

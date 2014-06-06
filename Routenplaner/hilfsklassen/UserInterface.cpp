@@ -10,25 +10,31 @@ UserInterface::UserInterface() {
 	this->startKnoten = NULL;
 }
 
+UserInterface::UserInterface(Graph * graph) {
+	this->graph = graph;
+	this->dijkstra = new Dijkstra(graph);
+	this->startKnoten = NULL;
+}
+
 UserInterface::~UserInterface() {
 	delete this->graph;
-	delete this->lokalitaetsVerwaltung;
+	//delete this->lokalitaetsVerwaltung;
 }
+/*
+ int main(void) {
+ cout
+ << "\nDie Datensaetze werden vorbereitet\nDies kann eine Weile dauern...\n";
+ UserInterface *userInterface = new UserInterface();
+ int eingabe = -1;
 
-int main(void) {
-	cout
-			<< "\nDie Datensaetze werden vorbereitet\nDies kann eine Weile dauern...\n";
-	UserInterface *userInterface = new UserInterface();
-	int eingabe = -1;
-
-	while (eingabe != 0) {
-		cout << userInterface->getMenue();
-		eingabe = sicherIntLesen();
-		userInterface->switchMenueEingabe(eingabe);
-	}
-	delete userInterface;
-}
-
+ while (eingabe != 0) {
+ cout << userInterface->getMenue();
+ eingabe = sicherIntLesen();
+ userInterface->switchMenueEingabe(eingabe);
+ }
+ delete userInterface;
+ }
+ */
 string UserInterface::getMenue() {
 	ostringstream ausgabe;
 	ausgabe << "\n";
@@ -45,6 +51,7 @@ string UserInterface::switchMenueEingabe(int eingabe) {
 	ostringstream ausgabe;
 	string name = "";
 	Knoten * zielKnoten;
+	list<Knoten*> ergebnis;
 	switch (eingabe) {
 	case ENDE:
 		ausgabe << "\nVielen Dank fuer die Benutzung des Programms";
@@ -57,7 +64,8 @@ string UserInterface::switchMenueEingabe(int eingabe) {
 		break;
 	case ZIEL:
 		zielKnoten = knotenEinlesen();
-		dijkstra->getRoute(startKnoten, zielKnoten);
+		ergebnis = dijkstra->getRoute(startKnoten, zielKnoten);
+		ausgabe << listeAusgeben(ergebnis);
 		break;
 	default:
 		ausgabe << "\nIhre Eingabe war leider ungueltig";
@@ -100,4 +108,24 @@ FileOpener* UserInterface::oeffneDatei() {
 	datei->oeffneDatei(dateiPfad);
 	datei->leseDateiAus();
 	return (datei);
+}
+
+void UserInterface::start() {
+	cout
+			<< "\nDie Datensaetze werden vorbereitet\nDies kann eine Weile dauern...\n";
+	int eingabe = -1;
+
+	while (eingabe != 0) {
+		cout << getMenue();
+		eingabe = sicherIntLesen();
+		cout << switchMenueEingabe(eingabe);
+	}
+}
+
+string UserInterface::listeAusgeben(list<Knoten*> &liste) {
+	ostringstream ausgabe;
+	for (auto it = liste.begin(); it != liste.end(); it++) {
+		ausgabe << (*it)->toString() << "\n";
+	}
+	return (ausgabe.str());
 }
