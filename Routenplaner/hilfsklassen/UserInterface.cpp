@@ -33,16 +33,27 @@ string UserInterface::switchMenueEingabe(int eingabe) {
 		ausgabe << "\nVielen Dank fuer die Benutzung des Programms\n";
 		break;
 	case START:
-		this->startKnoten = knotenEinlesen();
-		cout << "\nDer Graph wird berechnet, diese Operation dauert ein wenig.";
-		dijkstra->starteDijkstra(startKnoten);
-
+		try {
+			this->startKnoten = knotenEinlesen();
+			cout
+					<< "\nDer Graph wird berechnet, diese Operation dauert ein wenig.";
+			dijkstra->starteDijkstra(startKnoten);
+		} catch (exception &e) {
+			ausgabe << "Fehler beim Einlesen des Startknotens";
+			startKnoten = NULL;
+			break;
+		}
 		break;
 	case ZIEL:
-		zielKnoten = knotenEinlesen();
-		ergebnis = dijkstra->getRoute(startKnoten, zielKnoten);
-		ausgabe << listeAusgeben(ergebnis);
-		break;
+		try {
+			zielKnoten = knotenEinlesen();
+			ergebnis = dijkstra->getRoute(startKnoten, zielKnoten);
+			ausgabe << listeAusgeben(ergebnis);
+			break;
+		} catch (exception &e) {
+			ausgabe << "Fehler beim eingegebenen Zielknoten";
+			break;
+		}
 	default:
 		ausgabe << "\nIhre Eingabe war leider ungueltig";
 	}
@@ -75,13 +86,7 @@ Knoten* UserInterface::knotenEinlesen() {
 	cout << vectorAusgeben(&ergebnisVector);
 	cout << "\nBitte geben Sie die gewuenschte Nummer des Knoten ein: ";
 	int knotenNummer = sicherIntLesen();
-	try {
-		ergebnis = getKnoten(&ergebnisVector, knotenNummer);
-	} catch (exception &e) {
-		cerr << "\nFalsche Eingabe";
-		cerr << e.what()<<"\n";
-		knotenEinlesen();
-	}
+	ergebnis = getKnoten(&ergebnisVector, knotenNummer);
 	return (ergebnis);
 
 }

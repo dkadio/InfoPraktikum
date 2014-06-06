@@ -20,7 +20,7 @@ int main() {
 		datei->oeffneDatei("../utf8.csv");
 	}
 	datei->leseDateiAus();
-
+    
 	cout << "\n\n------------Einlesen abgeschlossen-----------\n\n";
 	vector<vector<string> > erg = datei->getDatensatz();
 

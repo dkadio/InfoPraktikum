@@ -1,8 +1,8 @@
 #include "PriorityQueue.h"
 
+
 PriorityQueue::PriorityQueue(Graph * graph) {
 	graph->clear();
-
 }
 
 PriorityQueue::PriorityQueue(Graph* graph, Knoten* startKnoten) :
@@ -34,14 +34,11 @@ void PriorityQueue::nacholfgerEintragen(Knoten* knoten) {
 	//Wenn die Nachfolger eines Knoten eingetragen wurden, dann setze ihn auf besucht
 	knoten->setBesucht(true);
 	for (auto it = nachfolger.begin(); it != nachfolger.end(); it++) {
-		if (*it != knoten) {
 			knotenEintragen(knoten, *it);
-		}
 	}
 }
 
 void PriorityQueue::queueInitialisieren(Knoten* startknoten) {
-	clear();
 	nacholfgerEintragen(startknoten);
 }
 
@@ -92,7 +89,7 @@ unsigned long PriorityQueue::getSize() {
 }
 
 void PriorityQueue::clear() {
-	for (auto it = queue.begin(); it != queue.end(); it++) {
+    for (auto it = queue.begin(); it != queue.end(); it++) {
 		it->second->clear();
 	}
 }

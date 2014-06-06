@@ -45,6 +45,7 @@ list<Knoten*> Knoten::getNachfolger() const {
 void Knoten::clear() {
 	this->vorgaenger = NULL;
 	this->distanz = IN_FINITY;
+    this->besucht = false;
 }
 
 bool Knoten::isBesucht() const {
