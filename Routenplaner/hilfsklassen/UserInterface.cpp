@@ -30,7 +30,7 @@ string UserInterface::switchMenueEingabe(int eingabe) {
 	list<Knoten*> ergebnis;
 	switch (eingabe) {
 	case ENDE:
-		ausgabe << "\nVielen Dank fuer die Benutzung des Programms";
+		ausgabe << "\nVielen Dank fuer die Benutzung des Programms\n";
 		break;
 	case START:
 		this->startKnoten = knotenEinlesen();
@@ -68,22 +68,22 @@ Knoten* UserInterface::getKnoten(vector<Knoten*>* liste, int stelle) {
 }
 
 Knoten* UserInterface::knotenEinlesen() {
+	Knoten * ergebnis;
 	cout << "Bitte geben Sie den Namen des gesuchten Knotens ein: ";
 	string name = sicherStringLesen();
 	vector<Knoten*> ergebnisVector = graph->sucheName(name);
 	cout << vectorAusgeben(&ergebnisVector);
 	cout << "\nBitte geben Sie die gewuenschte Nummer des Knoten ein: ";
 	int knotenNummer = sicherIntLesen();
-	Knoten * ergebnis = getKnoten(&ergebnisVector, knotenNummer);
+	try {
+		ergebnis = getKnoten(&ergebnisVector, knotenNummer);
+	} catch (exception &e) {
+		cerr << "\nFalsche Eingabe";
+		cerr << e.what()<<"\n";
+		knotenEinlesen();
+	}
 	return (ergebnis);
 
-}
-
-FileOpener* UserInterface::oeffneDatei() {
-	FileOpener *datei = new FileOpener();
-	datei->oeffneDatei(dateiPfad);
-	datei->leseDateiAus();
-	return (datei);
 }
 
 void UserInterface::start() {
@@ -101,7 +101,7 @@ void UserInterface::start() {
 string UserInterface::listeAusgeben(list<Knoten*> &liste) {
 	ostringstream ausgabe;
 	for (auto it = liste.begin(); it != liste.end(); it++) {
-		ausgabe << (*it)->toString() << "\n";
+		ausgabe << (*it)->toStringRoute() << "\n";
 	}
 	return (ausgabe.str());
 }

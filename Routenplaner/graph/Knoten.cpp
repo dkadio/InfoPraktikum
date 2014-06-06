@@ -26,8 +26,15 @@ int Knoten::getId() {
 string Knoten::toString() {
 	ostringstream s;
 	s << "";
-	s << "\nName: " << eigenschaften->getFirstName() << " Anzahl Nachfolger: "
-			<< nachfolger.size() << " Id=" << this->getEigenschaften()->getId();
+	s << "\nName: " << eigenschaften->getFirstName()<< " , "<< eigenschaften->getRoadNumber();
+	return (s.str());
+}
+
+string Knoten::toStringRoute() {
+	ostringstream s;
+	s << toString();
+	s << " Entfernung zum Start: " << distanz << " Geo Koordninaten: "
+			<< eigenschaften->getGeoKoordinate()->toString();
 	return (s.str());
 }
 
@@ -63,3 +70,4 @@ void Knoten::setDistanz(float distanz) {
 void Knoten::setVorgaenger(Knoten* vorgaenger) {
 	this->vorgaenger = vorgaenger;
 }
+

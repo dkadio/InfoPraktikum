@@ -29,6 +29,11 @@ public:
 
 	string toString();
 
+	/**
+	 * Diese toString() wird genutzt, um eine Route auszugeben.
+	 */
+	string toStringRoute();
+
 	Punktlokation* getEigenschaften() {
 		return (eigenschaften);
 	}

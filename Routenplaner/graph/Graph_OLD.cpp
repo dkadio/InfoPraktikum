@@ -42,7 +42,6 @@ void Graph_OLD::erstelleKnoten(map<int, Knoten*>& konstruktionsMap,
 
 void Graph_OLD::verlinkeKnoten(map<int, Knoten*> konstruktionsMap,
 		const map<int, Gebietslokation*> &rohdaten) {
-	int i = 0;
 	for (list<Knoten*>::iterator it = knotenListe.begin();
 			it != knotenListe.end(); it++) {
 		Knoten *knoten = *it;
