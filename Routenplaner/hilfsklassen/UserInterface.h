@@ -15,7 +15,6 @@
 #include <string>
 #include<sstream>
 
-#include "../graph/Graph.h"
 #include "../geopunkte/LokationsVerwaltung.h"
 #include "sicherLesen.h"
 #include "../reader/FileOpener.h"
@@ -26,11 +25,14 @@ using namespace std;
  * Diese Klasse ist die Schnittstelle f&uuml;r den Benutzer.<br>
  * Hier erfolgen die Eingaben des Benutzers und hier werden die Ergebnisse ausgegeben.
  */
-static const char* dateiPfad = "../utf8.csv";
+//static const char* dateiPfad = "../utf8.csv";
+static const char* dateiPfad =
+		"/Users/christoph/Documents/HTW/SEM6/InfoPraktikum/InfoPraktikum/Routenplaner/utf8.csv";
 
 class UserInterface {
 public:
 	UserInterface();
+
 	virtual ~UserInterface();
 
 	/**
@@ -67,6 +69,12 @@ public:
 	 * @return Der gesuchte Knoten.
 	 */
 	Knoten * knotenEinlesen();
+
+	/**
+	 * Diese Methode &ouml;ffnet die Date und liest sie aus.
+	 * @return ein FileOpener Pointer.
+	 */
+	FileOpener * oeffneDatei();
 private:
 	/**
 	 * Dieses Attribut enth&auml;lt die Lokationen.
@@ -86,11 +94,6 @@ private:
 	 * Der Startknoten, von dem aus der Dijkstra berechnet wurde.
 	 */
 	Knoten * startKnoten;
-
-	/**
-	 * Der Startknoten, zu dem  der Dijkstra berechnet wird.
-	 */
-	Knoten * zielKnoten;
 };
 
 #endif /* USERINTERFACE_H_ */

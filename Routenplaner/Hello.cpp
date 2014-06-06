@@ -17,7 +17,7 @@ Hello::~Hello() {
 }
 
 #include <iostream>                                     // Ein- und Ausgabebibliothek
-
+/*
 int main() {                                             // Hauptfunktion
 	//Jetzt mal die Datei auslesen
 	FileOpener *datei = new FileOpener();
@@ -40,7 +40,6 @@ int main() {                                             // Hauptfunktion
 	Graph *g = new Graph(lokVerwaltung->getGebieteMap());
 	//cout << g->toString();
 
-
 	Benutzerabfrage* ba = new Benutzerabfrage(g);
 	ba->startebenutzerabfrage();
 	//BenutzerInterface interface = BenutzerInterface(lokVerwaltung);
@@ -50,4 +49,4 @@ int main() {                                             // Hauptfunktion
 	delete lokVerwaltung;
 	return (EXIT_SUCCESS);          // Optionale Rueckgabe an das Betriebssystem
 }
-
+*/

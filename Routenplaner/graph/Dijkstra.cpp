@@ -17,27 +17,38 @@ Dijkstra::~Dijkstra() {
 }
 
 list<Knoten*> Dijkstra::starteDijkstra(Knoten* startKnoten, Knoten* endKnoten) {
-	PriorityQueue queue = PriorityQueue(graph, startKnoten);
+	starteDijkstra(startKnoten);
+	/*PriorityQueue queue = PriorityQueue(graph, startKnoten);
+	 queue.queueInitialisieren(startKnoten);
+	 Knoten * aktuellerKnoten = queue.getFirst();
+	 while (aktuellerKnoten != NULL) {
+	 queue.nacholfgerEintragen(aktuellerKnoten);
+	 aktuellerKnoten = queue.getFirst();
+	 }*/
+	/*//Ergebnis vom Endknoten aus aufbauen
+	 list<Knoten*> rueckwaertsErgebnis;
+	 Knoten* ergebnisKnoten = endKnoten;
+	 while (ergebnisKnoten != NULL && ergebnisKnoten != startKnoten) {
+	 rueckwaertsErgebnis.push_back(ergebnisKnoten);
+	 ergebnisKnoten = ergebnisKnoten->getVorgaenger();
+	 }
+	 list<Knoten*> ergebnis;
+	 //Jetzt die Liste umdrehen, damit die Strecke nicht von Ende nach Start angezeigt wird
+	 for (auto it = rueckwaertsErgebnis.rbegin();
+	 it != rueckwaertsErgebnis.rend(); it++) {
+	 ergebnis.push_back(*it);
+	 }*/
+	return (getRoute(startKnoten, endKnoten));
+}
+
+void Dijkstra::starteDijkstra(Knoten* startKnoten) {
+	PriorityQueue queue = PriorityQueue(graph);
 	queue.queueInitialisieren(startKnoten);
 	Knoten * aktuellerKnoten = queue.getFirst();
 	while (aktuellerKnoten != NULL) {
 		queue.nacholfgerEintragen(aktuellerKnoten);
 		aktuellerKnoten = queue.getFirst();
 	}
-	//Ergebnis vom Endknoten aus aufbauen
-	list<Knoten*> rueckwaertsErgebnis;
-	Knoten* ergebnisKnoten = endKnoten;
-	while (ergebnisKnoten != NULL && ergebnisKnoten != startKnoten) {
-		rueckwaertsErgebnis.push_back(ergebnisKnoten);
-		ergebnisKnoten = ergebnisKnoten->getVorgaenger();
-	}
-	list<Knoten*> ergebnis;
-	//Jetzt die Liste umdrehen, damit die Strecke nicht von Ende nach Start angezeigt wird
-	for (auto it = rueckwaertsErgebnis.rbegin();
-			it != rueckwaertsErgebnis.rend(); it++) {
-		ergebnis.push_back(*it);
-	}
-	return (ergebnis);
 }
 
 list<Knoten*> Dijkstra::dreheListe(list<Knoten*>* liste) {
@@ -60,4 +71,5 @@ list<Knoten*> Dijkstra::getRoute(Knoten* startKnoten, Knoten* endKnoten) {
 		rueckwaertsErgebnis.push_back(ergebnisKnoten);
 		ergebnisKnoten = ergebnisKnoten->getVorgaenger();
 	}
+	return (dreheListe(&rueckwaertsErgebnis));
 }

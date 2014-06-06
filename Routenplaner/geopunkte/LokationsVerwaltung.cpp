@@ -18,6 +18,7 @@ LokationsVerwaltung::~LokationsVerwaltung() {
 //Achtung, Fehlerhaft und deprecated
 void LokationsVerwaltung::objektErstellen(vector<string> *zeile,
 		string pattern) {
+    throw "Veraltete Methode in Lokalitaetsverwaltung aufgerufen";
 	if (checkGebietsLokation(zeile)) {
 		speichereGebietsLokation(new Gebietslokation(zeile));
 	} else if (checkLineaLokation(zeile)) {

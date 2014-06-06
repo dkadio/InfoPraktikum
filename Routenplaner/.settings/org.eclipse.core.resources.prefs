@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
 encoding//geopunkte/Gebietslokation.h=UTF-8
 encoding//geopunkte/LokationsVerwaltung.h=UTF-8
+encoding//graph/Dijkstra.h=UTF-8
 encoding/Hello.cpp=UTF-8

@@ -29,6 +29,15 @@ public:
 	list<Knoten*> starteDijkstra(Knoten* startKnoten, Knoten *endKnoten);
 
 	/**
+	 * Diese Methode errechnet lediglich den Graphen mit den k&uuml;rzesten Wegen
+	 * von einem gegebenen Startknoten aus. Die Berechnung ist in
+	 * @ink starteDijkstra(Knoten* startKnoten, Knoten *endKnoten) @endlink
+	 * beschrieben.
+	 * @param startKnoten Der Konten, von dem aus die k&uuml;rzesten Wege berechnet
+	 * werden sollen.
+	 */
+	void starteDijkstra(Knoten* startKnoten);
+	/**
 	 * Diese Methode sortiert die Reihenfolge einer Liste um.
 	 */
 	list<Knoten*> dreheListe(list<Knoten*> * liste);
@@ -47,6 +56,7 @@ private:
 	 * Aus diesem wird die Priority Queue gef&uuml;llt und der k&uuml;zeste Weg berechnet.
 	 */
 	Graph * graph;
+
 };
 
 #endif /* DIJKSTRA_H_ */
