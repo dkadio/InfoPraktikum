@@ -37,6 +37,13 @@ string UserInterface::switchMenueEingabe(int eingabe) {
 			this->startKnoten = knotenEinlesen();
 			cout
 					<< "\nDer Graph wird berechnet, diese Operation dauert ein wenig.";
+			if (startKnoten->getNachfolger().size() < 1) {
+				ausgabe
+						<< "\nDer gewaehlte Startknoten hat weder Vorgaenger noch Nachfolger."
+						<< "Der Graph kann nicht berechenet werden.";
+				this->startKnoten = NULL;
+				return (ausgabe.str());
+			}
 			dijkstra->starteDijkstra(startKnoten);
 		} catch (exception &e) {
 			ausgabe << "Fehler beim Einlesen des Startknotens";
@@ -44,8 +51,19 @@ string UserInterface::switchMenueEingabe(int eingabe) {
 		}
 		break;
 	case ZIEL:
+		if (this->startKnoten == NULL) {
+			ausgabe << "Es ist noch kein Graph berechnet."
+					<< " Eine Route kann nicht ausgegeben werden";
+			return (ausgabe.str());
+		}
 		try {
 			zielKnoten = knotenEinlesen();
+			if (zielKnoten->getNachfolger().size() < 1) {
+				ausgabe
+						<< "\nDer gewaehlte Startknoten hat weder Vorgaenger noch Nachfolger."
+						<< "Eine Route kann nicht angegeben werden.";
+				return (ausgabe.str());
+			}
 			ergebnis = dijkstra->getRoute(startKnoten, zielKnoten);
 			ausgabe << listeAusgeben(ergebnis);
 		} catch (exception &e) {
