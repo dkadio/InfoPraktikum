@@ -43,6 +43,7 @@ string UserInterface::switchMenueEingabe(int eingabe) {
 						<< "Der Graph kann nicht berechenet werden.";
 				this->startKnoten = NULL;
 				return (ausgabe.str());
+				break;
 			}
 			dijkstra->starteDijkstra(startKnoten);
 		} catch (exception &e) {
