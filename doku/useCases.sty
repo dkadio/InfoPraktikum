@@ -1,0 +1,97 @@
+\ProvidesPackage{useCases}
+
+%-------------------------------------------------------------------------------
+%                Required Packages
+%-------------------------------------------------------------------------------
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{longtable}
+
+%-----
+%Prevents a newline at the beginning of an enumerate when the enumerate is used in the table.
+%-----
+
+\newcolumntype{P}[1]{%
+    >{\begin{minipage}[t]{#1}\raggedright\arraybackslash}p{#1}<{\end{minipage}}}
+
+%-------------------------------------------------------------------------------
+%                \utitle command: Add the title of the use case- Should be short and significant 
+%-------------------------------------------------------------------------------
+\newcommand\utitle[1]{\hline \\ [-1.5ex] \textit{Use Case} &\textbf{#1}\\ [1ex] \hline \\ [-1.5ex]}
+\newcommand\tabularhead{\begin{longtable}{lP{0.75\linewidth}}
+}
+
+\newcommand\makeline{\\[1ex] \hline \\ [-1.3ex]} % brake the last line of the column and sets the spaces if used
+
+
+
+%----------
+%  \udescription: Adds a description of the use case. Can be more than one sentence
+%---------
+\newcommand\udescription[1]{\textit{Description} &#1 \makeline}
+
+%-----
+% \uactors: describes the actor included in the process. Actors can be inserted in the first argument, separated by ','
+%-----
+\newcommand\uactor[1]{\textit{Actor} &
+	\begin{itemize}
+		 \@for \xx:=#1 \do{
+        			\item \xx %!{#1}
+ 		   }
+		
+	 \end{itemize}
+	\makeline }
+
+%----------
+%  \uincludes: Adds the use cases which are included. Includes  can be inserted in the first argument, separated by ','
+%---------
+\newcommand\uinclude[1]{\textit{Include} &
+	\begin{itemize}
+		 \@for \xx:=#1 \do{
+        			\item \xx %!{#1}
+ 		   }
+		
+	\end{itemize}
+	\makeline }
+	
+%----------
+%  \utrigger: Adds the trigger what starts the use case. Triggers  can be inserted in the first argument, separated by ','
+%---------
+\newcommand\utrigger[1]{\textit{Trigger} &
+	\begin{itemize}
+		 \@for \xx:=#1 \do{
+        			\item \xx %!{#1}
+ 		   }
+		
+	\end{itemize}
+	\makeline }
+
+%----------
+%  \upreconditions: Adds the preconditions required for the use cse. Preconditions  can be inserted in the first argument, separated by ','
+%---------
+\newcommand\uprecondition[1]{\textit{Precodition} &
+	\begin{itemize}
+		 \@for \xx:=#1 \do{
+        			\item \xx %!{#1}
+ 		   }
+		
+	\end{itemize}
+	\makeline }
+
+%----------
+%  \upreconditions: Adds the postconditions required for the use cse. Postconditions  can be inserted in the first argument, separated by ','
+%---------
+\newcommand\upostcondition[1]{\textit{Postcondition} &
+	\begin{itemize}
+		 \@for \xx:=#1 \do{
+        			\item \xx %!{#1}
+ 		   }
+		
+	\end{itemize}
+	\makeline }
+
+
+\newenvironment{usecase}{\tabularhead}
+{\end{longtable}}
+
+

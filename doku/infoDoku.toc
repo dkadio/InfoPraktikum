@@ -1,0 +1,17 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\defcounter {refsection}{0}\relax 
+\select@language {ngerman}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {1}Einleitung}{2}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2}Use Cases}{2}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.1}Automatischer Ablauf}{2}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {2.1.1}Datei einlesen }{2}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {2.1.2}Datei verarbeiten }{3}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.2}Abl\IeC {\"a}ufe, die vom User angesto\IeC {\ss }en werden}{3}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {2.2.1}Startpunkt w\IeC {\"a}hlen }{3}
