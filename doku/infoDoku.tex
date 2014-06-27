@@ -64,6 +64,8 @@
 %Package fuer Use Cases
 \usepackage{useCases}
 
+\usepackage{datenTypen}
+
 %Eigene Kommandos
 
 \newcommand{\todo}[1]{\fcolorbox{red}{yellow}{ \parbox{0.75\linewidth}{#1}}} %To mark tasks can be done, but are not done 
@@ -108,13 +110,73 @@ Im Folgenden wird beschrieben, welche Use Cases das Programm in seiner Release V
 	\upostcondition{Die primäre Funktionalität des Routenplaners steht dem User zur Verfügung}
 \end{usecase}
 
+\subsubsection{Distanzen berechnen \label{uc:RouteBerechnen}}
+\begin{usecase}
+	\utitle{Distanzen berechnen}
+	\udescription{Der Routenplaner berechnet die kürzesten Wege vom Startpunkt zu allen anderen Punkten}
+	\uactor{Routenplaner}
+	\utrigger{Use Case \ref{uc:StartpunktWaehlen}} 
+	\uprecondition{Use Case \ref{uc:DateiVerarbeiten}}
+	\upostcondition{Die Distanzen vom Startpunkt zu allen anderen anderen Punkten sind bekannt}
+\end{usecase}
 \subsection{Abläufe, die vom User angestoßen werden}
 \subsubsection{Startpunkt wählen \label{uc:StartpunktWaehlen}}
 \begin{usecase}
 	\utitle{Startpunkt wählen}
 	\udescription{Der User wählt den Startpunkt der Routenberechnung aus}
 	\uactor{User}
-	\uprecondition{Use case \ref{uc:DateiVerarbeiten}}
+	\uprecondition{Use case \ref{uc:DateiVerarbeiten}, Der Startpunkt ist ein gültiger Punkt}
 	\upostcondition{Die Route wird berechnet}
 \end{usecase}
+
+\subsubsection{Startpunkt ändern \label{uc:StartpunktAendern}}
+\begin{usecase}
+	\utitle{Startpunkt ändern}
+	\udescription{Der User ändert den Startpunkt einer bereits berechneten Route}
+	\uactor{User}
+	\uprecondition{Use case \ref{uc:DateiVerarbeiten}, Der Startpunkt ist ein gültiger Punkt}
+	\upostcondition{Die Route wird neu berechnet}
+\end{usecase}
+
+\subsubsection{Zielpunkt ändern \label{uc:ZielpunktAendern}}
+\begin{usecase}
+	\utitle{Zielpunkt ändern}
+	\udescription{Der User trägt einen Zielpunkt ein, bzw. ändert einen bestehenden. }
+	\uactor{User}
+	\uprecondition{\ref{uc:RouteBerechnen}}
+	\upostcondition{Der Routenplaner sucht die kürzeste Route und gibt diese aus (Use Case \ref{uc:RouteAusgeben})}
+\end{usecase}
+
+\subsubsection{Route ausgeben \label{uc:RouteAusgeben}}
+\begin{usecase}
+	\utitle{Route ausgeben}
+	\udescription{Die kürzeste Route vom Start- zum Zielpunkt wird ausgegeben}
+	\uactor{Routenplaner}
+	\uprecondition{Use Case \ref{uc:RouteBerechnen},Use Case \ref{uc:ZielpunktAendern}}
+\end{usecase}
+
+\section{Verarbeitete Daten}
+Der Routenplaner verarbeitet sämtliche Daten, die im Datensatz vorhanden sind. Da ein Großteil dieser Daten für die Verarbeitung optional ist, werden die notwendigen Daten mit \textit{mandatory} und die optionalen Daten mit \textit{optional} gekennzeichnet. Der Hintergrund, dass die optionalen Daten verarbeitet werden ist, dass optionalen Daten für eine informative Ausgabe benötigt werden können und dem User mehr Komfort bei der Ausgabe bieten können. Die optionalen Daten sind permanent vorhanden und können jederzeit im User Interface abgegriffen und ausgegeben werden.
+Die Abbildung \ref{fig:klassendiagrammLokations} zeigt die Hierarchie der Lokationen und deren Attribute.
+
+\begin{figure}[htbp] 
+  \centering
+     \includegraphics[width=0.3\textwidth]{Grafiken/klassenDiagrammLokations.jpg}
+  \caption{Aufbau der Lokations}
+  \label{fig:klassendiagrammLokations}
+\end{figure}
+
+Der originale Datensatz wurde in drei Klassen nachgebildet. Diese entsprechen auch den verschiedenen Location, die in der original Dokumentation des Bundes beschrieben sind.
+\subsection{Area Location \label{AreaLocation}}
+Eine Area Location, oder Gebietslokation, ist ein grobes Gebiet. Gebiete können beispielsweise Kontinente, Länder, Bundesländer oder Ballungsgebiete sein. Sie stellt den Grundtyp der anderen Lokalionen dar.
+
+\begin{datenBeschreibung}{Id}
+	\drequried{ja}
+	\dmapping{Alte}{Neue}
+	\dbeschreibung{Die ist einem Gebiet eindeutig zugeordnet. Sie wird mit aus dem Datensatz ausgelesen und fest mit dem Objekt verbunden.}
+	
+\end{datenBeschreibung}
+
+
+
 \end{document}
