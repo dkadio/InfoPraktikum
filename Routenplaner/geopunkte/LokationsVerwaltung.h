@@ -162,6 +162,10 @@ private:
 	 * Dieses Attribut ist die prim&auml;re Datenstruktur f&uuml;r die Datens&auml;tze.
 	 * Dort sind die Gebietslokationen organisiert, die wiederum rekrusiv Datens&auml;tze
 	 * mit Linearlokationen und Punktlokationen enthalten.
+	 *
+	 *
+	 * @deprecated Der Vector wird nicht mehr ben&ouml;tigt.
+	 * Das Durchlaufen einer Map ist effizient genug.
 	 */
 	//vector<Gebietslokation*> gebieteVector;
 
@@ -177,10 +181,12 @@ private:
 	 * Da es nicht ausgeschlossen ist, dass ein Name mehrmals vorkommt, ist das Attribut als
 	 * Multiset realisiert. Bei der Abfrage muss darauf geachtet werden, dass mehrere
 	 * R&uuml;ckgabewerte auftreten k&ouml;nnen.
+	 *
+	 *
 	 * @deprecated Aufgrund anderer Suchkriterien kann prinzipiell auf die Namenmap verzichtet
 	 * werden.
 	 */
-	multimap<string, Gebietslokation*> namenMap;
+	//multimap<string, Gebietslokation*> namenMap;
 
 	/**
 	 * Diese Methode pr&uuml;ft anhand einer Regular Expression ob die &uuml;bergebene

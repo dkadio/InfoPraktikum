@@ -9,9 +9,7 @@ LokationsVerwaltung::~LokationsVerwaltung() {
 		delete it->second;
 	}
 	//Danach die leeren Pointer aus den Datenstrukturen entfernen
-	gebieteVector.clear();
 	gebieteMap.clear();
-	namenMap.clear();
 
 }
 
@@ -29,7 +27,6 @@ void LokationsVerwaltung::objektErstellen(vector<string> *zeile,
 }
 
 void LokationsVerwaltung::speichereGebietsLokation(Gebietslokation* lokation) {
-	gebieteVector.push_back(lokation);
 	insertMap(lokation);
 }
 
@@ -98,17 +95,14 @@ void LokationsVerwaltung::objekteErstellen(vector<vector<string> >* datenSatz) {
 
 void LokationsVerwaltung::insertMap(Gebietslokation* lok) {
 	gebieteMap.insert(pair<int, Gebietslokation*>(lok->getId(), lok));
-	namenMap.insert(pair<string, Gebietslokation*>(lok->getFirstName(), lok));
 }
 
 Gebietslokation* LokationsVerwaltung::suchName(string name) {
 	//deprecated
-	return (namenMap.find(name)->second);
+	//return (namenMap.find(name)->second);
+	return NULL;
 }
 
-const multimap<string, Gebietslokation*>& LokationsVerwaltung::getNamenMap() const {
-	return (namenMap);
-}
 
 bool LokationsVerwaltung::checkGebietsLokation(vector<string>* zeile) {
 	return (regex_match(zeile->at(TYPE), regex("\"A(.*)")));
