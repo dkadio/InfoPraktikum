@@ -6,7 +6,7 @@
 % Der Name des Attributs wird automatisch anhand des Parameters gesetzt.
 %
 % Folgende Befehle stehen zur Auswahl:
-% \drequried{<ja>}: Gibt an, ob das Attribut benötigt wird. Wird dieser Befehl mit "ja" aufgerufen, wird das Attribut als benötigt gekennzeichnet.
+% \drequired{<ja>}: Gibt an, ob das Attribut benötigt wird. Wird dieser Befehl mit "ja" aufgerufen, wird das Attribut als benötigt gekennzeichnet.
 % 
 % \dtype{<int>}: Beschreibt, mit welchem Datentyp das Attribut implementiert ist.
 % 
@@ -57,9 +57,9 @@
 
 
 %----------
-%  \drequried: Zeigt an, ob der Datentyp benötigt wird. Im Parameter muss 'ja' mitgegeben werden, wenn der Datentyp notwendig ist
+%  \drequired: Zeigt an, ob der Datentyp benötigt wird. Im Parameter muss 'ja' mitgegeben werden, wenn der Datentyp notwendig ist
 %---------
-\newcommand\drequried[1]{\textit{Notwendig} &
+\newcommand\drequired[1]{\textit{Notwendig} &
 \ifthenelse{\equal{ja}{#1}}{
 	\mandatory
 }{

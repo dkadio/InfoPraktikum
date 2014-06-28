@@ -176,14 +176,14 @@ Der originale Datensatz wurde in drei Klassen nachgebildet. Diese entsprechen au
 Eine Area Location, oder Gebietslokation, ist ein grobes Gebiet. Gebiete können beispielsweise Kontinente, Länder, Bundesländer oder Ballungsgebiete sein. Sie stellt den Grundtyp der anderen Lokalionen dar.
 
 \begin{attribut}{Id}
-	\drequried{ja}
+	\drequired{ja}
 	\dtype{unsigned int}
 	\dmapping{LOCATIONCODE}{Id}
 	\dbeschreibung{Eine Id ist einer Lokation eindeutig zugeordnet. Sie wird mit aus dem Datensatz ausgelesen und fest mit dem Objekt verbunden.}
 \end{attribut}
 
 \begin{attribut}{typBuchstabe}
-	\drequried{nein}
+	\drequired{nein}
 	\dtype{char}
 	\dmapping{TYPE}{typBuchstabe + typZahl}
 	\dbeschreibung{Dieses Attribut gibt an, um welchen Typ von Lokation es sich handelt. Der ursprüngliche Datentyp besteht aus der Kombination \textless Art der Lokation\textgreater \textless Beschreibung\textgreater. Die Art der Lokation ist ein Buchstabe, der in diesem Attribut gespeichert wird.}
@@ -191,13 +191,18 @@ Eine Area Location, oder Gebietslokation, ist ein grobes Gebiet. Gebiete können
 \end{attribut}
 
 \begin{attribut}{typZahl}
-	\drequried{nein}
+	\drequired{nein}
 	\dtype{int}
 	\dmapping{TYPE}{typBuchstabe + typZahl}
 	\dbeschreibung{Dieses Attribut beschreibt die Lokation genauer. Der ursprüngliche Datentyp besteht aus der Kombination \textless Art der Lokation\textgreater \textless Beschreibung\textgreater. Die genauere Beschreibung der Lokation ist eine Zahl.}
 	\dbelegung{1 - Kontinent, 2 - Ländergruppe, 3 - Land, 5 - Wasser, 6 - Allgemeines Gebiet, 7 - Bundesland}
 \end{attribut}
 Die Beschreibung von Lokationen kann weiter herunter gebrochen werden. Die Beschreibung, welche Zahlenwerte hierfür zur Verfügung stehen findet im angehängten Dokument unter \ref{bundFeinDoku}.
+
+\begin{attribut}{feinTyp}
+	\drequired
+
+
 \subsection{Linearlokation}
 \later{TypZahl dokumentieren}
 
