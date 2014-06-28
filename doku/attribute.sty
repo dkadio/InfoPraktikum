@@ -1,0 +1,115 @@
+%
+% Dieses Package hilft, die Attribute für das Info Praktikum zu beschreiben.
+% Der Aufruf erfolgt in der Umgebung  " \begin{attribut}{<Titel>} "
+%
+% Der 2. Parameter ist die Überschrift (subsubsection) des Attributs. Diese wird mit der Caption "dt:<Titel>" versehen. 
+% Der Name des Attributs wird automatisch anhand des Parameters gesetzt.
+%
+% Folgende Befehle stehen zur Auswahl:
+% \drequired{<ja>}: Gibt an, ob das Attribut benötigt wird. Wird dieser Befehl mit "ja" aufgerufen, wird das Attribut als benötigt gekennzeichnet.
+% 
+% \dtype{<int>}: Beschreibt, mit welchem Datentyp das Attribut implementiert ist.
+% 
+% \dmapping{<Id>}{<id>}: Beschreibt, wie das Attribut in der Doku der Bundesanstalt benannt war und wie die Benennung in unserer Doku ist.
+% 
+%\dbeschreibung{<Bla Bla>}: Hier wird das Attribut in Prosa beschrieben.
+%
+%\dbelegung{<1=Eins, 2=Drei>}: Kann gesetzt werden, wenn ein Attribut mit Werten vorbelegt ist, die eine Bedeutung haben. Bsp. 0-EXIT_SUCCESS, 1-EXIT_FAILURE. Mehrere Werte können durch ein ',' separiert eingetragen werden.
+
+%
+\ProvidesPackage{attribut}
+
+%-------------------------------------------------------------------------------
+%                Required Packages
+%-------------------------------------------------------------------------------
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{longtable}
+
+\usepackage{ifthen} %Zum Boolschen Vergleich
+
+
+%-----
+%Die Ausgaben von benötigt und nicht benoetigt
+%-----
+\newcommand{\mandatory}[0]{\fcolorbox{cyan}{cyan}{\parbox{0.3\linewidth}{\textbf{mandatory}}}} %Markiert ein Attribut als notwendig 
+\newcommand{\optional}[0]{\fcolorbox{green}{green}{\parbox{0.2\linewidth}{\textbf{optional}}}} %Markiert ein Attribut als optional 
+
+
+%-----
+%Prevents a newline at the beginning of an enumerate when the enumerate is used in the table.
+%-----
+
+\newcolumntype{P}[1]{%
+    >{\begin{minipage}[t]{#1}\raggedright\arraybackslash}p{#1}<{\end{minipage}}}
+
+%-------------------------------------------------------------------------------
+%                \dtitle command: Add the title of the use case- Should be short and significant 
+%-------------------------------------------------------------------------------
+\newcommand\dtitle[1]{\\ [-1.5ex] \textit{Name:} &\textbf{#1}\\ [1ex]  \\ [-1.5ex]}
+
+
+\newcommand\dtabularhead{\begin{longtable}{lP{0.75\linewidth}}
+}
+
+\newcommand\dmakeline{\\[1ex]  \\ [-1.3ex]} % brake the last line of the column and sets the spaces if used
+
+
+
+%----------
+%  \drequired: Zeigt an, ob der Datentyp benötigt wird. Im Parameter muss 'ja' mitgegeben werden, wenn der Datentyp notwendig ist
+%---------
+\newcommand\drequired[1]{\textit{Notwendig} &
+\ifthenelse{\equal{ja}{#1}}{
+	\mandatory
+}{
+	\optional
+} 
+\dmakeline}
+
+
+
+%----------
+%  \dmapping: Die Zuordnung der Namen von Bundesanstalt und unserer Doku
+%---------
+\newcommand\dmapping[2]{\textit{Mapping} &
+	#1~$\Rightarrow$~#2 \dmakeline
+}
+
+
+
+%----------
+%  \dbeschreibung: Die Beschreibung des Attributs
+%---------
+\newcommand\dbeschreibung[1]{\textit{Beschreibung} &
+	#1 \dmakeline
+}
+
+%----------
+%  \dtype: Mit Welchem Datentyp ist das Attribut implementiert
+%---------
+\newcommand\dtype[1]{\textit{Datentyp} &
+	#1 \dmakeline
+}
+
+%--------
+% \dbelegung: Kann gesetzt werden, wenn ein Attribut mit Werten vorbelegt ist, die eine Bedeutung haben. Bsp. 0-EXIT_SUCCESS, 1-EXIT_FAILURE. Mehrere Werte können durch ein ',' separiert eingetragen werden.
+%-------
+\newcommand\dbelegung[1]{\textit{Belegung} &
+	\begin{itemize}
+		 \@for \xx:=#1 \do{
+        			\item \xx %!{#1}
+ 		   }
+		
+	\end{itemize}
+	\dmakeline 
+}
+
+\newenvironment{attribut}[1]{
+	\subsubsection{#1 \label{dt:#1}}
+	\dtabularhead
+	\dtitle{#1}
+}
+{\end{longtable}}
+
+
