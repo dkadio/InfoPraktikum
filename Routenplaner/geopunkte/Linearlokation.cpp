@@ -1,5 +1,4 @@
 #include "Linearlokation.h"
-#include "iostream" //TODO iostream entfernen
 
 Linearlokation::Linearlokation(vector<string> *zeile,
 		Gebietslokation *areaReference) :

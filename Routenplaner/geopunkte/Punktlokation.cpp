@@ -1,4 +1,5 @@
 #include "Punktlokation.h"
+#include "iostream" //TODO iostream entfernen
 
 Punktlokation::Punktlokation(vector<string> *zeile,
 		Gebietslokation *areaReference, Linearlokation *linearReference) :

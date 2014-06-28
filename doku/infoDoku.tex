@@ -173,7 +173,7 @@ Die Abbildung \ref{fig:klassendiagrammLokations} zeigt die Hierarchie der Lokati
 \end{figure}
 
 Der originale Datensatz wurde in drei Klassen nachgebildet. Diese entsprechen auch den verschiedenen Location, die in der original Dokumentation des Bundes beschrieben sind.
-\subsection{Area Location \label{AreaLocation}}
+\subsection{Gebietslokation \label{AreaLocation}}
 Eine Area Location, oder Gebietslokation, ist ein grobes Gebiet. Gebiete können beispielsweise Kontinente, Länder, Bundesländer oder Ballungsgebiete sein. Sie stellt den Grundtyp der anderen Lokalionen dar.
 
 \begin{attribut}{Id}
@@ -380,6 +380,48 @@ Die Beschreibung von Lokationen kann weiter herunter gebrochen werden. Die Besch
 	\dbelegung{BW - Baden-Württemberg, BY - Bayern, BE - Berlin, BB - Brandenburg, HB - Bremen, HH - Hamburg, HE - Hessen, MV - Mecklenburg-Vorpommern, NI - Niedersachsen, NW - Nordrhein-Westfalen, RP - Rheinland-Pfalz, SL - Saarland, SN - Sachsen, ST - Sachsen-Anhalt, SH - Schleswig-Holstein, TH - Thüringen}
 \end{attribut}
 	
+\subsection{Punktlokation}
+\begin{attribut}{linearReference}
+	\drequired{nein}
+	\dtype{Linearlokation*}
+	\dmapping{LINEAR\_REFERENCE}{linearReference}
+	\dbeschreibung{Eine Punktlokation hat eine übergeordnete Linearlokation \ref{LinearLokation}. Dieses Attribut ist ein Pointer auf diese Linearlokation. }
+\end{attribut}
+
+\begin{attribut}{netzKontenNummerVor}
+	\drequired{nein}
+	\dtype{unsigned int}
+	\dmapping{NETZKNOTEN1\_NR}{netzKnotenNummerVor}
+	\dbeschreibung{Netzknotennummer der Lokation oder Netzknotennummer des vor der Lokation liegenden Netzknoten. Im Datensatz sind diese Datenfelder zwar gesetzt, aber einen Zusammenhang oder einen Sinn konnten wir nicht feststellen.}
+\end{attribut}
+
+\begin{attribut}{netzKontenNummerNach}
+	\drequired{nein}
+	\dtype{unsigned int}
+	\dmapping{NETZKNOTEN2\_NR}{netzKnotenNummerNach}
+	\dbeschreibung{Netzknotennummer des nach der Lokation liegenden Netzknoten. Im Datensatz sind diese Datenfelder zwar gesetzt, aber einen Zusammenhang oder einen Sinn konnten wir nicht feststellen.}
+\end{attribut}
+
+\begin{attribut}{station}
+	\drequired{nein}
+	\dtype{int}
+	\dmapping{STATION}{station}
+	\dbeschreibung{Entfernung der Lokation vor dem netzKontenNummerVor in Richtung netzKontenNummerNach. Die Angabe ist in Metern. Da sich uns nicht der Sinn der Netzknoten erschlossen hat, ergibt dieses Attribut auch keinen Sinn.}
+\end{attribut}
+
+\begin{attribut}{geoKoordinate}
+	\drequired{ja}
+	\dtype{GeoKoordinate*}
+	\dmapping{X-KOORDINATE + Y-KOORDINATE}{geoKoordinate}
+	\dbeschreibung{Ein GeoKoordinate Objekt enthält eine Position mit WGS84 Koordinaten. Es beinhaltet Methoden um Distanzen zwischen gegebenen Positionen oder anderen GeoKoordinate Objekten zu berechnen. Dieses Attribut ist ein Pointer auf das GeoKoordinate Objekt der aktuellen Punktlokation.}
+\end{attribut}	
+
+
+
+
+
+
+
 
 \section{Probleme bei der Routenberechnung \label{Probleme}}
 
