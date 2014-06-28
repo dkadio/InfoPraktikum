@@ -1,4 +1,5 @@
 #include "Linearlokation.h"
+#include "iostream" //TODO iostream entfernen
 
 Linearlokation::Linearlokation(vector<string> *zeile,
 		Gebietslokation *areaReference) :
@@ -142,6 +143,7 @@ void Linearlokation::leseWerteEin(vector<string>* zeile) {
 		this->tern = false;
 	}
 	this->poldir = zeile->at(POLDIR);
+
 	this->adminCounty = zeile->at(ADMIN_County);
 }
 

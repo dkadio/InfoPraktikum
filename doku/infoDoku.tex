@@ -168,7 +168,7 @@ Die Abbildung \ref{fig:klassendiagrammLokations} zeigt die Hierarchie der Lokati
 \begin{figure}[htbp] 
   \centering
      \includegraphics[width=0.3\textwidth]{Grafiken/klassenDiagrammLokations.jpg}
-  \caption{Aufbau der Lokations}
+  \caption{Hierarchie der Lokationsklassen}
   \label{fig:klassendiagrammLokations}
 \end{figure}
 
@@ -196,7 +196,7 @@ Eine Area Location, oder Gebietslokation, ist ein grobes Gebiet. Gebiete können
 	\dtype{int}
 	\dmapping{TYPE}{typBuchstabe + typZahl}
 	\dbeschreibung{Dieses Attribut beschreibt die Lokation genauer. Der ursprüngliche Datentyp besteht aus der Kombination \textless Art der Lokation\textgreater \textless Beschreibung\textgreater. Die genauere Beschreibung der Lokation ist eine Zahl.}
-	\dbelegung{1 - Kontinent, 2 - Ländergruppe, 3 - Land, 5 - Wasser, 6 - Allgemeines Gebiet, 7 - Bundesland}
+	\dbelegung{Die Zuordnung der Zahlen kann dem Dokument \ref{bundFeinDoku} entnommen werden. Zu beachten ist hierbei\, dass für verschiedene Lokationen andere Zahlenschlüssel gelten.}
 \end{attribut}
 Die Beschreibung von Lokationen kann weiter herunter gebrochen werden. Die Beschreibung, welche Zahlenwerte hierfür zur Verfügung stehen findet im angehängten Dokument unter \ref{bundFeinDoku}.
 
@@ -212,15 +212,7 @@ Die Beschreibung von Lokationen kann weiter herunter gebrochen werden. Die Besch
 	\drequired{ja}
 	\dtype{string}
 	\dmapping{FIRST\_NAME}{firstName}
-	\dbeschreibung{Der firstName ist der Name der Lokation. Dies kann beispielsweise \glqq Deutschland\grqq~oder \glqq Wallerfangen\grqq~sein.}
-\end{attribut}
-
-\begin{attribut}{adminBundesLand}
-	\drequired{nein}
-	\dtype{string}
-	\dmapping{ADMIN\_County}{adminBundesLand}
-	\dbeschreibung{Der adminBundesLand gibt an, welches Bundesland für die Bearbeitung dieser Lokation zuständig ist. }
-	\dbelegung{BW - Baden-Württemberg, BY - Bayern, BE - Berlin, BB - Brandenburg, HB - Bremen, HH - Hamburg, HE - Hessen, MV - Mecklenburg-Vorpommern, NI - Niedersachsen, NW - Nordrhein-Westfalen, RP - Rheinland-Pfalz, SL - Saarland, SN - Sachsen, ST - Sachsen-Anhalt, SH - Schleswig-Holstein, TH - Thüringen}
+	\dbeschreibung{Der firstName ist der Name der Lokation. Dies kann beispielsweise \glqq Deutschland\grqq~oder \glqq Wallerfangen\grqq~sein. }
 \end{attribut}
 
 \begin{attribut}{aktualitaet}
@@ -237,11 +229,167 @@ Die Beschreibung von Lokationen kann weiter herunter gebrochen werden. Die Besch
 \end{attribut}
 
 \subsection{Linearlokation \label{linearLokation}}
-\later{TypZahl dokumentieren}
+
+\begin{attribut}{roadNumber}
+	\drequired{nein}
+	\dtype{string}
+	\dmapping{ROADNUMBER}{roadNumber}
+	\dbeschreibung{Die roadNumber gibt die Nummer der Straße nach der Einteilung von Bund und Ländern an. Sie ist mit einem führenden Buchstaben und einer Nummer angegeben. Ein Beispiel für eine roadNumber ist \glqq A620\grqq. Neben den bekannten Bezeichnungen ist auch die Bezeichnung \glqq GDD\grqq aufgetreten. Diese Bezeichnung stammt von einem privaten Anbieter. Näheres dazu gibt es im Kapitel \ref{bundGDD}}
+\end{attribut}
+
+\begin{attribut}{roadName}
+	\drequired{nein}
+	\dtype{string}
+	\dmapping{ROADNAME}{roadName}
+	\dbeschreibung{Der roadName ist der Name einer Straße. Dieses Attribut darf nicht mit \ref{dt:roadNumber} verwechselt werden. Ein Beispiel für einen roadName ist \glqq Metzer Straße\glqq. Diese Straße hat die roadNumber \glqq B406\grqq.}
+\end{attribut}
+
+\begin{attribut}{secondName}
+	\drequired{nein}
+	\dtype{string}
+	\dmapping{SECOND\_NAME}{secondName}
+	\dbeschreibung{Der secondName ist ein zusätzlicher Name einer Lokation. Ein Beispiel hierfür ist die Straße \glqq GDD12\grqq, \glqq Budapester Straße\grqq, \glqq Georgplatz\grqq, wobei die dritte Angabe der socondName ist.}
+\end{attribut}
+
+\begin{attribut}{areaReference}
+	\drequired{nein}
+	\dtype{Gebietslokation*}
+	\dmapping{AREA\_REFERENCE}{areaReference}
+	\dbeschreibung{Jede Linear Location hat eine übergeordnete Area Location \ref{AreaLocation}. Dieses Attribut ist ein Pointer auf diese übergeordnete Area Lokation.}
+\end{attribut}
+
+\begin{attribut}{negativeOffset}
+	\drequired{ja}
+	\dtype{Linearlokation*}
+	\dmapping{NEGATIVE\_OFFSET}{negativeOffset}
+	\dbeschreibung{Der negativeOffset ist grundsätzlich eine vorangehende oder nachfolgende Linear Location. Laut der Beschreibung des Bundes eine Vorgängerlokation bezogen auf die Erfassungsrichtung. Das Attribut ist als Pointer angelegt und erlaubt eine Bewegung durch die Lokationen. Für die Distanzberechnung wurde angenommen, dass es zwischen den Offset eine direkte Verbindung gibt.}
+\end{attribut}
+
+\begin{attribut}{positiveOffset}
+	\drequired{ja}
+	\dtype{Linearlokation*}
+	\dmapping{POSITIVE\_OFFSET}{positiveOffset}
+	\dbeschreibung{Siehe Attribut \ref{dt:negativeOffset}. Im Gegensatz zum negativeOffset wird der positiveOffset als eine Nachfolgelokation bezogen auf die Erfassungsrichtung beschrieben.}
+\end{attribut}
+
+\begin{attribut}{urban}
+	\drequired{nein}
+	\dtype{bool}
+	\dmapping{URBAN}{urban}
+	\dbeschreibung{Flag, ob Verkehr städtischen Charakters vorliegt.}
+	\dbelegung{0 = nein = false, 1 = ja = true }
+\end{attribut} 	
+	
+
+\begin{attribut}{intersectioncode}
+	\drequired{ja}
+	\dtype{Linearlokation*}
+	\dmapping{INTERSECTIONSCODE}{intersectioncode}
+	\dbeschreibung{Der intersectioncode ist ein Pointer auf eine andere Linear Location, die die aktuelle Linear Location kreuzt. Bei der Distanzberechnung wird sie als potenzieller Nachfolger angenommen. Aus den Datensätzen ist nicht ersichtlich, ob der Intersectioncode tatsächlich eine Verbindung zu der aktuellen Linear Location hat. Näheres dazu steht im Kapitel \ref{Probleme}}
+\end{attribut}
+
+\begin{attribut}{interruptsRoad}
+	\drequired{nein}
+	\dtype{Linearlokation*}
+	\dmapping{INTERRUPTS\_ROAD}{interruptsRoad}
+	\dbeschreibung{\todo{Hast du noch im Kopf, was das Ding konnte?}}
+\end{attribut}
+
+\todo{Macht das hier Sinn, dass man dabei schreibt, dass die Attribute bei der Distanzberechnung ignoriert werden? Eigentlich sind sie ja eh optional 
+\begin{attribut}{inPositive}
+	\drequired{nein}
+	\dtype{bool}
+	\dmapping{IN\_POSITIVE}{inPositive}
+	\dbeschreibung{inPositive beschreibt, ob die Lotion in Erfassungsrichtung zugänglich ist. Dieses Attribut wird bei der Distanzberechnung ignoriert.}
+	\dbelegung{0 = nein = false, 1 = ja = true}
+\end{attribut}
+
+\begin{attribut}{outPositive}
+	\drequired{nein}
+	\dtype{bool}
+	\dmapping{OUT\_POSITIVE}{outPositive}
+	\dbeschreibung{outPositive beschreibt, ob die Lotion in Erfassungsrichtung verlassen werden kann. Dieses Attribut wird bei der Distanzberechnung ignoriert.}
+	\dbelegung{0 = nein = false, 1 = ja = true}
+\end{attribut}
+
+
+\begin{attribut}{inNegative}
+	\drequired{nein}
+	\dtype{bool}
+	\dmapping{IN\_NEGATIVE}{inNegative}
+	\dbeschreibung{inNegative beschreibt, ob die Lotion entgegen der Erfassungsrichtung zugänglich ist. Dieses Attribut wird bei der Distanzberechnung ignoriert.}
+	\dbelegung{0 = nein = false, 1 = ja = true}
+\end{attribut}
+
+\begin{attribut}{outNegative}
+	\drequired{nein}
+	\dtype{bool}
+	\dmapping{OUT\_NEGATIVE}{outNegative}
+	\dbeschreibung{outPositive beschreibt, ob die Lotion entgegen der Erfassungsrichtung verlassen werden kann. Dieses Attribut wird bei der Distanzberechnung ignoriert.}
+	\dbelegung{0 = nein = false, 1 = ja = true}
+\end{attribut}
+
+
+\begin{attribut}{presentPositive}
+	\drequired{nein}
+	\dtype{bool}
+	\dmapping{PRESENT\_POSITIVE}{presentPositive}
+	\dbeschreibung{outPositive beschreibt, ob die Lotion in Erfassungsrichtung vorhanden ist. Dieses Attribut wird bei der Distanzberechnung ignoriert.}
+	\dbelegung{0 = nein = false, 1 = ja = true}
+\end{attribut}
+
+
+\begin{attribut}{presentNegative}
+	\drequired{nein}
+	\dtype{bool}
+	\dmapping{PRESENT\_NEGATIVE}{inNegative}
+	\dbeschreibung{presentNegative beschreibt, ob die Lotion entgegen der Erfassungsrichtung vorhanden ist. Dieses Attribut wird bei der Distanzberechnung ignoriert.}
+	\dbelegung{0 = nein = false, 1 = ja = true}
+\end{attribut}}
+
+\begin{attribut}{veraendert}
+	\drequired{nein}
+	\dtype{int}
+	\dmapping{VER\"ANDERT}{veraendert}
+	\dbeschreibung{Flag, ob Datensatz bei Aktualisierungslauf gegenüber der Vorgängerversion verändert wurde (nur vor Release erkennbar). Im vorliegenden Datensatz war veraendert in jeder Location == 0}
+	\dbelegung{0 - nein, 1 - ja, 3 - löschen}
+\end{attribut}
+
+
+\begin{attribut}{tern}
+	\drequired{nein}
+	\dtype{bool}
+	\dmapping{TERN}{tern}
+	\dbeschreibung{Angabe, ob Lokation zum TERN-Netz gehört.}
+	\dbelegung{0 = nein = false, 1 = ja = true}
+\end{attribut}
+	
+\begin{attribut}{poldir}
+	\drequired{nein}
+	\dtype{string}
+	\dmapping{POLDIR}{poldir}
+	\dbeschreibung{Hinweis auf die nächste zuständige Polizeibehörde.}	
+\end{attribut}
+	
+
+\begin{attribut}{adminBundesLand}
+	\drequired{nein}
+	\dtype{string}
+	\dmapping{ADMIN\_County}{adminBundesLand}
+	\dbeschreibung{Der adminBundesLand gibt an, welches Bundesland für die Bearbeitung dieser Lokation zuständig ist. }
+	\dbelegung{BW - Baden-Württemberg, BY - Bayern, BE - Berlin, BB - Brandenburg, HB - Bremen, HH - Hamburg, HE - Hessen, MV - Mecklenburg-Vorpommern, NI - Niedersachsen, NW - Nordrhein-Westfalen, RP - Rheinland-Pfalz, SL - Saarland, SN - Sachsen, ST - Sachsen-Anhalt, SH - Schleswig-Holstein, TH - Thüringen}
+\end{attribut}
+	
+
+\section{Probleme bei der Routenberechnung \label{Probleme}}
 
 \section{Anhang}
 \subsection{Attributliste \label{bundAttributListe}}
 \includepdf[pages={1-2}]{Grafiken/RelatedDocuments/Attributliste_zur_LCL12.pdf}
+
 \subsection{Typen und Untertypen der Lokationen \label{bundFeinDoku}}
 \includepdf[pages={1-14}]{Grafiken/RelatedDocuments/Typenliste_V08_2010-03-03.pdf}
+
+\subsection{Broschüre eines privaten Anbieters für Straßenverwaltungssoftware \label{bundGDD}}
+\includepdf[pages=1-1]{Grafiken/RelatedDocuments/GDD-Strasse_PI.PDF}
 \end{document}

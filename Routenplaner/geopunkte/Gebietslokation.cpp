@@ -22,7 +22,6 @@ Gebietslokation::Gebietslokation(vector<string> *zeile) {
 	this->firstName = str;
 	this->adminBundesLand = zeile->at(ADMIN_County);
 	this->aktualitaet = new Aktualitaet(zeile->at(ACTUALITY));
-	cout<< "\n"<<this->aktualitaet->toString()<<"\n";
 }
 
 Gebietslokation::~Gebietslokation() {
