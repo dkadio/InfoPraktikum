@@ -81,7 +81,7 @@ protected:
 	char typBuchstabe;
 
 	/**
-	 * Zur Beschriebung der Lokation geh&ouml;rt eine Zahl. Die Zahl beschreit, um welche
+	 * Zur Beschreibung der Lokation geh&ouml;rt eine Zahl. Die Zahl beschreit, um welche
 	 * Lokation es sich handelt.<br>
 	 * M&ouml;glich sind:<br>
 	 * <ol>
