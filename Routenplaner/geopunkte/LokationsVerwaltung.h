@@ -82,9 +82,9 @@ public:
 	void speicherePunkLokation(vector<string> *zeile);
 
 	//Getter
-	const vector<Gebietslokation*>& getGebieteVector() const {
+/*	const vector<Gebietslokation*>& getGebieteVector() const {
 		return (gebieteVector);
-	}
+	}*/
 
 	/**
 	 * Diese Methode durchla&aumlft den Datensatz Vector mehrmals.<br>
@@ -163,7 +163,7 @@ private:
 	 * Dort sind die Gebietslokationen organisiert, die wiederum rekrusiv Datens&auml;tze
 	 * mit Linearlokationen und Punktlokationen enthalten.
 	 */
-	vector<Gebietslokation*> gebieteVector;
+	//vector<Gebietslokation*> gebieteVector;
 
 	/**
 	 * Dieses Attribut erlaubt den schnellen Zugriff auf Objekte anhand ihrer Id.

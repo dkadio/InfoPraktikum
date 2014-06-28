@@ -417,10 +417,30 @@ Die Beschreibung von Lokationen kann weiter herunter gebrochen werden. Die Besch
 \end{attribut}	
 
 
+\section{Programmablauf}
+\subsection{Datei Verarbeitung}
 
+\begin{figure}[H] 
+  \centering
+     \includegraphics[width=1.0\textwidth]{Grafiken/aktivitaetsDiagrammDateiEinlesen.jpg}
+  \caption{Aktivitätsdiagramm des Dateieinlesens}
+  \label{fig:uebersichtDateiEinlesen}
+\end{figure}
 
+\subsubsection{Datei öffnen}
+Die Aktivität Datei öffnen besteht aus zwei Aktionen. Der erste Schritt ist, die Datei in einen Filestream zu ziehen. Nachdem dieser Filestream geöffnet wurde, wird die Datei zeilenweise in Strings eingelesen. Diese Strings werden anhand des Zeichens \glqq ;\grqq~weiter zerlegt. Das Ergebnis ist eine Matrix, die in einem \textit{vector\textless vector\textless string\textgreater \textgreater} gespeichert ist.
 
+Datei Pfad und -Name sind fest in das Programm einkodiert und können vom Enduser nicht geändert werden. Wenn das Einlesen der Datei fehlschlägt, wird das Programm mit einer Fehlermeldung beendet.
 
+\todo{Evtl. noch beteiligte Klasse dokumentieren}
+
+\subsubsection{Objekte erstellen}
+Das Erstellen der Lokationsobjekte läuft in vier Schritten ab. Der Hintergrund ist, dass die Objekte untereinander Abhängigkeiten haben, die für einen schnelleren Zugriff als Pointer gespeichert sind. Eine Gebietslokation  \ref{AreaLocation} hat beispielsweise Pointer auf ihre untergeordneten Linearlokationen \ref{linearLokation} gespeichert, während die Linearlokationen Pointer auf ihre übergeordneten Gebietslokationen gespeichert haben.
+
+Die Objekte werden dynamisch allokiert und Pointer auf sie werden in einem Vector und in einer Map gespeichert. Die doppelte Speicherung hat den Vorteil, dass  
+
+\paragraph{Gebietslokationen erstellen}
+Im ersten Schritt des Durchlaufs werden die Gebietslokationen eingelesen. 
 
 
 \section{Probleme bei der Routenberechnung \label{Probleme}}
