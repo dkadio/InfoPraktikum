@@ -126,8 +126,7 @@ protected:
 	string adminBundesLand;
 
 	/**
-	 *Beschreibt vermutlich die Aktualit&auml;t des Datensatzes. Wird im aktuellen Release
-	 *nicht genutzt.
+	 *Beschreibt vermutlich die Aktualit&auml;t des Datensatzes. Wird nur eingelesen.
 	 */
 	Aktualitaet *aktualitaet;
 

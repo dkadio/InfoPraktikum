@@ -202,13 +202,46 @@ Die Beschreibung von Lokationen kann weiter herunter gebrochen werden. Die Besch
 
 \begin{attribut}{feinTyp}
 	\drequired{nein}
+	\dtype{int}
+	\dmapping{SUBTYPE}{feinTyp}
+	\dbeschreibung{Der feinTyp beschreibt den Typ einer Lokation genauer. Der Typ A5 beispielsweise steht für ein Gewässer. Wird das Gewässer durch den Feintyp 2 genauer spezifiziert, wird das allgemeine Gewässer zu einem Binnensee.}
+	\dbelegung{Siehe \ref{bundFeinDoku}. Dort in der Spalte \glqq Untertyp\grqq~beschrieben}	
 \end{attribut}
 
+\begin{attribut}{firstName}
+	\drequired{ja}
+	\dtype{string}
+	\dmapping{FIRST\_NAME}{firstName}
+	\dbeschreibung{Der firstName ist der Name der Lokation. Dies kann beispielsweise \glqq Deutschland\grqq~oder \glqq Wallerfangen\grqq~sein.}
+\end{attribut}
 
-\subsection{Linearlokation}
+\begin{attribut}{adminBundesLand}
+	\drequired{nein}
+	\dtype{string}
+	\dmapping{ADMIN\_County}{adminBundesLand}
+	\dbeschreibung{Der adminBundesLand gibt an, welches Bundesland für die Bearbeitung dieser Lokation zuständig ist. }
+	\dbelegung{BW - Baden-Württemberg, BY - Bayern, BE - Berlin, BB - Brandenburg, HB - Bremen, HH - Hamburg, HE - Hessen, MV - Mecklenburg-Vorpommern, NI - Niedersachsen, NW - Nordrhein-Westfalen, RP - Rheinland-Pfalz, SL - Saarland, SN - Sachsen, ST - Sachsen-Anhalt, SH - Schleswig-Holstein, TH - Thüringen}
+\end{attribut}
+
+\begin{attribut}{aktualitaet}
+	\drequired{nö}
+	\dtype{Aktualitaet*}
+	\dmapping{ACTUALITY}{aktualitaet}
+	\dbeschreibung{Die aktualitaet beschreibt vermutlich das Erstelldatum der Lokation. In \ref{bundAttributListe} ist dieses Datenfeld nicht dokumentiert. Anhand den aufgetretenen Werten wurde ermittelt, dass es sich dabei um ein Datum handeln muss. Der Wertebereich liegt grob zwischen 2008 und 2013. Die Vermutung, dass dieses Datenfeld das Erstelldatum oder Einpfegedatum der Lokation ist, stützt sich auf den Namen und den Wertebereich. Die Aktualitaet Klasse im Programm stützt sich auf ein \glqq tm *zeit\grqq~struct, ist aber komfortabler zu nutzen.}
+\end{attribut}
+
+\begin{attribut}{linLocations}
+	\drequired{nope}
+	\dtype{vector\textless Linearlokation*\textgreater}
+	\dbeschreibung{Jede Gebietslokation hat die Linearlokationen \ref{linearLokation}, die diese Gebietslokation als übergeordnet angegeben hat in einem Vector gespeichert.}
+\end{attribut}
+
+\subsection{Linearlokation \label{linearLokation}}
 \later{TypZahl dokumentieren}
 
 \section{Anhang}
+\subsection{Attributliste \label{bundAttributListe}}
+\includepdf[pages={1-2}]{Grafiken/RelatedDocuments/Attributliste_zur_LCL12.pdf}
 \subsection{Typen und Untertypen der Lokationen \label{bundFeinDoku}}
 \includepdf[pages={1-14}]{Grafiken/RelatedDocuments/Typenliste_V08_2010-03-03.pdf}
 \end{document}
