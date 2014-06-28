@@ -20,17 +20,8 @@ using namespace std;
  * Diese Klasse verwaltet die verschiedenen Lokationen.<br>
  * Neben den Strukturen zum Verwalten sind Methoden implementiert, die zum Einlesen
  * der Datei, bzw. dem Verarbeiten der Rohdatens&auml;tze ben&ouml;tigt werden.
- * Da aus verschiedenen Gr&uuml;nden und Gesichtspunkten auf die Lokalitionen
- * zugegriffen werden muss, werden die Lokationen in mehreren Speicherstrukturen
- * vorgehalten.<br>
- * Diese Speicherstrukturen sind im Westenlichen:<br>
- * <ul>
- * 	<li><b>Vector:</b> Im Vector sind nur Pointer auf Gebietsloikationen gespeichert. Die
- * 	Gebietslokationen enthalten selber wieder ihre Linearlokationen, die wiederum
- * 	Punkloaktionen enthalten.
- * 	<li><b>Map:</b> In der Map sind die Pointer auf alle Lokationen gespeichert. Aus dieser
- * 	Map k&ouml;nnen direkt anfragen anhand der Id gemacht werden.
- * </ul>
+ * Die Daten werden in einer Map vorgehalten um den schnellen Zugriff auf Id zu
+ * erm&ouml;glichen.
  */
 class LokationsVerwaltung {
 public:

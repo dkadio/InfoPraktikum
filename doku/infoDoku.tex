@@ -435,14 +435,30 @@ Datei Pfad und -Name sind fest in das Programm einkodiert und können vom Enduse
 \todo{Evtl. noch beteiligte Klasse dokumentieren}
 
 \subsubsection{Objekte erstellen}
+Die Erstellung und Verwaltung der Lokationsobjekte findet in der Klasse \textit{LokationsVerwaltung} statt. 
+
 Das Erstellen der Lokationsobjekte läuft in vier Schritten ab. Der Hintergrund ist, dass die Objekte untereinander Abhängigkeiten haben, die für einen schnelleren Zugriff als Pointer gespeichert sind. Eine Gebietslokation  \ref{AreaLocation} hat beispielsweise Pointer auf ihre untergeordneten Linearlokationen \ref{linearLokation} gespeichert, während die Linearlokationen Pointer auf ihre übergeordneten Gebietslokationen gespeichert haben.
 
-Die Objekte werden dynamisch allokiert und Pointer auf sie werden in einem Vector und in einer Map gespeichert. Die doppelte Speicherung hat den Vorteil, dass  
+Um einen sicheren Zugriff auf die Elemente einer Spalte zu garantieren, sind in der Datei \textit{AttributDefines.h} die entsprechenden Stellen der Elemente als Defines gespeichert.
+
+Die Objekte werden dynamisch allokiert und Pointer auf sie werden in einer Map gespeichert.  
+
+Diese Objekte bieten den Grund Datenbestand. Auf diesen Datenbestand werden können Suchen ausgeführt werden und aus diesem Datenbestand werden die Informationen für die Ausgaben entnommen. Außerdem basiert der Graph auf diesem Datenbestand.
 
 \paragraph{Gebietslokationen erstellen}
-Im ersten Schritt des Durchlaufs werden die Gebietslokationen eingelesen. 
+Im ersten Schritt des Durchlaufs werden die Gebietslokationen eingelesen. Dazu wird der Vector zeilenweise durchlaufen. Wenn der Typ einer Zeile mit einem \glqq A\grqq  beginnt wird ein Gebietslokation Objekt erstellt.
 
+\paragraph{Linearlokationen erstellen}
+Nach der Erstellung der Gebietslokationen werden die Linearlokationen erstellt. Die Pointer dieser Linearlokationen werden direkt in die Listen der übergeordneten Gebietslokationen eingepflegt. Parallel dazu werden die Pointer der übergeordneten Gebietslokationen \ref{dt:areaReference} in die Linearlokationen eingetragen.
 
+\paragraph{Punktlokationen erstellen}
+Nach den Linearlokationen werden die Punktlokationen erstellt. Die Pointer der erstellten Punktlokationen werden direkt in die Listen der übergeordneten Linearlokationen eingetragen. Beim Erstellen der Punktloationen werden die Pointer auf übergeordneten Linearlokationen \ref{dt:linearReference} direkt eingetragen.
+
+\paragraph{Abhängigkeiten verlinken} 
+Der vierte Schritt ist das Verlinken der Abhängigkeiten. In diesem Schritt werden die Pointer der Offset (\ref{dt:negativeOffset} und \ref{dt:positiveOffset}), sowie die Pointer von InterruptsRoad \ref{dt:interruptsRoad} und IntersectionCode \ref{dt:intersectioncode} in die jeweiligen Objekte eingetragen. Dazu wird wieder Zeile für Zeile ausgelesen. Aus der Zeile werden die Id an den entsprechenden Stellen ausgelesen. Anhand dieser Id werden die Pointer der entsprechenden Objekte gesucht und in die Attribute der jeweiligen Lokationen eingetragen.
+
+\subsubsection{Graph erstellen}
+\later{Was unterscheidet den Graph vom Datenbestand? Wie wird dieser aufgebaut?}
 \section{Probleme bei der Routenberechnung \label{Probleme}}
 
 \section{Anhang}
