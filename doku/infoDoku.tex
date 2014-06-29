@@ -70,6 +70,7 @@
 %Package, um PDF Dokumente einzubinden
 \usepackage{pdfpages} 
 
+%Package um die \ref{} zu verlinken. Die Links werden nicht als solche markiert\usepackage[hidelinks]{hyperref}
 
 %Eigene Kommandos
 
@@ -295,12 +296,11 @@ Die Beschreibung von Lokationen kann weiter herunter gebrochen werden. Die Besch
 	\dbeschreibung{\todo{Hast du noch im Kopf, was das Ding konnte?}}
 \end{attribut}
 
-\todo{Macht das hier Sinn, dass man dabei schreibt, dass die Attribute bei der Distanzberechnung ignoriert werden? Eigentlich sind sie ja eh optional 
 \begin{attribut}{inPositive}
 	\drequired{nein}
 	\dtype{bool}
 	\dmapping{IN\_POSITIVE}{inPositive}
-	\dbeschreibung{inPositive beschreibt, ob die Lotion in Erfassungsrichtung zugänglich ist. Dieses Attribut wird bei der Distanzberechnung ignoriert.}
+	\dbeschreibung{inPositive beschreibt, ob die Lotion in Erfassungsrichtung zugänglich ist. }
 	\dbelegung{0 = nein = false, 1 = ja = true}
 \end{attribut}
 
@@ -308,7 +308,7 @@ Die Beschreibung von Lokationen kann weiter herunter gebrochen werden. Die Besch
 	\drequired{nein}
 	\dtype{bool}
 	\dmapping{OUT\_POSITIVE}{outPositive}
-	\dbeschreibung{outPositive beschreibt, ob die Lotion in Erfassungsrichtung verlassen werden kann. Dieses Attribut wird bei der Distanzberechnung ignoriert.}
+	\dbeschreibung{outPositive beschreibt, ob die Lotion in Erfassungsrichtung verlassen werden kann. }
 	\dbelegung{0 = nein = false, 1 = ja = true}
 \end{attribut}
 
@@ -317,7 +317,7 @@ Die Beschreibung von Lokationen kann weiter herunter gebrochen werden. Die Besch
 	\drequired{nein}
 	\dtype{bool}
 	\dmapping{IN\_NEGATIVE}{inNegative}
-	\dbeschreibung{inNegative beschreibt, ob die Lotion entgegen der Erfassungsrichtung zugänglich ist. Dieses Attribut wird bei der Distanzberechnung ignoriert.}
+	\dbeschreibung{inNegative beschreibt, ob die Lotion entgegen der Erfassungsrichtung zugänglich ist. }
 	\dbelegung{0 = nein = false, 1 = ja = true}
 \end{attribut}
 
@@ -325,7 +325,7 @@ Die Beschreibung von Lokationen kann weiter herunter gebrochen werden. Die Besch
 	\drequired{nein}
 	\dtype{bool}
 	\dmapping{OUT\_NEGATIVE}{outNegative}
-	\dbeschreibung{outPositive beschreibt, ob die Lotion entgegen der Erfassungsrichtung verlassen werden kann. Dieses Attribut wird bei der Distanzberechnung ignoriert.}
+	\dbeschreibung{outPositive beschreibt, ob die Lotion entgegen der Erfassungsrichtung verlassen werden kann.}
 	\dbelegung{0 = nein = false, 1 = ja = true}
 \end{attribut}
 
@@ -334,7 +334,7 @@ Die Beschreibung von Lokationen kann weiter herunter gebrochen werden. Die Besch
 	\drequired{nein}
 	\dtype{bool}
 	\dmapping{PRESENT\_POSITIVE}{presentPositive}
-	\dbeschreibung{outPositive beschreibt, ob die Lotion in Erfassungsrichtung vorhanden ist. Dieses Attribut wird bei der Distanzberechnung ignoriert.}
+	\dbeschreibung{outPositive beschreibt, ob die Lotion in Erfassungsrichtung vorhanden ist.}
 	\dbelegung{0 = nein = false, 1 = ja = true}
 \end{attribut}
 
@@ -343,9 +343,9 @@ Die Beschreibung von Lokationen kann weiter herunter gebrochen werden. Die Besch
 	\drequired{nein}
 	\dtype{bool}
 	\dmapping{PRESENT\_NEGATIVE}{inNegative}
-	\dbeschreibung{presentNegative beschreibt, ob die Lotion entgegen der Erfassungsrichtung vorhanden ist. Dieses Attribut wird bei der Distanzberechnung ignoriert.}
+	\dbeschreibung{presentNegative beschreibt, ob die Lotion entgegen der Erfassungsrichtung vorhanden ist}
 	\dbelegung{0 = nein = false, 1 = ja = true}
-\end{attribut}}
+\end{attribut}
 
 \begin{attribut}{veraendert}
 	\drequired{nein}
@@ -458,7 +458,37 @@ Nach den Linearlokationen werden die Punktlokationen erstellt. Die Pointer der e
 Der vierte Schritt ist das Verlinken der Abhängigkeiten. In diesem Schritt werden die Pointer der Offset (\ref{dt:negativeOffset} und \ref{dt:positiveOffset}), sowie die Pointer von InterruptsRoad \ref{dt:interruptsRoad} und IntersectionCode \ref{dt:intersectioncode} in die jeweiligen Objekte eingetragen. Dazu wird wieder Zeile für Zeile ausgelesen. Aus der Zeile werden die Id an den entsprechenden Stellen ausgelesen. Anhand dieser Id werden die Pointer der entsprechenden Objekte gesucht und in die Attribute der jeweiligen Lokationen eingetragen.
 
 \subsubsection{Graph erstellen}
-\later{Was unterscheidet den Graph vom Datenbestand? Wie wird dieser aufgebaut?}
+Der Graph ist ähnlich aufgebaut, wie der Grunddatenbestand. Er besteht aus einer Liste mit Knoten. Zusätzlich bietet die Klasse \textit{Graph}  Methoden um den Graph aufzubauen und zu pflegen. Das Erstellen des Graphen läuft schrittweise ab.
+
+\paragraph{Erstellen der Knoten \label{knotenErstellen}}
+Ein Knoten ist ein eigenes Objekt. Er enthält einen Pointer auf die Punktlokation, die der Knoten darstellt. Weiterhin hat ein Knoten eine Liste mit Pointern von weiteren Knoten, die vom Streckenverlauf her seine Nachfolger sind, einen Pointer auf seinen Vorgänger, eine Distanz zum Startknoten und ein Flag, ob er bereits besucht wurde. Der Ausdruck Nachfolger bezieht sich auf die Knoten, die er direkt erreichen kann, bzw. die Punktlokationen, die von seiner Punktloaktion aus erreicht werden können. Die Richtung, die in den originalen Datensätzen beschrieben wird spielt hierbei keine Rolle.
+
+Bei der Erstellung der Knoten wird der Grunddatenbestand durchlaufen. Wenn eine Lokation eine Punktlokation ist, wird mit ihr ein Knoten erstellt. 
+
+\paragraph{Verlinken der Knoten} 
+Beim Verlinken der Knoten wird die Liste mit den gerade erstellten Knoten durchlaufen. Bei jedem Knoten wird geprüft, welche Punktlokationen von der ihm zu Grunde liegenden Punktloaktion erreicht werden können. Die auf diesen Punklokation basierenden Knoten werden gesucht und als Nachfolger eingetragen.
+
+\subsubsection{Warten auf Benutzereingabe}
+Wenn das Verlinken der Knoten abgeschlossen ist, ist auch das Einlesen der Datei beendet. Das Programm wartet ab dieser Stelle auf eine Benutzereingabe.
+
+\subsection{Routenberechnung}
+
+\begin{figure}[H] 
+  \centering
+     \includegraphics[width=1.0\textwidth]{Grafiken/aktivitaetsDiagrammDijkstra.jpg}
+  \caption{Aktivitätsdiagramm der Routenberechnung}
+  \label{fig:uebersichtRoutenberechnung}
+\end{figure}
+
+\subsubsection{Benutzereingabe Startpunkt}
+Die Benutzerinteraktion ist in diesem Dokument nicht beschrieben. Verantwortlich für diese Interaktion ist die Klasse \textit{UserInterface}. Sie ist bewusst einfach gehalten und kann deswegen auch einfach geändert werden.
+
+Um die Distanzen zu berechnen reicht der Startpunkt.
+
+\subsubsection{Distanzen berechnen}
+
+
+
 \section{Probleme bei der Routenberechnung \label{Probleme}}
 
 \section{Anhang}
