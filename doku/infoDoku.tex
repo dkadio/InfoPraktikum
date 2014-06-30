@@ -70,7 +70,8 @@
 %Package, um PDF Dokumente einzubinden
 \usepackage{pdfpages} 
 
-%Package um die \ref{} zu verlinken. Die Links werden nicht als solche markiert\usepackage[hidelinks]{hyperref}
+%Package um die \ref{} zu verlinken. Die Links werden nicht als solche markiert
+\usepackage[hidelinks]{hyperref}
 
 %Eigene Kommandos
 
@@ -85,6 +86,12 @@
 \newpage
 
 \section{Einleitung}
+\subsection{Überblick über das Programm}
+\subsection{Hintergrund der Datensätze}
+\subsection{Installationsanleitung und Vorraussetzungen}
+\todo{bsp: c++ 11 für auto Iteratoren}
+\subsection{Bedienungsanleitung}
+Gerne auch mit Bildern
 
 \section{Use Cases}
 Im Folgenden wird beschrieben, welche Use Cases das Programm in seiner Release Version bedienen kann.
@@ -162,7 +169,7 @@ Im Folgenden wird beschrieben, welche Use Cases das Programm in seiner Release V
 	\uprecondition{Use Case \ref{uc:RouteBerechnen},Use Case \ref{uc:ZielpunktAendern}}
 \end{usecase}
 
-\section{Verarbeitete Daten}
+\section{Verarbeitete Daten \label{attributBeschreibungen}}
 Der Routenplaner verarbeitet sämtliche Daten, die im Datensatz vorhanden sind. Da ein Großteil dieser Daten für die Verarbeitung optional ist, werden die notwendigen Daten mit \textit{mandatory} und die optionalen Daten mit \textit{optional} gekennzeichnet. Der Hintergrund, dass die optionalen Daten verarbeitet werden ist, dass optionalen Daten für eine informative Ausgabe benötigt werden können und dem User mehr Komfort bei der Ausgabe bieten können. Die optionalen Daten sind permanent vorhanden und können jederzeit im User Interface abgegriffen und ausgegeben werden.
 Die Abbildung \ref{fig:klassendiagrammLokations} zeigt die Hierarchie der Lokationen und deren Attribute.
 
@@ -380,7 +387,7 @@ Die Beschreibung von Lokationen kann weiter herunter gebrochen werden. Die Besch
 	\dbelegung{BW - Baden-Württemberg, BY - Bayern, BE - Berlin, BB - Brandenburg, HB - Bremen, HH - Hamburg, HE - Hessen, MV - Mecklenburg-Vorpommern, NI - Niedersachsen, NW - Nordrhein-Westfalen, RP - Rheinland-Pfalz, SL - Saarland, SN - Sachsen, ST - Sachsen-Anhalt, SH - Schleswig-Holstein, TH - Thüringen}
 \end{attribut}
 	
-\subsection{Punktlokation}
+\subsection{Punktlokation \label{Punklokation}}
 \begin{attribut}{linearReference}
 	\drequired{nein}
 	\dtype{Linearlokation*}
@@ -485,13 +492,71 @@ Die Benutzerinteraktion ist in diesem Dokument nicht beschrieben. Verantwortlich
 
 Um die Distanzen zu berechnen reicht der Startpunkt.
 
-\subsubsection{Distanzen berechnen}
+\subsubsection{Distanzen berechnen \label{distanzenBerechnen}}
+
+\todo{Evebtuell hierfür eine Grafik basteln}
+
+\paragraph{Graph bereinigen}
+Vor Beginn der Distanzberechnung wird der Graph bereinigt. Bereinigen bedeutet, dass alle Knoten des Graphen bereinigt werden. Was beim Bereinigen geschehen muss:
+\begin{itemize}
+	\item Vorgänger: Der Knoten darf keinen Vorgänger besitzen. Hat ein Knoten einen Vorgänger, kann es bei der späteren Routenberechnung zu Fehlern kommen. Dem Attribut vorgänger des Knotens wird ein Nullpointer zugewiesen.
+	\item Distanz: Die Distanz des Knotens wird mit der Konstante IN\_FINITY belegt. Diese Konstante ist auch intern von der Priority Queue benötigt.
+	\item Besucht: Das Flag besucht des Knotens muss false gesetzt werden.
+\end{itemize}
+
+Dieser Schritt ist in der Dokumentation als ein eigener Schritt beschrieben. In der Release Version der Software wird dieser Schritt im Konstruktor der Klasse \textit{PriorityQueue} angestoßen.
+
+\paragraph{Priority Queue erstellen \label{priorityQueueErstellen}}
+Die Priority Queue ist das Herzstück unserer Implementierung des Dijkstra Algorithmus. Prinzipiell funktioniert sie, wie die formelle Beschreibung einer Priority Queue und basiert auf einer Map. Diese Implementierung bietet aber Methoden, die auf die Routenberechnung angepasst sind. 
+
+Die Metrik der Queue ist die Distanz der Knoten, die noch nicht besucht wurden. Sind noch nicht besuchte Knoten in der Queue enthalten, wird beim Aufruf der \textit{getFirst()} Methode der Knoten zurück gegeben, der die kürzeste Distanz hat. Sind keine nicht besuchten Knoten mehr enthalten, wird ein Nullpointer zurück gegeben.
+
+Beim Einfügen eines neuen Knotens prüft die Queue, ob dieser Knoten bereits in der Queue enthalten ist. Ist das nicht der Fall wird der Knoten eingetragen und relaxiert. Ist dieser Knoten bereits in der Queue enthalten, wird er nicht noch einmal hinzugefügt, sondern direkt relaxiert. Relaxieren bedeutet, dass geprüft wird, ob sich bei dem neuen Vorgänger eine Verbesserung der Distanz ergeben würde. Ist das der Fall, oder ist die alte Distanz IN\_FINITY, wird der neue Vorgänger des Knotens und die neue Distanz gesetzt. Das Flag besucht wird false gesetzt. Damit ist es möglich, dass der Knoten ein weiteres Mal von der Methode \textit{getFirst()} zurück gegeben werden kann und dass dessen Nachfolger mit der neuen Distanz relaxiert werden können.
 
 
+%Die Berechnung der Distanzen läuft nach dem Dijkstra Algorithmus. Für diese Berechnung liegt eine PriorityQueue zugrunde, die auch in der gleichnamigen Klasse implementiert ist. Kurz beschrieben, von dem Element, was aktuell die kürzeste Distanz zum Startknoten hat und noch nicht besucht wurde, werden die Nachfolger in die Priority Queue eingetragen. Nachdem die Nachfolger eingetragen wurden, wird das Flag \textit{besucht} dieses Elements true gesetzt. Beim Eintragen der Nachfolger wird geprüft, ob sie bereits in der Queue enthalten sind. Ist das der Fall, wird geprüft, ob die neue Distanz eine Verbesserung zur Bestehenden darstellt.  Bei Bedarf wird die Distanz verändert und das Flag \textit{besucht} false gesetzt. Dadurch wird gewährleistet, dass die Nachfolger der soeben verbesserten Elemente auch wieder relaxiert werden. 
+
+\paragraph{Dijkstra ausführen}
+Der Dijkstra Algorithmus basiert in unserer Implementierung auf der Priority Queue \ref{priorityQueueErstellen}. Die Methode die den Dijkstra Algorithmus implementiert durchläuft lediglich eine Schleife und trägt die Nachfolger des ersten Knoten aus der Priority Queue in diese ein. Diese Schleife wird terminiert, wenn die Queue einen Nullpointer zurück gibt. Nachdem diese Schleife durchlaufen ist, sind die Wege vom Startknoten zu sämtlichen Knoten berechnet.
+
+\todo{Ist der Graph eigentlich zusammenhängend? Ich glaube nicht, aber müssen wir das dokumentieren?}
+
+\subsubsection{Benutzereingabe Endpunkt}
+Um die Route bei gleichen Startpunkten und verschiedenen Zielpunkten nicht jedes Mal neu berechnen zu müssen, wurde die Aktivität \ref{priorityQueueErstellen} nur anhand des Startpunkts ausgeführt. Die Route wird berechnet, nachdem der Benutzer den Zielpunkt eingegeben hat.
+
+\subsubsection{Ergebnis aufbereiten}
+Die Aktion Ergebnis aufbereiten beinhaltet, dass vom Zielpunkt so lange durch die Vorgänger iteriert wird, bis der Startknoten erreicht ist. Diese Liste wird umgedreht und ans UserInterface zurückgegeben. Eine Berechnung findet an dieser Stelle nicht mehr statt.
+
+\subsubsection{Ergebnis ausgeben}
+Das Ergebnis wird dem Benutzer angezeigt.
+
+\subsubsection{Warten auf Benutzereingabe}
+Das Programm wartet eine Benutzereingabe. Möglich sind eine Neuberechnung der Strecken, die Ausgabe einer Route mit einem anderen Zielpunkt oder die Beendung des Programms.
+
+\section{Pakete}
+Das gesamte Programm besteht aus fünf Pakten. Die Klassen, die nicht primär am Programm beteiligt sind, werden an dieser Stelle nicht weiter erläutert. Die Dokumentation dieser Klassen befindet sich direkt im Quelltest, bzw. kann mit Doxygen ausgegeben werden.
+\subsection{exceptions}
+Dieses Pakt beinhaltet diverse Exceptions. 
+
+\subsection{geopunkte}
+In diesem Package sind alle Klassen enthalten, die unmittelbar mit den Lokationen bzw. deren Verwaltung zu tun haben.
+\subsubsection{AttributDefines.h}
+In dieser Headerdatei sind die Spalten definiert, in denen aus dem Originaldokument die entsprechenden Informationen ausgelesen werden können. Die Namen der Defines entsprechen denen, die in der Originaldokumentation des Bundes verwendet wurden. Im Kapitel \ref{attributBeschreibungen} ist beschrieben, wie die Originalnamen den im Programm verwendeten zugeordnet werden können. 
+
+\subsubsection{Gebietslokation}
+Siehe \ref{AreaLocation}.
+
+\subsubsection{Linearlokation}
+Siehe \ref{linearLokation}.
+
+\subsubsection{Punktlokation}
+Siehe \ref{Punklokation}
 
 \section{Probleme bei der Routenberechnung \label{Probleme}}
+\later{Hier kommen so Dinger rein, wie dass wir keine Ausfahrten haben, nur Luftlinien berechnen und die Straßen stellenweise weit auseinander liegen}
 
 \section{Anhang}
+
 \subsection{Attributliste \label{bundAttributListe}}
 \includepdf[pages={1-2}]{Grafiken/RelatedDocuments/Attributliste_zur_LCL12.pdf}
 
