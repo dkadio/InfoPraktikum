@@ -70,6 +70,35 @@
 %Package, um PDF Dokumente einzubinden
 \usepackage{pdfpages} 
 
+%Package um Listings anzuzeigen
+\usepackage{listings}
+
+%Rahmen um Listung konfigurieren
+\lstset {
+     frame=single,               % einfacher Rahmen
+     framesep=1pt,               % Abstand des Rahmens
+     framerule=0.8pt,            % Linienstaerke des Rahmens
+     xleftmargin=1.8pt,          % linker Abstand vom Rand (framesep+framrule)
+     xrightmargin=1.8pt,         % rechter Abstand vom Rand (framesep+framrule)
+     aboveskip=\medskipamount,   % Abstand vor einer Box
+     belowskip=\medskipamount,   % Abstand nach einer Box
+}
+
+%Umlaute für Listings konfigurieren
+\lstset{literate=%
+    {Ö}{{\"O}}1
+    {Ä}{{\"A}}1
+    {Ü}{{\"U}}1
+    {ß}{{\ss}}1
+    {ü}{{\"u}}1
+    {ä}{{\"a}}1
+    {ö}{{\"o}}1
+    {~}{{\textasciitilde}}1
+}
+
+
+
+
 %Package um die \ref{} zu verlinken. Die Links werden nicht als solche markiert
 \usepackage[hidelinks]{hyperref}
 
@@ -89,7 +118,7 @@
 
 \later{I'm the box marking a task what can not be done at this stadium of the document}
 
-\todo{I'm the box marking a task can be done at this stadium of the document but are not done yet}
+\todo{I'm the box marking a task can be done at this stadium of the document but is not done yet}
 
 \checked{My information are accurate}
 
@@ -102,10 +131,85 @@
 \subsection{Überblick über das Programm}
 \subsection{Hintergrund der Datensätze}
 \subsection{Installationsanleitung und Vorraussetzungen}
-\todo{bsp: c++ 11 für auto Iteratoren}
-\subsection{Bedienungsanleitung}
-Gerne auch mit Bildern
+Das Programm wurde in c++ realisiert. 
+\subsubsection{System}
+Getestet wurde die Software auf Mac Books mit Intel CPU.
 
+Das Programm ist UTF-8 kodiert, die eingelesene Datei entspricht auch dieser Kodierung.
+
+Das Programm benötigt in dieser Konfiguration mindestens 160mb Arbeitsspeicher.
+
+\subsubsection{Software}
+Auf den Testsystemen war Mac OS 10.9.3 installiert. Zusätzlich war das Softwarepaket Xcode 5.1.1 installiert. 
+
+\textbf{Compiler:}\newline
+ g++ 4.2.1  \newline
+Apple LLVM version 5.1 (clang-503.0.40) (based on LLVM 3.4svn) \newline
+Target: x86\_64-apple-darwin13.2.0 \newline
+Thread model: posix
+
+
+\textbf{IDE:}\newline
+Eclipse IDE for C/C++ Developers \newline
+Version: Kepler Service Release 2
+
+\subsubsection{Build}
+Das Projekt wurde von Ellipse als Makefile Project verwaltet. Die makefiles wurde von Eclipse generiert und verwaltet. Bei der Benutzung eigener makefiles ist auf den Schalter \textit{-std=c++11} zu achten. 
+
+Der Quellcode ist ANSI-konform und benutzt keine externen Libraries, wie z.B. Boost.
+
+\subsection{Bedienungsanleitung \label{Bedienungsanleitung}}
+\subsubsection{Starten des Programms}
+Das Programm muss vor dem Starten kompiliert werden. Im Root Ordner des Programms muss die Datei \textit{utf8.csv} liegen. Anpassungen von Dateipfad und -Namen können in \ref{hello} erfolgen. Nach dem Entpacken und kompilieren des ausgelieferten Archivs kann das Programm aber ohne Änderungen gestartet werden.
+
+\subsubsection{Startknoten wählen}
+Nach dem Starten des Programms erscheint die folgende Anzeige:
+
+\begin{lstlisting}
+
+------------Einlesen abgeschlossen-----------
+
+
+Die Datensaetze werden vorbereitet
+Dies kann eine Weile dauern...
+
+0 - um das Programm zu beenden
+1 - um den Startknoten zu waehlen
+Bitte jetzt waehlen:  
+\end{lstlisting}
+
+\todo{Muss das eines Kommentars gewürdigt werden?}
+
+Die Eingabe des Startknotens kann zu Teilen erfolgen und ist nicht case sensitive. So werden beispielsweise mit der Eingabe \textit{sa} alle Knoten gefunden, die \textit{sa}, \textit{Sa},\dots, zusammenhängend im Namen haben. Aufgrund des umfangreichen Datensatzes empfiehlt sich aber eine eine möglichst präzise Angabe. 
+
+Nach der Eingabe von Saarbrücken schlägt das Programm folgende Knoten vor:
+\begin{lstlisting}
+Knotennummer: 0
+Name: Saarbrücken- Rodenhof , "A623"
+
+Knotennummer: 1
+Name: Saarbrücken-Johannisbrücke , "L125"
+[...]
+Knotennummer: 42
+Name: Saarbrückenstraße , "B76"
+\end{lstlisting} 
+Nach dieser Ausgabe kommt die Aufforderung einen Knoten zu wählen:
+\begin{lstlisting}
+Bitte geben Sie die gewuenschte Nummer des Knoten ein:
+\end{lstlisting}
+
+Die Auswahl einer gültigen Knotennummer startet die Distanzberechnung mit diesem Knoten als Startknoten. Diese Berechnung kann, je nach System, eine längere Zeit in Anspruch nehmen. Nachdem die Distanzberechnung abgeschlossen ist ändert sich das Menü.
+\begin{lstlisting}
+Bitte geben Sie die gewuenschte Nummer des Knoten ein: 29
+
+Der Graph wird berechnet, diese Operation dauert ein wenig.
+0 - um das Programm zu beenden
+1 - um den Startknoten zu waehlen
+2 - um den Zielknoten zu waehlen
+\end{lstlisting}
+
+
+Das Auswählen des Zielknotens erfolgt analog zu dem Auswählen des Startknotens. Mit der Auswahl des Zielknotens wird die Routenberechnung gestartet. Die Route wird ausgegeben.
 \section{Use Cases}
 Im Folgenden wird beschrieben, welche Use Cases das Programm in seiner Release Version bedienen kann.
 
@@ -596,9 +700,19 @@ Diese Klasse basiert auf dem \glqq tm *zeit\grqq~struct. Sie wird benötigt um d
 \subsubsection{Geokoordinate}
 Diese Klasse wird für das Attribut \ref{st:geoKoordinate} benötigt. Sie enthält Methoden um aus einem String ein WGS84 Datum auszulesen, sowie mit GPS Daten zu rechnen. In ihr sind sowohl die X-Koordinate, als auch die Y-Koordinate des GPS Datums gespeichert.
 
-\subsubsection{sucherLesen}
+\subsubsection{SicherLesen}
+Dieses Header File bietet Funktionen um die grundsätzlichen Datentypen sicher über die Konsole einzulesen. Sicher bedeutet, dass der Eingabestrom überprüft und bei einem Fehler zurückgesetzt wird.
 
 
+\subsubsection{UserInterface}
+Diese Klasse bietet dem User eine Schnittstelle zum Programm. Die Funktionen sind in \ref{Bedienungsanleitung} beschrieben.
+
+
+\subsection{Root Ordner}
+Der Root Ordner des Programms enthält die Ordner mit den beschriebenen packages.
+
+\subsubsection{Hello \label{hello}}
+Diese Klasse ist die Main Klasse des Programms. In dieser Klasse wird die Dateiverarbeitung inklusive dem Konstruieren des Graphen initiiert. Der Dateipfad und -Name kann hier geändert werden. Zusätzlich wird hier das Benutzerinterface gestartet.
 
 
 \section{Probleme bei der Routenberechnung \label{Probleme}}

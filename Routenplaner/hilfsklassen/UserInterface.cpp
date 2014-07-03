@@ -85,7 +85,7 @@ string UserInterface::vectorAusgeben(vector<Knoten*>* liste) {
 	}
 	auto it = liste->begin();
 	for (int i = 0; i < liste->size(); i++) {
-		ausgabe << "\n\nStelle: " << i << (*it)->toString();
+		ausgabe << "\n\nKnotennummer: " << i << (*it)->toString();
 		it++;
 	}
 	return (ausgabe.str());
