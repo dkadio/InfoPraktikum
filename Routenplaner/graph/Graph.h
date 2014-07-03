@@ -3,9 +3,12 @@
  * einer geeigneten Datenstruktur auch Methoden um den Graph aufzubauen.<br>
  * Ein Knoten ist durch maximal 3 Nachfolger gekennzeichnet.<br>
  * Die Knoten sind alle in einer doppelt verketteten Liste enthalten.<br>
- * Beim Aufbu des Graphen wird eine Konstruktionsmap genutzt. Diese hat den Vorteil,
- * dass die vielen Zugriffe auf eine Id schnell abgearbeitet werden k&ouml;nnen.
- * Sie wird nach dem Aufbau des Graphen verworfen.
+ * In dieser Klasse wird eine KonstruktionMap genutzt. Diese KonstruktionsMap
+ * beinhaltet Pointer auf alle erstellten Knoten. Sie wird gepflegt, da beim
+ * Verlinken der Knoten (Abhängigkeiten aufbauen) im schlechtesten Fall
+ * 4*(Anzahl Punktloationen) Zugriffe auf bestehende Knoten erfolgen und diese
+ * Zugriffe nur anhand der Id geschehen. Nach dem Erstellungsprozess wird
+ * die Konstruktionsmap verworfen.
  */
 #ifndef GRAPH_H_
 #define GRAPH_H_
@@ -19,7 +22,7 @@ class Graph {
 public:
 	/**
 	 * Der Standardkonstrukor. Er baut den Graphen ohne Wertung der einzelnen
-	 * Knoten auf.
+	 * Knoten auf.<br>
 	 * @param rohDaten Eine Map mit Lokationen.
 	 */
 	Graph(map<int, Gebietslokation*> rohDaten);
@@ -32,7 +35,7 @@ public:
 	/**
 	 * Diese Methode durchl&auml;ft alle Lokationen.<br>
 	 * Ist die aktuelle Lokation eine Punklokation, wird daraus ein Knoten erstellt.<br>
-	 * Dessen Pointer wird in die Liste mit den Knoten aufgenommen.
+	 * Deren Pointer wird in die Liste mit den Knoten aufgenommen.
 	 * @param konstruktionsMap Die Konstruktionsmap. In ihr sind alle erstellten Knoten
 	 * enthalten. Bzw. Pointer auf sie.
 	 * @param rohdaten Eine Map mit Lokationen.

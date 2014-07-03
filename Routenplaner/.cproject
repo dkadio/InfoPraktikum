@@ -5,8 +5,8 @@
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.toolchain.gnu.macosx.base.2076657634" moduleId="org.eclipse.cdt.core.settings" name="Default">
 				<macros>
 					<stringMacro name="Pedantic" type="VALUE_TEXT" value="-Pedantic"/>
-					<stringMacro name="c11" type="VALUE_TEXT" value="-std=c++11"/>
 					<stringMacro name="C+11" type="VALUE_TEXT" value="-Wc++11-extensions"/>
+					<stringMacro name="c11" type="VALUE_TEXT" value="-std=c++11"/>
 				</macros>
 				<externalSettings/>
 				<extensions>
@@ -36,11 +36,11 @@
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.archiver.macosx.base.805102724" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.macosx.base"/>
 							<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.macosx.base.1361775594" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.macosx.base">
-								<option id="gnu.cpp.compiler.option.other.other.1026019332" name="Other flags" superClass="gnu.cpp.compiler.option.other.other" value="-c -fmessage-length=0 -std=c++11" valueType="string"/>
+								<option id="gnu.cpp.compiler.option.other.other.1026019332" name="Other flags" superClass="gnu.cpp.compiler.option.other.other" value="-c -fmessage-length=0 -std=c++11 -pedantic " valueType="string"/>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.1784105108" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.c.compiler.macosx.base.1209345023" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.macosx.base">
-								<option id="gnu.c.compiler.option.optimization.level.396299949" superClass="gnu.c.compiler.option.optimization.level" value="gnu.c.optimization.level.most" valueType="enumerated"/>
+								<option id="gnu.c.compiler.option.optimization.level.396299949" name="Optimization Level" superClass="gnu.c.compiler.option.optimization.level" value="gnu.c.optimization.level.most" valueType="enumerated"/>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1233259096" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>
 						</toolChain>

@@ -13,7 +13,7 @@ LokationsVerwaltung::~LokationsVerwaltung() {
 
 }
 
-//Achtung, Fehlerhaft und deprecated
+//Achtung, fehlerhaft und deprecated
 void LokationsVerwaltung::objektErstellen(vector<string> *zeile,
 		string pattern) {
     throw "Veraltete Methode in Lokalitaetsverwaltung aufgerufen";

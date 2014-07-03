@@ -70,6 +70,35 @@
 %Package, um PDF Dokumente einzubinden
 \usepackage{pdfpages} 
 
+%Package um Listings anzuzeigen
+\usepackage{listings}
+
+%Rahmen um Listung konfigurieren
+\lstset {
+     frame=single,               % einfacher Rahmen
+     framesep=1pt,               % Abstand des Rahmens
+     framerule=0.8pt,            % Linienstaerke des Rahmens
+     xleftmargin=1.8pt,          % linker Abstand vom Rand (framesep+framrule)
+     xrightmargin=1.8pt,         % rechter Abstand vom Rand (framesep+framrule)
+     aboveskip=\medskipamount,   % Abstand vor einer Box
+     belowskip=\medskipamount,   % Abstand nach einer Box
+}
+
+%Umlaute für Listings konfigurieren
+\lstset{literate=%
+    {Ö}{{\"O}}1
+    {Ä}{{\"A}}1
+    {Ü}{{\"U}}1
+    {ß}{{\ss}}1
+    {ü}{{\"u}}1
+    {ä}{{\"a}}1
+    {ö}{{\"o}}1
+    {~}{{\textasciitilde}}1
+}
+
+
+
+
 %Package um die \ref{} zu verlinken. Die Links werden nicht als solche markiert
 \usepackage[hidelinks]{hyperref}
 
@@ -85,14 +114,102 @@
 \tableofcontents 
 \newpage
 
+\section{Verfügbare Status Marker}
+
+\later{I'm the box marking a task what can not be done at this stadium of the document}
+
+\todo{I'm the box marking a task can be done at this stadium of the document but is not done yet}
+
+\checked{My information are accurate}
+
+\crap{i be the box marks somethimg wrong}
+ 
+
+
+
 \section{Einleitung}
 \subsection{Überblick über das Programm}
 \subsection{Hintergrund der Datensätze}
 \subsection{Installationsanleitung und Vorraussetzungen}
-\todo{bsp: c++ 11 für auto Iteratoren}
-\subsection{Bedienungsanleitung}
-Gerne auch mit Bildern
+Das Programm wurde in c++ realisiert. 
+\subsubsection{System}
+Getestet wurde die Software auf Mac Books mit Intel CPU.
 
+Das Programm ist UTF-8 kodiert, die eingelesene Datei entspricht auch dieser Kodierung.
+
+Das Programm benötigt in dieser Konfiguration mindestens 160mb Arbeitsspeicher.
+
+\subsubsection{Software}
+Auf den Testsystemen war Mac OS 10.9.3 installiert. Zusätzlich war das Softwarepaket Xcode 5.1.1 installiert. 
+
+\textbf{Compiler:}\newline
+ g++ 4.2.1  \newline
+Apple LLVM version 5.1 (clang-503.0.40) (based on LLVM 3.4svn) \newline
+Target: x86\_64-apple-darwin13.2.0 \newline
+Thread model: posix
+
+
+\textbf{IDE:}\newline
+Eclipse IDE for C/C++ Developers \newline
+Version: Kepler Service Release 2
+
+\subsubsection{Build}
+Das Projekt wurde von Ellipse als Makefile Project verwaltet. Die makefiles wurde von Eclipse generiert und verwaltet. Bei der Benutzung eigener makefiles ist auf den Schalter \textit{-std=c++11} zu achten. 
+
+Der Quellcode ist ANSI-konform und benutzt keine externen Libraries, wie z.B. Boost.
+
+\subsection{Bedienungsanleitung \label{Bedienungsanleitung}}
+\subsubsection{Starten des Programms}
+Das Programm muss vor dem Starten kompiliert werden. Im Root Ordner des Programms muss die Datei \textit{utf8.csv} liegen. Anpassungen von Dateipfad und -Namen können in \ref{hello} erfolgen. Nach dem Entpacken und kompilieren des ausgelieferten Archivs kann das Programm aber ohne Änderungen gestartet werden.
+
+\subsubsection{Startknoten wählen}
+Nach dem Starten des Programms erscheint die folgende Anzeige:
+
+\begin{lstlisting}
+
+------------Einlesen abgeschlossen-----------
+
+
+Die Datensaetze werden vorbereitet
+Dies kann eine Weile dauern...
+
+0 - um das Programm zu beenden
+1 - um den Startknoten zu waehlen
+Bitte jetzt waehlen:  
+\end{lstlisting}
+
+\todo{Muss das eines Kommentars gewürdigt werden?}
+
+Die Eingabe des Startknotens kann zu Teilen erfolgen und ist nicht case sensitive. So werden beispielsweise mit der Eingabe \textit{sa} alle Knoten gefunden, die \textit{sa}, \textit{Sa},\dots, zusammenhängend im Namen haben. Aufgrund des umfangreichen Datensatzes empfiehlt sich aber eine eine möglichst präzise Angabe. 
+
+Nach der Eingabe von Saarbrücken schlägt das Programm folgende Knoten vor:
+\begin{lstlisting}
+Knotennummer: 0
+Name: Saarbrücken- Rodenhof , "A623"
+
+Knotennummer: 1
+Name: Saarbrücken-Johannisbrücke , "L125"
+[...]
+Knotennummer: 42
+Name: Saarbrückenstraße , "B76"
+\end{lstlisting} 
+Nach dieser Ausgabe kommt die Aufforderung einen Knoten zu wählen:
+\begin{lstlisting}
+Bitte geben Sie die gewuenschte Nummer des Knoten ein:
+\end{lstlisting}
+
+Die Auswahl einer gültigen Knotennummer startet die Distanzberechnung mit diesem Knoten als Startknoten. Diese Berechnung kann, je nach System, eine längere Zeit in Anspruch nehmen. Nachdem die Distanzberechnung abgeschlossen ist ändert sich das Menü.
+\begin{lstlisting}
+Bitte geben Sie die gewuenschte Nummer des Knoten ein: 29
+
+Der Graph wird berechnet, diese Operation dauert ein wenig.
+0 - um das Programm zu beenden
+1 - um den Startknoten zu waehlen
+2 - um den Zielknoten zu waehlen
+\end{lstlisting}
+
+
+Das Auswählen des Zielknotens erfolgt analog zu dem Auswählen des Startknotens. Mit der Auswahl des Zielknotens wird die Routenberechnung gestartet. Die Route wird ausgegeben.
 \section{Use Cases}
 Im Folgenden wird beschrieben, welche Use Cases das Programm in seiner Release Version bedienen kann.
 
@@ -227,7 +344,7 @@ Die Beschreibung von Lokationen kann weiter herunter gebrochen werden. Die Besch
 	\drequired{nö}
 	\dtype{Aktualitaet*}
 	\dmapping{ACTUALITY}{aktualitaet}
-	\dbeschreibung{Die aktualitaet beschreibt vermutlich das Erstelldatum der Lokation. In \ref{bundAttributListe} ist dieses Datenfeld nicht dokumentiert. Anhand den aufgetretenen Werten wurde ermittelt, dass es sich dabei um ein Datum handeln muss. Der Wertebereich liegt grob zwischen 2008 und 2013. Die Vermutung, dass dieses Datenfeld das Erstelldatum oder Einpfegedatum der Lokation ist, stützt sich auf den Namen und den Wertebereich. Die Aktualitaet Klasse im Programm stützt sich auf ein \glqq tm *zeit\grqq~struct, ist aber komfortabler zu nutzen.}
+	\dbeschreibung{Die aktualitaet beschreibt vermutlich das Erstelldatum der Lokation. In \ref{bundAttributListe} ist dieses Datenfeld nicht dokumentiert. Anhand den aufgetretenen Werten wurde ermittelt, dass es sich dabei um ein Datum handeln muss. Der Wertebereich liegt grob zwischen 2008 und 2013. Die Vermutung, dass dieses Datenfeld das Erstelldatum oder Einpfegedatum der Lokation ist, stützt sich auf den Namen und den Wertebereich. Die Aktualitaet Klasse  \ref{class:Aktualitaet} im Programm stützt sich auf ein \glqq tm *zeit\grqq~struct, ist aber komfortabler zu nutzen.}
 \end{attribut}
 
 \begin{attribut}{linLocations}
@@ -441,7 +558,7 @@ Datei Pfad und -Name sind fest in das Programm einkodiert und können vom Enduse
 
 \todo{Evtl. noch beteiligte Klasse dokumentieren}
 
-\subsubsection{Objekte erstellen}
+\subsubsection{Objekte erstellen \label{objekteErstellen}}
 Die Erstellung und Verwaltung der Lokationsobjekte findet in der Klasse \textit{LokationsVerwaltung} statt. 
 
 Das Erstellen der Lokationsobjekte läuft in vier Schritten ab. Der Hintergrund ist, dass die Objekte untereinander Abhängigkeiten haben, die für einen schnelleren Zugriff als Pointer gespeichert sind. Eine Gebietslokation  \ref{AreaLocation} hat beispielsweise Pointer auf ihre untergeordneten Linearlokationen \ref{linearLokation} gespeichert, während die Linearlokationen Pointer auf ihre übergeordneten Gebietslokationen gespeichert haben.
@@ -452,14 +569,15 @@ Die Objekte werden dynamisch allokiert und Pointer auf sie werden in einer Map g
 
 Diese Objekte bieten den Grund Datenbestand. Auf diesen Datenbestand werden können Suchen ausgeführt werden und aus diesem Datenbestand werden die Informationen für die Ausgaben entnommen. Außerdem basiert der Graph auf diesem Datenbestand.
 
-\paragraph{Gebietslokationen erstellen}
+\paragraph{Gebietslokationen erstellen \label{par:gebietsLokationenErstellen}}
 Im ersten Schritt des Durchlaufs werden die Gebietslokationen eingelesen. Dazu wird der Vector zeilenweise durchlaufen. Wenn der Typ einer Zeile mit einem \glqq A\grqq  beginnt wird ein Gebietslokation Objekt erstellt.
 
 \paragraph{Linearlokationen erstellen}
-Nach der Erstellung der Gebietslokationen werden die Linearlokationen erstellt. Die Pointer dieser Linearlokationen werden direkt in die Listen der übergeordneten Gebietslokationen eingepflegt. Parallel dazu werden die Pointer der übergeordneten Gebietslokationen \ref{dt:areaReference} in die Linearlokationen eingetragen.
+Nach der Erstellung der Gebietslokationen werden die Linearlokationen erstellt. Die Pointer dieser Linearlokationen werden direkt in die Listen der übergeordneten Gebietslokationen eingepflegt. Parallel dazu werden die Pointer der übergeordneten Gebietslokationen \ref{dt:areaReference} in die Linearlokationen eingetragen. Der Prozess des Einlesens läuft analog zu \ref{par:gebietsLokationenErstellen}. Die Zeilen müssen aber mit \glqq L \grqq beginnen. 
 
 \paragraph{Punktlokationen erstellen}
-Nach den Linearlokationen werden die Punktlokationen erstellt. Die Pointer der erstellten Punktlokationen werden direkt in die Listen der übergeordneten Linearlokationen eingetragen. Beim Erstellen der Punktloationen werden die Pointer auf übergeordneten Linearlokationen \ref{dt:linearReference} direkt eingetragen.
+Nach den Linearlokationen werden die Punktlokationen erstellt. Die Pointer der erstellten Punktlokationen werden direkt in die Listen der übergeordneten Linearlokationen eingetragen. Beim Erstellen der Punktloationen werden die Pointer auf übergeordneten Linearlokationen \ref{dt:linearReference} direkt eingetragen. Der Prozess des Einlesens läuft analog zu \ref{par:gebietsLokationenErstellen}. Die Zeilen müssen aber mit \glqq P \grqq beginnen. 
+
 
 \paragraph{Abhängigkeiten verlinken} 
 Der vierte Schritt ist das Verlinken der Abhängigkeiten. In diesem Schritt werden die Pointer der Offset (\ref{dt:negativeOffset} und \ref{dt:positiveOffset}), sowie die Pointer von InterruptsRoad \ref{dt:interruptsRoad} und IntersectionCode \ref{dt:intersectioncode} in die jeweiligen Objekte eingetragen. Dazu wird wieder Zeile für Zeile ausgelesen. Aus der Zeile werden die Id an den entsprechenden Stellen ausgelesen. Anhand dieser Id werden die Pointer der entsprechenden Objekte gesucht und in die Attribute der jeweiligen Lokationen eingetragen.
@@ -514,8 +632,6 @@ Die Metrik der Queue ist die Distanz der Knoten, die noch nicht besucht wurden. 
 Beim Einfügen eines neuen Knotens prüft die Queue, ob dieser Knoten bereits in der Queue enthalten ist. Ist das nicht der Fall wird der Knoten eingetragen und relaxiert. Ist dieser Knoten bereits in der Queue enthalten, wird er nicht noch einmal hinzugefügt, sondern direkt relaxiert. Relaxieren bedeutet, dass geprüft wird, ob sich bei dem neuen Vorgänger eine Verbesserung der Distanz ergeben würde. Ist das der Fall, oder ist die alte Distanz IN\_FINITY, wird der neue Vorgänger des Knotens und die neue Distanz gesetzt. Das Flag besucht wird false gesetzt. Damit ist es möglich, dass der Knoten ein weiteres Mal von der Methode \textit{getFirst()} zurück gegeben werden kann und dass dessen Nachfolger mit der neuen Distanz relaxiert werden können.
 
 
-%Die Berechnung der Distanzen läuft nach dem Dijkstra Algorithmus. Für diese Berechnung liegt eine PriorityQueue zugrunde, die auch in der gleichnamigen Klasse implementiert ist. Kurz beschrieben, von dem Element, was aktuell die kürzeste Distanz zum Startknoten hat und noch nicht besucht wurde, werden die Nachfolger in die Priority Queue eingetragen. Nachdem die Nachfolger eingetragen wurden, wird das Flag \textit{besucht} dieses Elements true gesetzt. Beim Eintragen der Nachfolger wird geprüft, ob sie bereits in der Queue enthalten sind. Ist das der Fall, wird geprüft, ob die neue Distanz eine Verbesserung zur Bestehenden darstellt.  Bei Bedarf wird die Distanz verändert und das Flag \textit{besucht} false gesetzt. Dadurch wird gewährleistet, dass die Nachfolger der soeben verbesserten Elemente auch wieder relaxiert werden. 
-
 \paragraph{Dijkstra ausführen}
 Der Dijkstra Algorithmus basiert in unserer Implementierung auf der Priority Queue \ref{priorityQueueErstellen}. Die Methode die den Dijkstra Algorithmus implementiert durchläuft lediglich eine Schleife und trägt die Nachfolger des ersten Knoten aus der Priority Queue in diese ein. Diese Schleife wird terminiert, wenn die Queue einen Nullpointer zurück gibt. Nachdem diese Schleife durchlaufen ist, sind die Wege vom Startknoten zu sämtlichen Knoten berechnet.
 
@@ -535,10 +651,13 @@ Das Programm wartet eine Benutzereingabe. Möglich sind eine Neuberechnung der S
 
 \section{Pakete}
 Das gesamte Programm besteht aus fünf Pakten. Die Klassen, die nicht primär am Programm beteiligt sind, werden an dieser Stelle nicht weiter erläutert. Die Dokumentation dieser Klassen befindet sich direkt im Quelltest, bzw. kann mit Doxygen ausgegeben werden.
-\subsection{exceptions}
+
+In dieser Dokumentation sind \textit{deprecated} Methoden und Klassen nicht aufgeführt. Sie werden im Programm nicht (mehr) genutzt, sind aber weiterhin als Quellcode vorhanden und in der Doxygen Dokumentation entsprechend  dokumentiert.
+
+\subsection{package:exceptions}
 Dieses Pakt beinhaltet diverse Exceptions. 
 
-\subsection{geopunkte}
+\subsection{package:geopunkte}
 In diesem Package sind alle Klassen enthalten, die unmittelbar mit den Lokationen bzw. deren Verwaltung zu tun haben.
 \subsubsection{AttributDefines.h}
 In dieser Headerdatei sind die Spalten definiert, in denen aus dem Originaldokument die entsprechenden Informationen ausgelesen werden können. Die Namen der Defines entsprechen denen, die in der Originaldokumentation des Bundes verwendet wurden. Im Kapitel \ref{attributBeschreibungen} ist beschrieben, wie die Originalnamen den im Programm verwendeten zugeordnet werden können. 
@@ -552,10 +671,60 @@ Siehe \ref{linearLokation}.
 \subsubsection{Punktlokation}
 Siehe \ref{Punklokation}
 
+\subsubsection{Lokationsverwaltung}
+Diese Klasse beinhaltet eine Speicherstruktur und Methoden zu Verwalten der Lokationen. In der Speicherstruktur werden Pointer auf alle erstellten Lokationen gespeichert. Die Lokationen werden dynamisch allokiert, und im Destruktor dieser Klasse wieder destruiert. Ein Objekt dieser Klasse darf erst bei der Programmbeendung destruiert werden, da sämtliche Informationen über Lokationen hier verwaltet werden. Weiterhin enthält diese Klasse Methoden, die zum Erstellen (\ref{objekteErstellen}) der Lokationen benötigt werden.
+
+\subsection{package:graph}
+Im Package graph sind die Klassen enthalten, die unmittelbar an der Routenberechnung beteiligt sind.
+
+\subsubsection{Dijkstra}
+Diese Klasse beinhaltet Methoden zur Routenberechnung und um das Ergebnis der Routenberechnung aufzubereiten. 
+
+\subsubsection{Graph}
+Diese Klasse stellt den Graph dar und beinhaltet Methoden um ihn aufzubauen, sowie eine Datenstruktur um die Pointer auf die Knoten zu speichern. Der Aufbau des Graphen läuft in den Schritten \glqq Knoten erstellen \grqq und \glqq Knoten verlinken \grqq ab. Diese Unterteilung ist nötig, da die die Abhängigkeiten der Knoten untereinander durch Pointer dargestellt werden. Die Verlinkung der Abhängigkeiten kann nur erfolgen, wenn alle Knoten erstellt und deren Pointer bekannt sind.
+
+
+
+\subsubsection{Knoten}
+Die Klasse \textit{Knoten} stellt einen Knoten aus der Graphentheorie dar. In unserer Implementierung baut ein Knoten auf einer Punktlokation auf. Die Verbindungen zu den Punktlokationen werden durch einen Pointer auf die zugrundeliegende Punktlokation dargestellt. Diese Verbindung ermöglicht es, ohne zusätzlichen Speicheraufwand detaillierte Informationen zu dem Knoten zu bekommen. Zusätzlich zu den Grundinformationen hat ein Knoten Pointer auf seinen Vorgänger und seine Nachfolger. Der Vorgänger wird besonders wichtig, wenn aus den berechneten Distanzen eine Route gesucht werden soll. Die Nachfolger werden zur Berechnung der Distanzen benötigt. Weiterhin speichert ein Knoten seine Distanz zum Startknoten und ob er bereits besucht wurde. In \ref{priorityQueueErstellen} wurde beschrieben, wie diese Informationen verarbeitet werden.
+
+
+\subsubsection{Priority Queue}
+Diese Klasse bildet eine Priority Queue ab. Ihre Funktionsweise ist in \ref{priorityQueueErstellen} beschrieben. 
+
+\subsection{package:hilfsklassen}
+Dieses Paket beinhaltet eine Ansammlung von Klassen, die nicht direkt mit der Routenberechnung zu tun haben.
+\subsubsection{Aktualitaet \label{class:Aktualitaet}}
+Diese Klasse basiert auf dem \glqq tm *zeit\grqq~struct. Sie wird benötigt um das Attribut \ref{dt:aktualitaet} zu speichern und zu verwalten. Zusätzlich zu dem Struct bietet sie Methoden um die Zeit aus dem Datensatz auszulesen und zu validieren.
+
+\subsubsection{Geokoordinate}
+Diese Klasse wird für das Attribut \ref{st:geoKoordinate} benötigt. Sie enthält Methoden um aus einem String ein WGS84 Datum auszulesen, sowie mit GPS Daten zu rechnen. In ihr sind sowohl die X-Koordinate, als auch die Y-Koordinate des GPS Datums gespeichert.
+
+\subsubsection{SicherLesen}
+Dieses Header File bietet Funktionen um die grundsätzlichen Datentypen sicher über die Konsole einzulesen. Sicher bedeutet, dass der Eingabestrom überprüft und bei einem Fehler zurückgesetzt wird.
+
+
+\subsubsection{UserInterface}
+Diese Klasse bietet dem User eine Schnittstelle zum Programm. Die Funktionen sind in \ref{Bedienungsanleitung} beschrieben.
+
+
+\subsection{Root Ordner}
+Der Root Ordner des Programms enthält die Ordner mit den beschriebenen packages.
+
+\subsubsection{Hello \label{hello}}
+Diese Klasse ist die Main Klasse des Programms. In dieser Klasse wird die Dateiverarbeitung inklusive dem Konstruieren des Graphen initiiert. Der Dateipfad und -Name kann hier geändert werden. Zusätzlich wird hier das Benutzerinterface gestartet.
+
+
 \section{Probleme bei der Routenberechnung \label{Probleme}}
 \later{Hier kommen so Dinger rein, wie dass wir keine Ausfahrten haben, nur Luftlinien berechnen und die Straßen stellenweise weit auseinander liegen}
 
 \section{Anhang}
+\subsection{Versionsdokumentation}
+\subsubsection{Version 1.0.0}
+Diese Version beinhaltet ein lauffähiges Programm. Fehler sind keine bekannt. Veröffentlicht am 07.06.2014
+\subsubsection{Version 1.1.0}
+Aus der Klasse \textit{LokationsVerwaltung} wurden die Datenstrukturen \textit{vector\textless Gebietslokation* \textgreater "-gebieteVector} und \textit{multimap \textless string, Gebietslokation* \textgreater namenMap} entfernt. Die Änderung ist in der Dokumentation berücksichtigt. Weiterhin sind Teile der Doxygen Dokumentation erweitert oder verbessert worden.
+
 
 \subsection{Attributliste \label{bundAttributListe}}
 \includepdf[pages={1-2}]{Grafiken/RelatedDocuments/Attributliste_zur_LCL12.pdf}
@@ -565,4 +734,6 @@ Siehe \ref{Punklokation}
 
 \subsection{Broschüre eines privaten Anbieters für Straßenverwaltungssoftware \label{bundGDD}}
 \includepdf[pages=1-1]{Grafiken/RelatedDocuments/GDD-Strasse_PI.PDF}
+
+
 \end{document}

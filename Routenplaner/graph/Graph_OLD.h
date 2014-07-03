@@ -51,6 +51,5 @@ private:
 	list<Knoten*> knotenListe;
 };
 
-//knoten.getitem().getnachfolger().getitem().getentfernung();
 
 #endif /* GRAPH_H_ */

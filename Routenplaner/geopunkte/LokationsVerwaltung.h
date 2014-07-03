@@ -137,7 +137,6 @@ public:
 	vector<Gebietslokation*> suchen(string name, bool uebereinstimmung);
 
 	//Nur Getter
-	const multimap<string, Gebietslokation*>& getNamenMap() const;
 	const map<int, Gebietslokation*>& getGebieteMap() const;
 
 	/**
