@@ -31,15 +31,16 @@ void PriorityQueue::knotenEintragen(Knoten* vorgaenger, Knoten* knoten) {
 
 void PriorityQueue::nacholfgerEintragen(Knoten* knoten) {
 	list<Knoten*> nachfolger = knoten->getNachfolger();
-	//Wenn die Nachfolger eines Knoten eingetragen wurden, dann setze ihn auf besucht
-	knoten->setBesucht(true);
 	for (auto it = nachfolger.begin(); it != nachfolger.end(); it++) {
 			knotenEintragen(knoten, *it);
 	}
+    //Wenn die Nachfolger eines Knoten eingetragen wurden, dann setze ihn auf besucht
+	knoten->setBesucht(true);
 }
 
 void PriorityQueue::queueInitialisieren(Knoten* startknoten) {
-	nacholfgerEintragen(startknoten);
+    startknoten->setDistanz(0);
+    nacholfgerEintragen(startknoten);
 }
 
 Knoten * PriorityQueue::getFirst() {

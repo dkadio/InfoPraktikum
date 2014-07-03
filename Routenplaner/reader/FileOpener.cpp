@@ -9,7 +9,7 @@ FileOpener::~FileOpener() {
 
 void FileOpener::oeffneDatei(const char* adresse) {
 	datei.open(adresse, ifstream::in);
-	//datei.open("/Users/christoph/Documents/HTW/SEM6/InfoPraktikum/InfoPraktikum/Routenplaner/utf8.csv", ifstream::in); TODO Fuer Release loeschen
+	//datei.open("/Users/christoph/Documents/HTW/SEM6/InfoPraktikum/InfoPraktikum/Routenplaner/utf8.csv", ifstream::in); //TODO Fuer Release loeschen
 	if (!datei) {
 		throw FileNotFoundException("Die Datei konnte nicht gefunden werden.");
 	}
