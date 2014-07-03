@@ -129,7 +129,9 @@
 
 \section{Einleitung}
 \subsection{Überblick über das Programm}
+\todo{kurze Zusammenfassung und Vorstellung}
 \subsection{Hintergrund der Datensätze}
+\todo{evtl. was über den Hintergrund der Datensätze schreiben}
 \subsection{Installationsanleitung und Vorraussetzungen}
 Das Programm wurde in c++ realisiert. 
 \subsubsection{System}
@@ -180,7 +182,7 @@ Bitte jetzt waehlen:
 
 \todo{Muss das eines Kommentars gewürdigt werden?}
 
-Die Eingabe des Startknotens kann zu Teilen erfolgen und ist nicht case sensitive. So werden beispielsweise mit der Eingabe \textit{sa} alle Knoten gefunden, die \textit{sa}, \textit{Sa},\dots, zusammenhängend im Namen haben. Aufgrund des umfangreichen Datensatzes empfiehlt sich aber eine eine möglichst präzise Angabe. 
+Die Eingabe des Startknotens kann zu Teilen erfolgen und ist case sensitive. So werden beispielsweise mit der Eingabe \textit{sa} alle Knoten gefunden, die \textit{sa} zusammenhängend im Namen haben. Zielt die Suche auf das Finden von \textit{Sa} ab, wird die Suche fehlschlagen. Aufgrund des umfangreichen Datensatzes empfiehlt sich aber eine eine möglichst präzise Angabe. 
 
 Nach der Eingabe von Saarbrücken schlägt das Programm folgende Knoten vor:
 \begin{lstlisting}
@@ -208,8 +210,79 @@ Der Graph wird berechnet, diese Operation dauert ein wenig.
 2 - um den Zielknoten zu waehlen
 \end{lstlisting}
 
-
+\subsubsection{Zielknoten auswählen}
 Das Auswählen des Zielknotens erfolgt analog zu dem Auswählen des Startknotens. Mit der Auswahl des Zielknotens wird die Routenberechnung gestartet. Die Route wird ausgegeben.
+\begin{lstlisting}
+Bitte geben Sie die gewuenschte Nummer des Knoten ein: 36
+
+Name: Saarbrücken-Wilhelm-Heinrich-Brücke , 
+"A620" Entfernung zum Start: 0 Geo Koordninaten: 
+49.2337 6.99155
+
+Name: Saarbrücken-Bismarckbrücke , 
+"A620" Entfernung zum Start: 1.02447 Geo Koordninaten: 
+49.2273 7.00175
+
+Name: Saarbrücken-Sankt Arnual , 
+"A620" Entfernung zum Start: 2.45096 Geo Koordninaten: 
+49.2197 7.01755
+
+Name: Saarbrücken-Unner , 
+"A620" Entfernung zum Start: 3.68308 Geo Koordninaten: 
+49.2095 7.02395
+
+Name: Saarbrücken-Unner , 
+"B406" Entfernung zum Start: 3.68308 Geo Koordninaten: 
+49.2095 7.02395
+
+Name: Saarbrücken-Sankt Arnual , 
+"B406" Entfernung zum Start: 4.91519 Geo Koordninaten: 
+49.2197 7.01755
+\end{lstlisting}
+
+\subsection{Änderungsvorschläge}
+Die folgenden Änderungsvorschläge sind ohne großen Aufwand zu implementieren und Verändern die Funktionalität der Software nicht. Die  Änderungen werden erst nach dem neu Kompilieren des Programms und einem Neustart wirksam. 
+
+\subsubsection{Anpassung von Dateipfad und -name}
+In der Datei Hello.cpp (\ref{hello}) kann in der Zeile 
+\begin{lstlisting}[language=C++]
+datei->oeffneDatei("../utf8.csv");
+\end{lstlisting}
+Der Dateipfad, sowie der Dateiname geändert werden.
+
+\subsubsection{Menüführung}
+Die Menüführung ist in der Klasse UserInterface \ref{UserInterface} implementiert. 
+
+\subsubsection{Ausgabe der Lokationen}
+Bei der Ausgabe der Lokationen müssen 3 Ausgaben unterschieden werden. Weiterhin erfolgt in den folgenden Methoden keine Ausgabe, es wird lediglich ein String erzeugt, der in der Klasse UserInterface (\ref{UserInterface}) ausgegeben wird.
+\paragraph{Ausgabe einer Lokation}
+Die Ausgabe einer Lokation kann in den Klassen \ref{class:Gebietslokation}, \ref{class:Linearlokation}, \ref{class:Punktlokation} geändert werden. Bei Änderungen ist die Vererbungshierarchie \ref{fig:klassendiagrammLokations} zu beachten. 
+
+Die Methoden 
+\begin{lstlisting}[language=C++]
+string Gebietslokation::toString() {...}
+string Linearlokation::toString(){...}
+string Punktlokation::toString() {...}
+\end{lstlisting}
+sind dort im Einzelnen anhand der gewünschten Ausgabe anzupassen.
+
+Im Aktuellen Release der Software werden keine Lokationen direkt ausgegeben. 
+
+\paragraph{Ausgabe von Knoten}
+Die Ausgabe der Knoten kann in der Klasse Knoten (\ref{class:Knoten}) in der Methode 
+
+\textit{string Knoten"-::toString"-() \{\dots \}} 
+
+angepasst werden.
+
+\paragraph{Ausgabe der berechneten Route}
+Die Ausgabe der Knoten einer berechneten Route kann in der Klasse Knoten (\ref{class:Knoten}) in der Methode 
+
+\textit{string Knoten::toStringRoute()\{ \dots \}} 
+
+angepasst werden.
+
+
 \section{Use Cases}
 Im Folgenden wird beschrieben, welche Use Cases das Programm in seiner Release Version bedienen kann.
 
@@ -662,13 +735,13 @@ In diesem Package sind alle Klassen enthalten, die unmittelbar mit den Lokatione
 \subsubsection{AttributDefines.h}
 In dieser Headerdatei sind die Spalten definiert, in denen aus dem Originaldokument die entsprechenden Informationen ausgelesen werden können. Die Namen der Defines entsprechen denen, die in der Originaldokumentation des Bundes verwendet wurden. Im Kapitel \ref{attributBeschreibungen} ist beschrieben, wie die Originalnamen den im Programm verwendeten zugeordnet werden können. 
 
-\subsubsection{Gebietslokation}
+\subsubsection{Gebietslokation \label{class:Gebietslokation}}
 Siehe \ref{AreaLocation}.
 
-\subsubsection{Linearlokation}
+\subsubsection{Linearlokation \label{class:Linearlokation}}
 Siehe \ref{linearLokation}.
 
-\subsubsection{Punktlokation}
+\subsubsection{Punktlokation \label{class:Punktlokation}}
 Siehe \ref{Punklokation}
 
 \subsubsection{Lokationsverwaltung}
@@ -685,7 +758,7 @@ Diese Klasse stellt den Graph dar und beinhaltet Methoden um ihn aufzubauen, sow
 
 
 
-\subsubsection{Knoten}
+\subsubsection{Knoten \label{class:Knoten}}
 Die Klasse \textit{Knoten} stellt einen Knoten aus der Graphentheorie dar. In unserer Implementierung baut ein Knoten auf einer Punktlokation auf. Die Verbindungen zu den Punktlokationen werden durch einen Pointer auf die zugrundeliegende Punktlokation dargestellt. Diese Verbindung ermöglicht es, ohne zusätzlichen Speicheraufwand detaillierte Informationen zu dem Knoten zu bekommen. Zusätzlich zu den Grundinformationen hat ein Knoten Pointer auf seinen Vorgänger und seine Nachfolger. Der Vorgänger wird besonders wichtig, wenn aus den berechneten Distanzen eine Route gesucht werden soll. Die Nachfolger werden zur Berechnung der Distanzen benötigt. Weiterhin speichert ein Knoten seine Distanz zum Startknoten und ob er bereits besucht wurde. In \ref{priorityQueueErstellen} wurde beschrieben, wie diese Informationen verarbeitet werden.
 
 
@@ -704,7 +777,7 @@ Diese Klasse wird für das Attribut \ref{st:geoKoordinate} benötigt. Sie enthä
 Dieses Header File bietet Funktionen um die grundsätzlichen Datentypen sicher über die Konsole einzulesen. Sicher bedeutet, dass der Eingabestrom überprüft und bei einem Fehler zurückgesetzt wird.
 
 
-\subsubsection{UserInterface}
+\subsubsection{UserInterface \label{UserInterface}}
 Diese Klasse bietet dem User eine Schnittstelle zum Programm. Die Funktionen sind in \ref{Bedienungsanleitung} beschrieben.
 
 
@@ -716,7 +789,7 @@ Diese Klasse ist die Main Klasse des Programms. In dieser Klasse wird die Dateiv
 
 
 \section{Probleme bei der Routenberechnung \label{Probleme}}
-\later{Hier kommen so Dinger rein, wie dass wir keine Ausfahrten haben, nur Luftlinien berechnen und die Straßen stellenweise weit auseinander liegen}
+\todo{Beispielsweise dass wir keine Ausfahrten im Datenbestand haben und dass die verlinkten Straßen auch weit auseinander liegen können }
 
 \section{Anhang}
 \subsection{Versionsdokumentation}
@@ -725,6 +798,8 @@ Diese Version beinhaltet ein lauffähiges Programm. Fehler sind keine bekannt. V
 \subsubsection{Version 1.1.0}
 Aus der Klasse \textit{LokationsVerwaltung} wurden die Datenstrukturen \textit{vector\textless Gebietslokation* \textgreater "-gebieteVector} und \textit{multimap \textless string, Gebietslokation* \textgreater namenMap} entfernt. Die Änderung ist in der Dokumentation berücksichtigt. Weiterhin sind Teile der Doxygen Dokumentation erweitert oder verbessert worden.
 
+\subsubsection{Version 1.1.1}
+Je nach Konstruktor der Prioirty Queue konnte die berechnete Distanz um -1 Kilometer abweichen. Dieser Fehler ist behoben.
 
 \subsection{Attributliste \label{bundAttributListe}}
 \includepdf[pages={1-2}]{Grafiken/RelatedDocuments/Attributliste_zur_LCL12.pdf}
