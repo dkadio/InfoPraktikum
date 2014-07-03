@@ -624,13 +624,12 @@ Die Beschreibung von Lokationen kann weiter herunter gebrochen werden. Die Besch
   \label{fig:uebersichtDateiEinlesen}
 \end{figure}
 
-\subsubsection{Datei öffnen}
+\subsubsection{Datei öffnen \label{dateiOeffnen}}
 Die Aktivität Datei öffnen besteht aus zwei Aktionen. Der erste Schritt ist, die Datei in einen Filestream zu ziehen. Nachdem dieser Filestream geöffnet wurde, wird die Datei zeilenweise in Strings eingelesen. Diese Strings werden anhand des Zeichens \glqq ;\grqq~weiter zerlegt. Das Ergebnis ist eine Matrix, die in einem \textit{vector\textless vector\textless string\textgreater \textgreater} gespeichert ist.
 
 Datei Pfad und -Name sind fest in das Programm einkodiert und können vom Enduser nicht geändert werden. Wenn das Einlesen der Datei fehlschlägt, wird das Programm mit einer Fehlermeldung beendet.
 
-\todo{Evtl. noch beteiligte Klasse dokumentieren}
-
+Die Klassen die Das Einlesen der Datei übernimmt heißt FileOpener (\ref{class:FileOpener})
 \subsubsection{Objekte erstellen \label{objekteErstellen}}
 Die Erstellung und Verwaltung der Lokationsobjekte findet in der Klasse \textit{LokationsVerwaltung} statt. 
 
@@ -708,7 +707,7 @@ Beim Einfügen eines neuen Knotens prüft die Queue, ob dieser Knoten bereits in
 \paragraph{Dijkstra ausführen}
 Der Dijkstra Algorithmus basiert in unserer Implementierung auf der Priority Queue \ref{priorityQueueErstellen}. Die Methode die den Dijkstra Algorithmus implementiert durchläuft lediglich eine Schleife und trägt die Nachfolger des ersten Knoten aus der Priority Queue in diese ein. Diese Schleife wird terminiert, wenn die Queue einen Nullpointer zurück gibt. Nachdem diese Schleife durchlaufen ist, sind die Wege vom Startknoten zu sämtlichen Knoten berechnet.
 
-\todo{Ist der Graph eigentlich zusammenhängend? Ich glaube nicht, aber müssen wir das dokumentieren?}
+%\todo{Ist der Graph eigentlich zusammenhängend? Ich glaube nicht, aber müssen wir das dokumentieren?}
 
 \subsubsection{Benutzereingabe Endpunkt}
 Um die Route bei gleichen Startpunkten und verschiedenen Zielpunkten nicht jedes Mal neu berechnen zu müssen, wurde die Aktivität \ref{priorityQueueErstellen} nur anhand des Startpunkts ausgeführt. Die Route wird berechnet, nachdem der Benutzer den Zielpunkt eingegeben hat.
@@ -780,6 +779,9 @@ Dieses Header File bietet Funktionen um die grundsätzlichen Datentypen sicher �
 \subsubsection{UserInterface \label{UserInterface}}
 Diese Klasse bietet dem User eine Schnittstelle zum Programm. Die Funktionen sind in \ref{Bedienungsanleitung} beschrieben.
 
+\subsection{package:reader}
+\subsubsection{FileOpener \label{class:FileOpener}}
+Diese Klasse öffnet den Dateistream und zerlegt die .csv Datei in einen Vector. Das Verfahren ist in \ref{dateiOeffnen} beschrieben.
 
 \subsection{Root Ordner}
 Der Root Ordner des Programms enthält die Ordner mit den beschriebenen packages.
