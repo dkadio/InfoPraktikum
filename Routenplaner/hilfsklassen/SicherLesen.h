@@ -1,9 +1,15 @@
 /**
- * sicherLesen.h
+ * SicherLesen.h
  *
  *  Created on: 23.06.2012
  *      Author: Christoph Drost
  *  Headerfile was Funktionen einbindet um sicher Werte einlesen zu koennen.
+ *  Jede der entahltenen Methoden beinhaltet einen Eingabestrom. Dieser wird nach
+ *  dem Einlesen auf eine semantisch korrekte Eingabe geprüft und bei einem Fehler
+ *  zurueck gesetzt. Wenn ein Fehler auftritt, werden die Methoden so lange rekursiv
+ *  aufgerufen, bis ein gueltiger Wert zurueckgegeben wird.
+ *
+ *
  *  Soll in jedes kommende Projekt eingebunden werden.
  *
  */
@@ -33,7 +39,7 @@ static inline int sicherIntLesen() {
 
 /**
  *Sicheres double Einlesen
- *Prueft auf Fehleingaben beim float-Lesen
+ *Prueft auf Fehleingaben beim double-Lesen
  *@return eingelesener Wert
  */
 static inline double sicherDoubleLesen() {
@@ -52,6 +58,7 @@ static inline double sicherDoubleLesen() {
  * Sicheres Einlesen eines Strings
  * Nach der Eingabe mehrerer Woerter wird nur das erste zurueck gegeben
  * Saemtliche Leehrzeichen werden entfernt
+ * @deprecated Diese Methode wurde verienfacht.
  */
 /*static string sicherStringLesen() {
  string in;
@@ -77,6 +84,11 @@ static inline double sicherDoubleLesen() {
  }
  return out;
  }*/
+
+
+/**
+ *  Sicheres Einlesen eines Strings.
+ */
 static inline string sicherStringLesen() {
 	string in;
 	cin >> in;

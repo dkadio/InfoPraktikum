@@ -1,10 +1,3 @@
-/*
- * BenutzerInterface.h
- *
- *  Created on: 06.05.2014
- *      Author: christoph
- */
-
 #ifndef BENUTZERINTERFACE_H_
 #define BENUTZERINTERFACE_H_
 
@@ -38,7 +31,7 @@
  * bietet hierf&uuml;r eine Men&uuml;f&uuml;hrung an.
  *
  * @deprecated Diese Klasse wird nicht mehr benutzt und gepflegt. Sie war
- * zum Testen gedacht und wurde duch die Klasse Benutzerabfrage abgel&ouml;st.
+ * zum Testen gedacht und wurde duch die Klasse UserInterface abgel&ouml;st.
  * Dementsprechend sind die Kommentare und die Dokumentation.
  */
 class BenutzerInterface {
