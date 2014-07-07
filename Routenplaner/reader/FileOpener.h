@@ -60,3 +60,4 @@ private:
 };
 
 #endif /* FILEOPENER_H_ */
+
