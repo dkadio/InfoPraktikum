@@ -304,7 +304,9 @@ angepasst werden.
 
 
 \section{Use Cases}
-Im Folgenden wird beschrieben, welche Use Cases das Programm in seiner Release Version bedienen kann.
+Im Folgenden wird beschrieben, welche Use Cases das Programm in seiner Release Version bedienen kann. Die Autoren dieser Use Cases sind \glqq Routenplaner \grqq~und \glqq User \grqq. Der Routenplaner ist das Programm, der User ist der Bediener. Use Cases, die rein vom Routenplaner ausgeführt werden, werden automatisiert ausgeführt.
+
+Die Übersicht und Beschreibung der Use Cases sollen das Verständnis fördern, welche Grundfunktionalitäten die Software abseits der Benutzerführung bietet.
 
 \begin{figure}[htbp] 
   \centering
@@ -822,6 +824,9 @@ Aus der Klasse \textit{LokationsVerwaltung} wurden die Datenstrukturen \textit{v
 
 \subsubsection{Version 1.1.1}
 Je nach Konstruktor der Prioirty Queue konnte die berechnete Distanz um -1 Kilometer abweichen. Dieser Fehler ist behoben.
+
+\subsubsection{Version 1.2.0}
+Die Makefiles wurden von Eclipse managed makefiles zu handgeschriebenen makefiles geändert. In sämtlichen Klassen wurde die Methode \textit{stoi} zu durch die Methode \textit{atoi} ersetzt.
 
 \subsection{Attributliste \label{bundAttributListe}}
 \includepdf[pages={1-2}]{Grafiken/RelatedDocuments/Attributliste_zur_LCL12.pdf}
