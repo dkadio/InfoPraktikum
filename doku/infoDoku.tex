@@ -133,7 +133,7 @@
 \subsection{Hintergrund der Datensätze}
 \todo{evtl. was über den Hintergrund der Datensätze schreiben}
 \subsection{Installationsanleitung und Vorraussetzungen}
-Das Programm wurde in c++ realisiert. 
+Das Programm wurde in C++ realisiert. 
 \subsubsection{System}
 Getestet wurde die Software auf Mac Books mit Intel CPU.
 
@@ -156,13 +156,33 @@ Eclipse IDE for C/C++ Developers \newline
 Version: Kepler Service Release 2
 
 \subsubsection{Build}
-Das Projekt wurde von Ellipse als Makefile Project verwaltet. Die makefiles wurde von Eclipse generiert und verwaltet. Bei der Benutzung eigener makefiles ist auf den Schalter \textit{-std=c++11} zu achten. 
+Dem Quellcode liegen makefiles (GNU make) bei.
+
+Bei der Benutzung eigener makefiles ist auf den Schalter \textit{-std=c++11} zu achten. 
 
 Der Quellcode ist ANSI-konform und benutzt keine externen Libraries, wie z.B. Boost.
 
 \subsection{Bedienungsanleitung \label{Bedienungsanleitung}}
 \subsubsection{Starten des Programms}
-Das Programm muss vor dem Starten kompiliert werden. Im Root Ordner des Programms muss die Datei \textit{utf8.csv} liegen. Anpassungen von Dateipfad und -Namen können in \ref{hello} erfolgen. Nach dem Entpacken und kompilieren des ausgelieferten Archivs kann das Programm aber ohne Änderungen gestartet werden.
+Der Quellcode wird in einem Paket ausgeliefert. Vor der Benutzung der Software muss der Quellcode kompiliert werden. Das Kompilieren erfolgt in den folgenden Schritten:
+\begin{enumerate}
+	\item Entpacken des Pakets in den Ordner \textit{Routenplaner}\footnote{Bei einem abweichenden Ordnernamen muss dieser im weiteren Verlauf der Installation berücksichtigt werden}. Beim Entpacken dieses Archivs wird ein Verzeichnisbaum unterhalb des Ordners \textit{Routenplaner} erstellt.
+	\item Mit dem Kommando \textit|{cd Routenplaner} in den Ordner \textit{Routenplaner} wechseln.
+	\item Quellcode mit den Befehl \textit{make} kompilieren.
+	\item Starten des Programms mit \textit{./Routenplaner}
+\end{enumerate}
+
+Im Ordner \textit{Routenplaner} des Programms muss die Datei \textit{utf8.csv} liegen. Anpassungen von Dateipfad und -Namen können in \ref{hello} erfolgen. Nach dem Entpacken und kompilieren des ausgelieferten Archivs kann das Programm aber ohne Änderungen gestartet werden.
+
+Nach dem Entpacken des Pakets liegt die Datei im Ordner \textit{Routenplaner}. Sollte die Datei beschädigt oder nicht mehr vorhanden sein, muss sie vom Bundesministerium neu angefordert werden. 
+
+\todo{Kann man die einfach runter laden, oder muss die angefordert werden?}
+
+Mögliche Fehler bei der Programminstallation:
+\begin{itemize}
+	\item Falsches Dateiformat: Bei der Auslieferung des Programms ist die Datei utf8.csv hart eincodiert. Diese Datei ist mit UTF8 kodiert. Der Quelltext des Programms muss im gleichen Format kodiert sein. \todo{Stimmt das denn auch?}
+	\item Fehler beim Neu-Kompilieren: Mit dem Befehl \textit{make clean}  werden die vorhandenen Build Dateien gelöscht. Nach dem Löschen kann wieder mit \textit{make } kompiliert werden.
+\end{itemize}
 
 \subsubsection{Startknoten wählen}
 Nach dem Starten des Programms erscheint die folgende Anzeige:
