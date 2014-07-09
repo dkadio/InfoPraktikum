@@ -7,21 +7,21 @@ Punktlokation::Punktlokation(vector<string> *zeile,
 	this->linearReference = linearReference;
 	if (!zeile->at(NETZKNOTEN1_NR).empty()) {
 		try {
-			this->netzKontenNummerVor = stoi(zeile->at(NETZKNOTEN1_NR));
+			this->netzKontenNummerVor = atoi(zeile->at(NETZKNOTEN1_NR).c_str());
 		} catch (const std::invalid_argument &e) {
 			this->netzKontenNummerVor = 0;
 		}
 	}
 	if (!zeile->at(NETZKNOTEN2_NR).empty()) {
 		try {
-			this->netzKontenNummerNach = stoi(zeile->at(NETZKNOTEN2_NR));
+			this->netzKontenNummerNach = atoi(zeile->at(NETZKNOTEN2_NR).c_str());
 		} catch (const std::invalid_argument &e) {
 			this->netzKontenNummerNach = 0;
 		}
 	}
 	if (!zeile->at(STATION).empty()) {
 		try {
-			this->station = stoi(zeile->at(STATION));
+			this->station = atoi(zeile->at(STATION).c_str());
 		} catch (const std::invalid_argument &e) {
 			this->station = 0;
 		}
@@ -76,7 +76,7 @@ int Punktlokation::getNetzKontenNummerVor() const {
 int Punktlokation::getStation() const {
 	return (station);
 }
-;
+
 
 void Punktlokation::initialisieren() {
 	this->linearReference = NULL;

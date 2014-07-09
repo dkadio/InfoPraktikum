@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include "GeoKoordinate.h"
 
 GeoKoordinate::GeoKoordinate(string xKoordinate, string yKoordinate) {
@@ -13,20 +14,29 @@ GeoKoordinate::~GeoKoordinate() {
 }
 
 void GeoKoordinate::gradEinlesen(string zeichen, float* angabe) {
-	try {
+//	try {
 		unsigned long int lenght = zeichen.length();
 		string nachkommastellen = zeichen.substr(lenght - NACHKOMMA_STELLEN,
 		NACHKOMMA_STELLEN);
 		string vorkommastellen = zeichen.substr(
 				lenght - (NACHKOMMA_STELLEN + VORKOMMA_STELLEN),
 				VORKOMMA_STELLEN);
+		#if 0
 		*angabe = stoi(vorkommastellen)
 				+ (((stoi(nachkommastellen)) / (pow(10, NACHKOMMA_STELLEN))));
-	} catch (const invalid_argument &e) {
+		#endif 
+		*angabe = (float)atoi(vorkommastellen.c_str())
+				+ ((((float)atoi(nachkommastellen.c_str())) / ((float)pow(10, NACHKOMMA_STELLEN))));
+//	} 
+	#if 0
+	
+	catch (Exception e) {
 		//Dieser Fehler duerfte eigentlch nicht auftreten.
 		throw("Fehler beim Einlesen einer Koordinate");
 	}
+	#endif
 }
+
 
 float GeoKoordinate::entfernungBerechnen(GeoKoordinate* ziel) {
 	float distance, dx, dy, lat;

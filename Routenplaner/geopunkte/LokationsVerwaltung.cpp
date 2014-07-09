@@ -32,7 +32,7 @@ void LokationsVerwaltung::speichereGebietsLokation(Gebietslokation* lokation) {
 
 void LokationsVerwaltung::speichereLinearLokation(vector<string>* zeile) {
 	Gebietslokation *areaReference = gebieteMap.at(
-			stoi(zeile->at(AREA_REFERENCE)));
+			atoi(zeile->at(AREA_REFERENCE).c_str()));
 	Linearlokation *linearLokation = new Linearlokation(zeile, areaReference);
 	areaReference->addLinLokation(linearLokation);
 	insertMap(linearLokation);
@@ -45,10 +45,10 @@ void LokationsVerwaltung::speicherePunkLokation(vector<string>* zeile) {
 	Gebietslokation *areaReference = NULL;
 	if (!zeile->at(LINEAR_REFERENCE).empty()) {
 		linearReference = (Linearlokation*) gebieteMap.at(
-				stoi(zeile->at(LINEAR_REFERENCE)));
+				atoi(zeile->at(LINEAR_REFERENCE).c_str()));
 	}
 	if (!zeile->at(AREA_REFERENCE).empty()) {
-		areaReference = gebieteMap.at(stoi(zeile->at(AREA_REFERENCE)));
+		areaReference = gebieteMap.at(atoi(zeile->at(AREA_REFERENCE).c_str()));
 	}
 
 	//(Linearreference und Georeference sind NULL)
@@ -84,10 +84,10 @@ void LokationsVerwaltung::objekteErstellen(vector<vector<string> >* datenSatz) {
 	 aufgebaut werden.*/
 	for (auto it = datenSatz->begin(); it != datenSatz->end(); it++) {
 		if (checkLineaLokation(&*it)) {
-			((Linearlokation*) gebieteMap.find(stoi(it->at(LOCATIONCODE)))->second)->verweiseAufbauen(
+			((Linearlokation*) gebieteMap.find(atoi(it->at(LOCATIONCODE).c_str()))->second)->verweiseAufbauen(
 					&gebieteMap, &*it);
 		} else if (checkPunktlokation(&*it)) {
-			((Punktlokation*) gebieteMap.find(stoi(it->at(LOCATIONCODE)))->second)->verweiseAufbauen(
+			((Punktlokation*) gebieteMap.find(atoi(it->at(LOCATIONCODE).c_str()))->second)->verweiseAufbauen(
 					&gebieteMap, &*it);
 		}
 	}

@@ -5,15 +5,16 @@
  *      Author: christoph
  */
 
+#include <stdlib.h>
 #include "Gebietslokation.h"
 
 #include <iostream>
 Gebietslokation::Gebietslokation(vector<string> *zeile) {
 	initialisieren();
-	this->id = stoi(zeile->at(LOCATIONCODE));
+	this->id = atoi((zeile->at(LOCATIONCODE)).c_str());
 	this->typBuchstabe = zeile->at(TYPE).at(1);
 	this->typZahl = (int) (zeile->at(TYPE).at(2));
-	this->feinTyp = stoi(zeile->at(SUBTYPE));
+	this->feinTyp = atoi((zeile->at(SUBTYPE)).c_str());
 	string str = zeile->at(FIRST_NAME);
 	//Der Name ist mit "" angegeben. Diese muessen raus.
 	//TODON mal sehen, ob das schneller geht -> War schnell genug

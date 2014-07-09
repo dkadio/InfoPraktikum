@@ -16,7 +16,7 @@
 #include<sstream>
 
 #include "../geopunkte/LokationsVerwaltung.h"
-#include "sicherLesen.h"
+#include "SicherLesen.h"
 #include "../reader/FileOpener.h"
 #include "../graph/Dijkstra.h"
 
