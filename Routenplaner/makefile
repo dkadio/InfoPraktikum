@@ -1,6 +1,4 @@
-
-CPP=g++48
-WARN=-pedantic -Wall
+include config
 
 all: Routenplaner
 

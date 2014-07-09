@@ -1,8 +1,7 @@
 
 .SUFFIXES: .cpp .o
 
-CPP=g++48
-WARN=-Wall -pedantic
+include ../config
 
 LIB=libgraph.a
 
