@@ -1,9 +1,0 @@
-build/Routenplaner.dep Routenplaner.o: Routenplaner.cpp Routenplaner.h \
-  reader/FileOpener.h reader/./../exceptions/FileNotFoundException.h \
-  geopunkte/LokationsVerwaltung.h geopunkte/Gebietslokation.h \
-  geopunkte/../hilfsklassen/Aktualitaet.h \
-  geopunkte/../hilfsklassen/./../exceptions/ZeitException.h \
-  geopunkte/AttributDefines.h geopunkte/Linearlokation.h \
-  geopunkte/Punktlokation.h geopunkte/../hilfsklassen/GeoKoordinate.h \
-  graph/Graph.h graph/Knoten.h graph/Dijkstra.h graph/PriorityQueue.h \
-  hilfsklassen/UserInterface.h geopunkte/../hilfsklassen/sicherLesen.h
