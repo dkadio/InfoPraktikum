@@ -1,38 +1,31 @@
-TARGET   := ./Routenplaner
-CXXFLAGS := -g -Wall -pedantic -std=c++11
-CXX      := g++
-LIBS     :=
-EXT      := cpp 
-BUILDDIR := build
-  
-override BUILDDIR := $(strip $(BUILDDIR))
-SOURCES  := $(wildcard *.$(EXT))
-OBJECTS  := $(patsubst %.$(EXT), $(BUILDDIR)/%.o, $(SOURCES))
-DEPS     := $(patsubst %.$(EXT), $(BUILDDIR)/%.dep, $(SOURCES))
 
-.PHONY: all
-all: $(TARGET)
+CPP=g++48
+WARN=-pedantic -Wall
 
-$(TARGET): $(OBJECTS) $(DEPS)
-	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJECTS) $(LIBS)
+all: Routenplaner
 
-ifneq ($(MAKECMDGOALS), clean)
--include $(DEPS)
-endif
+LIBS= reader/FileOpener.o geopunkte/libgeopunkte.a hilfsklassen/libhilf.a  \
+	graph/libgraph.a exceptions/libexceptions.a  
 
-$(OBJECTS): $(BUILDDIR)/%.o: %.$(EXT) $(BUILDDIR)/%.dep $(BUILDDIR)/.tag
-	#$(CXX) $(CXXFLAGS) -c $< -o $@
-	$(CXX) $(CXXFLAGS) -c $^ -o $@
 
-$(DEPS): $(BUILDDIR)/%.dep: %.$(EXT) $(BUILDDIR)/.tag
-	mkdir -p $(dir $(@))
-	$(CXX) $(CXXFLAGS) -MM $< -MT $@ -MT $(<:.$(EXT)=.o) -o $@
+Routenplaner.o: 
+	$(CPP) $(WARN) -I. -std=c++11 -c Routenplaner.cpp
 
-%.tag:
-	mkdir -p $(dir $(@))
-	touch $@
+Routenplaner: subdirs Routenplaner.o
+	$(CPP) -o Routenplaner Routenplaner.o $(LIBS)
 
-.PHONY: clean
+
+subdirs: 
+	make -C graph
+	make -C reader
+	make -C exceptions
+	make -C geopunkte
+	make -C hilfsklassen
 clean:
-	$(RM) -r $(BUILDDIR)
-
+	-rm Routenplaner Routenplaner.o 
+	make -C graph clean
+	make -C reader clean
+	make -C exceptions clean
+	make -C geopunkte clean
+	make -C hilfsklassen clean
+	

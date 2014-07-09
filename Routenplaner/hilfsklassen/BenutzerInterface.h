@@ -20,7 +20,7 @@
 #include "../geopunkte/LokationsVerwaltung.h"
 #include  "SuchenKlasse.h"
 #include  <iostream>
-#include  "sicherLesen.h"
+#include  "SicherLesen.h"
 #include "../graph/Dijkstra.h"
 
 #include "../graph/Graph.h"

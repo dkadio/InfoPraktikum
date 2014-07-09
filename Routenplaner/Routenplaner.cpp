@@ -14,7 +14,8 @@ Hello::~Hello() {
 int main() {
 	//Datei auslesen
 	FileOpener *datei = new FileOpener();
-	datei->oeffneDatei("../utf8.csv");
+//	datei->oeffneDatei("./utf8.csv");
+	datei->oeffneDatei("./iso8859.csv");
 	datei->leseDateiAus();
 
 	cout << "\n\n------------Einlesen abgeschlossen-----------\n\n";

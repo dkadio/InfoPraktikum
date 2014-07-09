@@ -5,6 +5,8 @@
  *      Author: christoph
  */
 
+#include <stdlib.h> 
+
 #include "Aktualitaet.h"
 
 Aktualitaet::Aktualitaet() {
@@ -86,15 +88,33 @@ void Aktualitaet::datumEinlesen(int* sekunde, int* minute, int* stunde,
 	 }
 	 }*/
 	//Mithilfe Regex den Datumsstring aufspalten und in ein Array blasen
+	#if 0
 	const regex pattern("\\d+");
 
 	const sregex_token_iterator end;
+	#endif
+
 	int ergebisArray[SEKUNDE + 1];
 	int anzahlWerte = 0;
+	const char *p;
+
+	p=(const char *)datum.c_str();
+
+	// "01.11.04 16:39:00"
+	ergebisArray[TAG]=atoi(p);
+	ergebisArray[MONAT]=atoi(p+3);
+	ergebisArray[JAHR]=atoi(p+6);
+	ergebisArray[STUNDE]=atoi(p+9);
+	ergebisArray[MINUTE]=atoi(p+12);
+	ergebisArray[SEKUNDE]=atoi(p+15);
+
+	#if 0
 	for (sregex_token_iterator i(datum.begin(), datum.end(), pattern); i != end;
 			++i, ++anzahlWerte) {
-		ergebisArray[anzahlWerte] = stoi(*i);
+		ergebisArray[anzahlWerte] = strtol((*i).c_str(),0,10); // stoi(*i);
 	}
+	#endif
+
 	if (anzahlWerte > SEKUNDE) {
 		*sekunde = ergebisArray[SEKUNDE];
 		*minute = ergebisArray[MINUTE];

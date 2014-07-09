@@ -97,47 +97,47 @@ void Linearlokation::leseWerteEin(vector<string>* zeile) {
 	this->roadName = zeile->at(ROADNAME);
 	this->secondName = zeile->at(SECOND_NAME);
 	try {
-		this->urban = stoi(zeile->at(URBAN));
+		this->urban = atoi(zeile->at(URBAN).c_str());
 	} catch (const std::invalid_argument &e) {
 		this->urban = 0;
 	}
 	try {
-		this->inPositive = stoi(zeile->at(IN_POSITIVE));
+		this->inPositive = atoi(zeile->at(IN_POSITIVE).c_str());
 	} catch (const std::invalid_argument &e) {
 		this->inPositive = 0;
 	}
 	try {
-		this->outPositive = stoi(zeile->at(OUT_POSITIVE));
+		this->outPositive = atoi(zeile->at(OUT_POSITIVE).c_str());
 	} catch (const std::invalid_argument &e) {
 		this->outPositive = false;
 	}
 	try {
-		this->inNegative = stoi(zeile->at(IN_NEGATIVE));
+		this->inNegative = atoi(zeile->at(IN_NEGATIVE).c_str());
 	} catch (const std::invalid_argument &e) {
 		this->inNegative = false;
 	}
 	try {
-		this->outNegative = stoi(zeile->at(OUT_NEGATIVE));
+		this->outNegative = atoi(zeile->at(OUT_NEGATIVE).c_str());
 	} catch (const std::invalid_argument &e) {
 		this->outNegative = false;
 	}
 	try {
-		this->presentPositive = stoi(zeile->at(PRESENT_POSITIVE));
+		this->presentPositive = atoi(zeile->at(PRESENT_POSITIVE).c_str());
 	} catch (const std::invalid_argument &e) {
 		this->presentPositive = false;
 	}
 	try {
-		this->presentNegative = stoi(zeile->at(PRESENT_NEGATIVE));
+		this->presentNegative = atoi(zeile->at(PRESENT_NEGATIVE).c_str());
 	} catch (const std::invalid_argument &e) {
 		this->presentNegative = false;
 	}
 	try {
-		this->veraendert = stoi(zeile->at(VERAENDERT));
+		this->veraendert = atoi(zeile->at(VERAENDERT).c_str());
 	} catch (const std::invalid_argument &e) {
 		this->veraendert = false;
 	}
 	try {
-		this->tern = stoi(zeile->at(TERN));
+		this->tern = atoi(zeile->at(TERN).c_str());
 	} catch (const std::invalid_argument &e) {
 		this->tern = false;
 	}
@@ -153,7 +153,7 @@ void Linearlokation::addPktLokation(Punktlokation* pktLocation) {
 void Linearlokation::speichereOffset(map<int, Gebietslokation*>* gebieteMap,
 		vector<string> *zeile) {
 	try {
-		int positiveOffset = stoi(zeile->at(POSITIVE_OFFSET));
+		int positiveOffset = atoi(zeile->at(POSITIVE_OFFSET).c_str());
 		this->positiveOffset = (Linearlokation*) gebieteMap->find(
 				positiveOffset)->second;
 	} catch (invalid_argument &e) {
@@ -161,7 +161,7 @@ void Linearlokation::speichereOffset(map<int, Gebietslokation*>* gebieteMap,
 		//nichts eingelesen zu werden.
 	}
 	try {
-		int negativeOffset = stoi(zeile->at(NEGATIVE_OFFSET));
+		int negativeOffset = atoi(zeile->at(NEGATIVE_OFFSET).c_str());
 		this->negativeOffset = (Linearlokation*) gebieteMap->find(
 				negativeOffset)->second;
 	} catch (invalid_argument &e) {
@@ -173,7 +173,7 @@ void Linearlokation::speichereOffset(map<int, Gebietslokation*>* gebieteMap,
 void Linearlokation::speichereIntersectionCode(
 		map<int, Gebietslokation*>* gebieteMap, vector<string> *zeile) {
 	try {
-		int interSectionCode = stoi(zeile->at(INTERSECTIONSCODE));
+		int interSectionCode = atoi(zeile->at(INTERSECTIONSCODE).c_str());
 		this->intersectioncode = (Linearlokation*) gebieteMap->find(
 				interSectionCode)->second;
 	} catch (invalid_argument &e) {
@@ -256,7 +256,7 @@ const vector<Punktlokation*>& Linearlokation::getPunktLokations() const {
 void Linearlokation::speichereInterruptsRoad(
 		map<int, Gebietslokation*>* gebieteMap, vector<string> *zeile) {
 	try {
-		int interruptsRoad = stoi(zeile->at(POSITIVE_OFFSET));
+		int interruptsRoad = atoi(zeile->at(POSITIVE_OFFSET).c_str());
 		this->interruptsRoad = (Linearlokation*) gebieteMap->find(
 				interruptsRoad)->second;
 	} catch (invalid_argument &e) {
