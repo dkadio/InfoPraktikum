@@ -167,12 +167,12 @@ Der Quellcode ist ANSI-konform und benutzt keine externen Libraries, wie z.B. Bo
 Der Quellcode wird in einem Paket ausgeliefert. Vor der Benutzung der Software muss der Quellcode kompiliert werden. Das Kompilieren erfolgt in den folgenden Schritten:
 \begin{enumerate}
 	\item Entpacken des Pakets in den Ordner \textit{Routenplaner}\footnote{Bei einem abweichenden Ordnernamen muss dieser im weiteren Verlauf der Installation berücksichtigt werden}. Beim Entpacken dieses Archivs wird ein Verzeichnisbaum unterhalb des Ordners \textit{Routenplaner} erstellt.
-	\item Mit dem Kommando \textit|{cd Routenplaner} in den Ordner \textit{Routenplaner} wechseln.
+	\item Mit dem Kommando \textit{cd Routenplaner} in den Ordner \textit{Routenplaner} wechseln.
 	\item Quellcode mit den Befehl \textit{make} kompilieren.
 	\item Starten des Programms mit \textit{./Routenplaner}
 \end{enumerate}
 
-Im Ordner \textit{Routenplaner} des Programms muss die Datei \textit{utf8.csv} liegen. Anpassungen von Dateipfad und -Namen können in \ref{hello} erfolgen. Nach dem Entpacken und kompilieren des ausgelieferten Archivs kann das Programm aber ohne Änderungen gestartet werden.
+Im Ordner \textit{Routenplaner} des Programms muss die Datei \textit{utf8.csv} liegen. Anpassungen von Dateipfad und -Namen können in \ref{hello} erfolgen. Nach dem Entpacken und Kompilieren des ausgelieferten Archivs kann das Programm aber ohne Änderungen gestartet werden.
 
 Nach dem Entpacken des Pakets liegt die Datei im Ordner \textit{Routenplaner}. Sollte die Datei beschädigt oder nicht mehr vorhanden sein, muss sie vom Bundesministerium neu angefordert werden. 
 
@@ -180,12 +180,12 @@ Nach dem Entpacken des Pakets liegt die Datei im Ordner \textit{Routenplaner}. S
 
 Mögliche Fehler bei der Programminstallation:
 \begin{itemize}
-	\item Falsches Dateiformat: Bei der Auslieferung des Programms ist die Datei utf8.csv hart eincodiert. Diese Datei ist mit UTF8 kodiert. Der Quelltext des Programms muss im gleichen Format kodiert sein. \todo{Stimmt das denn auch?}
-	\item Fehler beim Neu-Kompilieren: Mit dem Befehl \textit{make clean}  werden die vorhandenen Build Dateien gelöscht. Nach dem Löschen kann wieder mit \textit{make } kompiliert werden.
+	\item Falsches Dateiformat: Bei der Auslieferung des Programms wird die Datei utf8.csv geöffnet. Name und Pfad der Datei sind hart einkodiert. Diese Datei ist mit UTF8 kodiert. Der Quelltext des Programms muss im gleichen Format kodiert sein. \todo{Stimmt das denn auch?}
+	\item Fehler beim Neu-Kompilieren: Mit dem Befehl \textit{make clean}  werden die vorhandenen Build Dateien gelöscht. Nach dem Löschen kann wieder mit \textit{make} kompiliert werden.
 \end{itemize}
 
 \subsubsection{Startknoten wählen}
-Nach dem Starten des Programms erscheint die folgende Anzeige:
+Nach dem Starten des Programms mit \textit{./Routenplaner} erscheint die folgende Anzeige:
 
 \begin{lstlisting}
 
@@ -200,7 +200,7 @@ Dies kann eine Weile dauern...
 Bitte jetzt waehlen:  
 \end{lstlisting}
 
-\todo{Muss das eines Kommentars gewürdigt werden?}
+Wenn das Wählen eines Startknotens ausgewählt wird, erscheint die Eingabe für den Startknoten.
 
 Die Eingabe des Startknotens kann zu Teilen erfolgen und ist case sensitive. So werden beispielsweise mit der Eingabe \textit{sa} alle Knoten gefunden, die \textit{sa} zusammenhängend im Namen haben. Zielt die Suche auf das Finden von \textit{Sa} ab, wird die Suche fehlschlagen. Aufgrund des umfangreichen Datensatzes empfiehlt sich aber eine eine möglichst präzise Angabe. 
 
@@ -221,7 +221,7 @@ Bitte geben Sie die gewuenschte Nummer des Knoten ein:
 \end{lstlisting}
 
 Die Auswahl einer gültigen Knotennummer startet die Distanzberechnung mit diesem Knoten als Startknoten. Diese Berechnung kann, je nach System, eine längere Zeit in Anspruch nehmen. Nachdem die Distanzberechnung abgeschlossen ist ändert sich das Menü.
-\begin{lstlisting}
+\begin{lstlisting}[label=menueAusgabeAlle]
 Bitte geben Sie die gewuenschte Nummer des Knoten ein: 29
 
 Der Graph wird berechnet, diese Operation dauert ein wenig.
@@ -229,6 +229,8 @@ Der Graph wird berechnet, diese Operation dauert ein wenig.
 1 - um den Startknoten zu waehlen
 2 - um den Zielknoten zu waehlen
 \end{lstlisting}
+
+Zusätzlich zu den vorhandenen Optionen kann nun ein Zielknoten gewählt werden.
 
 \subsubsection{Zielknoten auswählen}
 Das Auswählen des Zielknotens erfolgt analog zu dem Auswählen des Startknotens. Mit der Auswahl des Zielknotens wird die Routenberechnung gestartet. Die Route wird ausgegeben.
@@ -260,11 +262,13 @@ Name: Saarbrücken-Sankt Arnual ,
 49.2197 7.01755
 \end{lstlisting}
 
+Nachdem die Route ausgegeben wurde erscheint wieder die gleiche Ausgabe wie in \ref{menueAusgabeAlle} beschrieben. Es besteht die Möglichkeit, das Programm zu beenden, die Distanzen von einem neuen Startpunkt aus zu berechnen und vom aktuellen Startpunkt aus eine neue Route zu suchen.
+
 \subsection{Änderungsvorschläge}
 Die folgenden Änderungsvorschläge sind ohne großen Aufwand zu implementieren und Verändern die Funktionalität der Software nicht. Die  Änderungen werden erst nach dem neu Kompilieren des Programms und einem Neustart wirksam. 
 
 \subsubsection{Anpassung von Dateipfad und -name}
-In der Datei Hello.cpp (\ref{hello}) kann in der Zeile 
+In der Datei Routenplaner.cpp (\ref{hello}) kann in der Zeile 
 \begin{lstlisting}[language=C++]
 datei->oeffneDatei("../utf8.csv");
 \end{lstlisting}
@@ -304,7 +308,7 @@ angepasst werden.
 
 
 \section{Use Cases}
-Im Folgenden wird beschrieben, welche Use Cases das Programm in seiner Release Version bedienen kann. Die Autoren dieser Use Cases sind \glqq Routenplaner \grqq~und \glqq User \grqq. Der Routenplaner ist das Programm, der User ist der Bediener. Use Cases, die rein vom Routenplaner ausgeführt werden, werden automatisiert ausgeführt.
+Im Folgenden wird beschrieben, welche Use Cases das Programm in seiner Release Version bedienen kann. Die Aktoren dieser Use Cases sind \glqq Routenplaner \grqq~und \glqq User \grqq. Der Routenplaner ist das Programm, der User ist der Bediener. Use Cases, die alleine vom Routenplaner ausgeführt werden, werden automatisiert ausgeführt.
 
 Die Übersicht und Beschreibung der Use Cases sollen das Verständnis fördern, welche Grundfunktionalitäten die Software abseits der Benutzerführung bietet.
 
@@ -382,7 +386,10 @@ Die Übersicht und Beschreibung der Use Cases sollen das Verständnis fördern, 
 \end{usecase}
 
 \section{Verarbeitete Daten \label{attributBeschreibungen}}
-Der Routenplaner verarbeitet sämtliche Daten, die im Datensatz vorhanden sind. Da ein Großteil dieser Daten für die Verarbeitung optional ist, werden die notwendigen Daten mit \textit{mandatory} und die optionalen Daten mit \textit{optional} gekennzeichnet. Der Hintergrund, dass die optionalen Daten verarbeitet werden ist, dass optionalen Daten für eine informative Ausgabe benötigt werden können und dem User mehr Komfort bei der Ausgabe bieten können. Die optionalen Daten sind permanent vorhanden und können jederzeit im User Interface abgegriffen und ausgegeben werden.
+Der Routenplaner verarbeitet sämtliche Daten, die im Datensatz vorhanden sind. Da ein Großteil dieser Daten für die Verarbeitung optional ist, werden die notwendigen Daten mit \textit{mandatory} und die optionalen Daten mit \textit{optional} gekennzeichnet. Der Hintergrund, dass die optionalen Daten verarbeitet werden ist, dass damit mehr Informationen an den Benutzer weitergegeben werden können. Die optionalen Daten sind permanent vorhanden und können jederzeit im User Interface abgegriffen und ausgegeben werden.
+
+Daten, die mit \textit{mandatory} gekennzeichnet sind, sind bei der Routenberechnung unerlässlich. Sie können nicht wegoptimiert werden.
+
 Die Abbildung \ref{fig:klassendiagrammLokations} zeigt die Hierarchie der Lokationen und deren Attribute.
 
 \begin{figure}[htbp] 
@@ -399,12 +406,12 @@ Eine Area Location, oder Gebietslokation, ist ein grobes Gebiet. Gebiete können
 \begin{attribut}{Id}
 	\drequired{ja}
 	\dtype{unsigned int}
-	\dmapping{LOCATIONCODE}{Id}
+	\dmapping{LOCATIONCODE}{id}
 	\dbeschreibung{Eine Id ist einer Lokation eindeutig zugeordnet. Sie wird mit aus dem Datensatz ausgelesen und fest mit dem Objekt verbunden.}
 \end{attribut}
 
 \begin{attribut}{typBuchstabe}
-	\drequired{nein}
+	\drequired{ja}
 	\dtype{char}
 	\dmapping{TYPE}{typBuchstabe + typZahl}
 	\dbeschreibung{Dieses Attribut gibt an, um welchen Typ von Lokation es sich handelt. Der ursprüngliche Datentyp besteht aus der Kombination \textless Art der Lokation\textgreater \textless Beschreibung\textgreater. Die Art der Lokation ist ein Buchstabe, der in diesem Attribut gespeichert wird.}
@@ -604,7 +611,7 @@ Die Beschreibung von Lokationen kann weiter herunter gebrochen werden. Die Besch
 	\drequired{nein}
 	\dtype{Linearlokation*}
 	\dmapping{LINEAR\_REFERENCE}{linearReference}
-	\dbeschreibung{Eine Punktlokation hat eine übergeordnete Linearlokation \ref{LinearLokation}. Dieses Attribut ist ein Pointer auf diese Linearlokation. }
+	\dbeschreibung{Eine Punktlokation hat eine übergeordnete Linearlokation \ref{linearLokation}. Dieses Attribut ist ein Pointer auf diese Linearlokation. }
 \end{attribut}
 
 \begin{attribut}{netzKontenNummerVor}
@@ -639,7 +646,10 @@ Die Beschreibung von Lokationen kann weiter herunter gebrochen werden. Die Besch
 \section{Programmablauf}
 In diesem Kapitel wird beschrieben, wie die einzelnen Ablaufschritte des Programms voneinander abhängen. Die Betrachtung der Abläufe ist eine Ergänzung zu den Use Cases und deutlich differenzierter.
 
-\subsection{Datei Verarbeitung}
+Um tiefergreifende Änderungen im Programm vornehmen zu können, muss dieses Kapitel verstanden sein. Bei Änderungen sind die gegenseitigen Abhängigkeiten der Datensätze und Ablaufschritte zu beachten. 
+
+\subsection{Datei Verarbeitung\label{dateiVerarbeitung}}
+Die Dateiverarbeitung findet nur zu Beginn des Programmablaufs statt. In diesem Abschnitt werden die Datensätze vorbereitet. Der Prozess findet automatisch nach dem Programmstart statt und kann vom Benutzer nicht beeinflusst werden.
 
 \begin{figure}[H] 
   \centering
@@ -676,23 +686,27 @@ Nach den Linearlokationen werden die Punktlokationen erstellt. Die Pointer der e
 
 
 \paragraph{Abhängigkeiten verlinken} 
-Der vierte Schritt ist das Verlinken der Abhängigkeiten. In diesem Schritt werden die Pointer der Offset (\ref{dt:negativeOffset} und \ref{dt:positiveOffset}), sowie die Pointer von InterruptsRoad \ref{dt:interruptsRoad} und IntersectionCode \ref{dt:intersectioncode} in die jeweiligen Objekte eingetragen. Dazu wird wieder Zeile für Zeile ausgelesen. Aus der Zeile werden die Id an den entsprechenden Stellen ausgelesen. Anhand dieser Id werden die Pointer der entsprechenden Objekte gesucht und in die Attribute der jeweiligen Lokationen eingetragen.
+Der vierte Schritt ist das Verlinken der Ab\-häng\-ig\-keit\-en. In diesem Schritt werden die Pointer der Offset (\ref{dt:negativeOffset} und \ref{dt:positiveOffset}), sowie die Pointer von InterruptsRoad \ref{dt:interruptsRoad} und IntersectionCode \ref{dt:intersectioncode} in die jeweiligen Objekte eingetragen. Dazu wird wieder Zeile für Zeile ausgelesen. Aus der Zeile werden die Id an den entsprechenden Stellen ausgelesen. Anhand dieser Id werden die Pointer der entsprechenden Objekte gesucht und in die Attribute der jeweiligen Lokationen eingetragen.
 
 \subsubsection{Graph erstellen}
 Der Graph ist ähnlich aufgebaut, wie der Grunddatenbestand. Er besteht aus einer Liste mit Knoten. Zusätzlich bietet die Klasse \textit{Graph}  Methoden um den Graph aufzubauen und zu pflegen. Das Erstellen des Graphen läuft schrittweise ab.
 
 \paragraph{Erstellen der Knoten \label{knotenErstellen}}
-Ein Knoten ist ein eigenes Objekt. Er enthält einen Pointer auf die Punktlokation, die der Knoten darstellt. Weiterhin hat ein Knoten eine Liste mit Pointern von weiteren Knoten, die vom Streckenverlauf her seine Nachfolger sind, einen Pointer auf seinen Vorgänger, eine Distanz zum Startknoten und ein Flag, ob er bereits besucht wurde. Der Ausdruck Nachfolger bezieht sich auf die Knoten, die er direkt erreichen kann, bzw. die Punktlokationen, die von seiner Punktloaktion aus erreicht werden können. Die Richtung, die in den originalen Datensätzen beschrieben wird spielt hierbei keine Rolle.
+Ein Knoten ist ein eigenes Objekt. Er enthält einen Pointer auf die Punktlokation, die der Knoten darstellt. Weiterhin hat ein Knoten eine Liste mit Pointern von weiteren Knoten, die vom Streckenverlauf her seine Nachfolger sind, einen Pointer auf seinen Vorgänger, eine Distanz zum Startknoten und ein Flag, ob er bereits besucht wurde. Nachfolger sind die Knoten, die er direkt erreichen kann, bzw. die Punktlokationen, die von seiner Punktloaktion aus erreicht werden können. Die Richtung, die in den originalen Datensätzen beschrieben wird spielt hierbei keine Rolle.
 
 Bei der Erstellung der Knoten wird der Grunddatenbestand durchlaufen. Wenn eine Lokation eine Punktlokation ist, wird mit ihr ein Knoten erstellt. 
 
-\paragraph{Verlinken der Knoten} 
-Beim Verlinken der Knoten wird die Liste mit den gerade erstellten Knoten durchlaufen. Bei jedem Knoten wird geprüft, welche Punktlokationen von der ihm zu Grunde liegenden Punktloaktion erreicht werden können. Die auf diesen Punklokation basierenden Knoten werden gesucht und als Nachfolger eingetragen.
+
+Vorgänger und Nachfolger werden erst im weiteren Verlauf des Programms eingetragen. Der Vorgänger kann erst bei der Distanzberechnung \ref{distanzenBerechnen} eingetragen werden. Die Nachfolger werden im Schritt \ref{verlinkenDerKnoten} eingetragen.
+
+\paragraph{Verlinken der Knoten \label{verlinkenDerKnoten}} 
+Beim Verlinken der Knoten wird die Liste mit den gerade erstellten Knoten durchlaufen. Bei jedem Knoten wird geprüft, welche Punktlokationen von der ihm zu Grunde liegenden Punktloaktion erreicht werden können. Die auf diesen Punklokation basierenden Knoten werden gesucht und als Nachfolger eingetragen. Dieser Schritt kann nur ausgeführt werden, wenn bereits alle Knoten erstellt wurden.
 
 \subsubsection{Warten auf Benutzereingabe}
 Wenn das Verlinken der Knoten abgeschlossen ist, ist auch das Einlesen der Datei beendet. Das Programm wartet ab dieser Stelle auf eine Benutzereingabe.
 
 \subsection{Routenberechnung}
+Im Folgenden wird die Routenberechnung beschrieben. Dieser Prozess ist im Gegensatz zur Dateiverarbeitung \ref{dateiVerarbeitung} vom User beeinflusst und kann so oft wiederholt werden, bis das Programm beendet wird.
 
 \begin{figure}[H] 
   \centering
@@ -702,12 +716,12 @@ Wenn das Verlinken der Knoten abgeschlossen ist, ist auch das Einlesen der Datei
 \end{figure}
 
 \subsubsection{Benutzereingabe Startpunkt}
-Die Benutzerinteraktion ist in diesem Dokument nicht beschrieben. Verantwortlich für diese Interaktion ist die Klasse \textit{UserInterface}. Sie ist bewusst einfach gehalten und kann deswegen auch einfach geändert werden.
+Die Benutzerinteraktion ist in diesem Teil des Dokuments nicht beschrieben. Verantwortlich für diese Interaktion ist die Klasse \textit{UserInterface} \ref{UserInterface}. Sie ist bewusst einfach gehalten und kann deswegen auch einfach geändert werden.
 
 Um die Distanzen zu berechnen reicht der Startpunkt.
 
 \subsubsection{Distanzen berechnen \label{distanzenBerechnen}}
-
+Beim Berechnen der Distanzen werden vom Startknoten aus die Distanzen zu allen Knoten berechnet.
 \todo{Evebtuell hierfür eine Grafik basteln}
 
 \paragraph{Graph bereinigen}
