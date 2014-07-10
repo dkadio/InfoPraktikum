@@ -208,8 +208,7 @@ Nach dem Entpacken des Pakets liegt die Datei im Ordner \textit{Routenplaner}. S
 \smallskip
 Mögliche Fehler bei der Programminstallation:
 \begin{itemize}
-	\item Falsches Dateiformat: Bei der Auslieferung des Programms wird die Datei utf8.csv geöffnet. Name und Pfad der Datei sind hart einkodiert. Diese Datei ist mit UTF8 kodiert. Der Quelltext des Programms muss im gleichen Format kodiert sein. \todo{Stimmt das denn auch?}
-	\item Fehler beim Neu-Kompilieren: Mit dem Befehl \textit{make clean}  werden die vorhandenen Build Dateien gelöscht. Nach dem Löschen kann wieder mit \textit{make} kompiliert werden.
+	\item Falsches Dateiformat: Bei der Auslieferung des Programms wird die Datei utf8.csv geöffnet. Name und Pfad der Datei sind hart einkodiert. Diese Datei ist mit UTF8 kodiert. 	\item Fehler beim Neu-Kompilieren: Mit dem Befehl \textit{make clean}  werden die vorhandenen Build Dateien gelöscht. Nach dem Löschen kann wieder mit \textit{make} kompiliert werden.
 \end{itemize}
 
 \subsubsection{Startknoten wählen}
@@ -547,14 +546,14 @@ Die Beschreibung von Lokationen kann weiter herunter gebrochen werden. Die Besch
 	\drequired{nein}
 	\dtype{Linearlokation*}
 	\dmapping{INTERRUPTS\_ROAD}{interruptsRoad}
-	\dbeschreibung{\todo{Hast du noch im Kopf, was das Ding konnte?}}
+	\dbeschreibung{Zeigt auf die nächste Punktlokation nach einer Unterbrechnung im Straßenverlauf, wie z.b. durch den intersectioncode}
 \end{attribut}
 
 \begin{attribut}{inPositive}
 	\drequired{nein}
 	\dtype{bool}
 	\dmapping{IN\_POSITIVE}{inPositive}
-	\dbeschreibung{inPositive beschreibt, ob die Lotion in Erfassungsrichtung zugänglich ist. }
+	\dbeschreibung{inPositive beschreibt, ob die Location in Erfassungsrichtung zugänglich ist. }
 	\dbelegung{0 = nein = false, 1 = ja = true}
 \end{attribut}
 
@@ -750,7 +749,7 @@ Um die Distanzen zu berechnen reicht der Startpunkt.
 
 \subsubsection{Distanzen berechnen \label{distanzenBerechnen}}
 Beim Berechnen der Distanzen werden vom Startknoten aus die Distanzen zu allen Knoten berechnet.
-\todo{Evebtuell hierfür eine Grafik basteln}
+\todo{Eventuell hierfür eine Grafik basteln}
 
 \paragraph{Graph bereinigen}
 Vor Beginn der Distanzberechnung wird der Graph bereinigt. Bereinigen bedeutet, dass alle Knoten des Graphen bereinigt werden. Was beim Bereinigen geschehen muss:
@@ -863,10 +862,30 @@ Die Datensätze sind stellenweise nicht genau skaliert. Da bei der Berechnung nu
 \subsection{Fehlende Abfahrten}
 In den Datensätzen sind keine Auf- und Abfahrten vorhanden. Aus diesem Grund wird bei der Routenberechnung angenommen, dass Straßen die sich kreuzen auch miteinander verbunden sind. Die tatsächlichen Abfahrmöglichkeiten können sich aber von den Kreuzungen unterscheiden.
 
+\subsection{Abfahrten Abstand}
+Beim Überprüfen der Datensätze ist uns ebenfalls aufgefallen das die Kreuzungen der Straßen, die wir als Abfahrt behandeln, nicht unbedingt genau an dieser Stelle tatsächlich existieren. Das bedeutet das jedes Mal wenn eine Straße gewechselt wird die Berechnung eventuell sich um einige hundert Meter unterscheiden können. Dies ist jedoch eher selten der Fall. Als Beispiel dient hier die Abfahrt Saarbrücken Unner die als Intersectioncode die B406 hat. jedoch kann man auf dem folgenden Bild sehen wie weit sich die eigentliche Ausfahrt von der der Datensätze unterscheidet.
+
+\begin{figure}[htbp] 
+  \centering
+     \includegraphics[width=0.9\textwidth]{Grafiken/entfernung.png}
+  \caption{Entfernung zwsichen der Ausfahrt die die Daten angeben und die die Google-Maps zeigt}
+  \label{fig:entfernungabfahrt}
+\end{figure}
+
+Bei dem oben gezeigten Szenario handelt es sich um die folgende Punktlokation.
+
+\begin{figure}[htbp] 
+  \centering
+     \includegraphics[width=0.9\textwidth]{Grafiken/punklokationentfernung.png}
+  \caption{Daten einer Punktlokation die sich weit von Google-Maps unterscheidet}
+  \label{fig:entfernungabfahrtplk}
+\end{figure}
+
+
+
+
 \subsection{Verkehrsregeln}
 In den Datensätzen sind keine Verkehrsregeln dargestellt. Aus diesem Grund kann die Streckenführung beispielsweise entgegengesetzt einer Einbahnstraße verlaufen.
-
-\todo{Beispielsweise dass wir keine Ausfahrten im Datenbestand haben und dass die verlinkten Straßen auch weit auseinander liegen können }
 
 \section{Anhang}
 \subsection{Versionsdokumentation}
