@@ -110,6 +110,25 @@
 \newcommand{\crap}[1]{\fcolorbox{red}{red}{\parbox{0.75\linewidth}{#1}}} %To mark tasks, being absolutely bullshit
 
 \begin{document}
+\begin{titlepage}
+\includegraphics[width=\linewidth]{Grafiken/htwsaar_Logo_inwi_head_VF_4C_crop}
+  \begin{center}
+    \large  
+    \hfill
+    \vfill
+    \begingroup
+      \Large\bfseries Dokumentation des Projekt GEO  \\ \bigskip
+    \endgroup
+
+  \vfill
+  Christoph Drost und Deniz Cadiogullari
+  \vfill
+  Betreuer: Prof. Dr.-Ing. Weber \\
+\vfill                      
+
+    \end{center}       
+\end{titlepage}   
+
 
 \tableofcontents 
 \newpage
@@ -128,10 +147,20 @@
 
 
 \section{Einleitung}
-\subsection{Überblick über das Programm}
-\todo{kurze Zusammenfassung und Vorstellung}
+\glqq Der Weg ist das Ziel\grqq~(Konfuzius) \bigskip
+
+Das folgende Dokument beschreibt die Software, die von uns im Rahmen des Informatik Praktikums entwickelt wurde. Ziel des Praktikums war es, die bereitgestellten Datensätze der Bundesanstalt für Straßenwesen (BASt) zu verstehen und auf deren Basis einen Routenplaner zu entwickeln. 
+
 \subsection{Hintergrund der Datensätze}
-\todo{evtl. was über den Hintergrund der Datensätze schreiben}
+Die Bundesanstalt für Straßenwesen (BASt) koordiniert im Auftrag des Bundesministeriums für Verkehr und digitale Infrastruktur (BMVI) die Fortschreibung von Location Code List (LCL)  und Event Code List (ECL). Für die LCL werden dazu die von den Bundesländern gepflegten Einzellisten zusammengefügt und Qualitätsprüfungen unterzogen. Die ECL wird ebenfalls kontinuierlich erweitert und um fehlende oder neue Ereignisse ergänzt.
+
+Diese Listen sind die Grundlage für eine automatisierte Meldung von Verkehrsmeldungen. Diese Meldungen werden über den Traffic Message Channel (TMC) verbreitet. Der TMC wird im nicht hörbaren Bereich über das Radio übertragen. Bekannt ist dieser Dienst von Navigationssystemen die anhand der Meldungen des TMC ihre Routen anpassen. TMC Meldungen bestehen aus einem Location Code und einem Event Code. Die Bedeutungen des Location Codes und der Event Codes können aus den Listen abgeleitet werden.
+
+Da die LCL einen umfassenden Datensatz der deutschen Straßen darstellen bieten sie eine mögliche Grundlage für einen Routenplaner. 
+
+\subsection{Überblick über das Programm}
+Nach dem Starten des Programms liest es automatisch den Location Code List ein. Wenn das Einlesen abgeschlossen ist, steht dem Benutzer die Funktionalität zur Verfügung. Die Funktionalität umfasst das Berechnen einer Route von einem vom Benutzer definierten Startpunkt bis zu einem vom Benutzer definierten Endpunkt, sowie das Ausgeben dieser Route auf die Komandozeile. Die Berechnung der Route geschieht über den Dijkstra Algorithmus.
+
 \subsection{Installationsanleitung und Vorraussetzungen}
 Das Programm wurde in C++ realisiert. 
 \subsubsection{System}
@@ -174,10 +203,9 @@ Der Quellcode wird in einem Paket ausgeliefert. Vor der Benutzung der Software m
 
 Im Ordner \textit{Routenplaner} des Programms muss die Datei \textit{utf8.csv} liegen. Anpassungen von Dateipfad und -Namen können in \ref{hello} erfolgen. Nach dem Entpacken und Kompilieren des ausgelieferten Archivs kann das Programm aber ohne Änderungen gestartet werden.
 
-Nach dem Entpacken des Pakets liegt die Datei im Ordner \textit{Routenplaner}. Sollte die Datei beschädigt oder nicht mehr vorhanden sein, muss sie vom Bundesministerium neu angefordert werden. 
+Nach dem Entpacken des Pakets liegt die Datei im Ordner \textit{Routenplaner}. Sollte die Datei beschädigt oder nicht mehr vorhanden sein, muss sie von der Bundesanstalt für Straßenwesen neu angefordert werden. Die Anforderung ist kostenlos, es muss lediglich ein Verwendungszweck angegeben werden.
 
-\todo{Kann man die einfach runter laden, oder muss die angefordert werden?}
-
+\smallskip
 Mögliche Fehler bei der Programminstallation:
 \begin{itemize}
 	\item Falsches Dateiformat: Bei der Auslieferung des Programms wird die Datei utf8.csv geöffnet. Name und Pfad der Datei sind hart einkodiert. Diese Datei ist mit UTF8 kodiert. Der Quelltext des Programms muss im gleichen Format kodiert sein. \todo{Stimmt das denn auch?}
@@ -760,7 +788,7 @@ Das Ergebnis wird dem Benutzer angezeigt.
 Das Programm wartet eine Benutzereingabe. Möglich sind eine Neuberechnung der Strecken, die Ausgabe einer Route mit einem anderen Zielpunkt oder die Beendung des Programms.
 
 \section{Pakete}
-Das gesamte Programm besteht aus fünf Pakten. Die Klassen, die nicht primär am Programm beteiligt sind, werden an dieser Stelle nicht weiter erläutert. Die Dokumentation dieser Klassen befindet sich direkt im Quelltest, bzw. kann mit Doxygen ausgegeben werden.
+Das gesamte Programm besteht aus fünf Pakten. Die Klassen, die nicht primär am Programm beteiligt sind, werden an dieser Stelle nicht weiter erläutert. Die Dokumentation dieser Klassen befindet sich direkt im Quelltext, bzw. kann mit Doxygen ausgegeben werden.
 
 In dieser Dokumentation sind \textit{deprecated} Methoden und Klassen nicht aufgeführt. Sie werden im Programm nicht (mehr) genutzt, sind aber weiterhin als Quellcode vorhanden und in der Doxygen Dokumentation entsprechend  dokumentiert.
 
@@ -779,7 +807,7 @@ Siehe \ref{AreaLocation}.
 Siehe \ref{linearLokation}.
 
 \subsubsection{Punktlokation \label{class:Punktlokation}}
-Siehe \ref{Punklokation}
+Siehe \ref{Punklokation}.
 
 \subsubsection{Lokationsverwaltung}
 Diese Klasse beinhaltet eine Speicherstruktur und Methoden zu Verwalten der Lokationen. In der Speicherstruktur werden Pointer auf alle erstellten Lokationen gespeichert. Die Lokationen werden dynamisch allokiert, und im Destruktor dieser Klasse wieder destruiert. Ein Objekt dieser Klasse darf erst bei der Programmbeendung destruiert werden, da sämtliche Informationen über Lokationen hier verwaltet werden. Weiterhin enthält diese Klasse Methoden, die zum Erstellen (\ref{objekteErstellen}) der Lokationen benötigt werden.
@@ -791,7 +819,7 @@ Im Package graph sind die Klassen enthalten, die unmittelbar an der Routenberech
 Diese Klasse beinhaltet Methoden zur Routenberechnung und um das Ergebnis der Routenberechnung aufzubereiten. 
 
 \subsubsection{Graph}
-Diese Klasse stellt den Graph dar und beinhaltet Methoden um ihn aufzubauen, sowie eine Datenstruktur um die Pointer auf die Knoten zu speichern. Der Aufbau des Graphen läuft in den Schritten \glqq Knoten erstellen \grqq und \glqq Knoten verlinken \grqq ab. Diese Unterteilung ist nötig, da die die Abhängigkeiten der Knoten untereinander durch Pointer dargestellt werden. Die Verlinkung der Abhängigkeiten kann nur erfolgen, wenn alle Knoten erstellt und deren Pointer bekannt sind.
+Diese Klasse stellt den Graph dar und beinhaltet Methoden um ihn aufzubauen, sowie eine Datenstruktur um die Pointer auf die Knoten zu speichern. Der Aufbau des Graphen läuft in den Schritten \glqq Knoten erstellen\grqq~und \glqq Knoten verlinken\grqq~ab. Diese Unterteilung ist nötig, da die die Abhängigkeiten der Knoten untereinander durch Pointer dargestellt werden. Die Verlinkung der Abhängigkeiten kann nur erfolgen, wenn alle Knoten erstellt und deren Pointer bekannt sind.
 
 
 
@@ -829,6 +857,15 @@ Diese Klasse ist die Main Klasse des Programms. In dieser Klasse wird die Dateiv
 
 
 \section{Probleme bei der Routenberechnung \label{Probleme}}
+\subsection{Ungenauigkeiten bei der Berechnung}
+Die Datensätze sind stellenweise nicht genau skaliert. Da bei der Berechnung nur die Luftlinien zwischen Punkten berechnet werden ergibt sich eine Ungenauigkeit in den Berechnungen. Diese Ungenauigkeit ist aber zu vernachlässigen.
+
+\subsection{Fehlende Abfahrten}
+In den Datensätzen sind keine Auf- und Abfahrten vorhanden. Aus diesem Grund wird bei der Routenberechnung angenommen, dass Straßen die sich kreuzen auch miteinander verbunden sind. Die tatsächlichen Abfahrmöglichkeiten können sich aber von den Kreuzungen unterscheiden.
+
+\subsection{Verkehrsregeln}
+In den Datensätzen sind keine Verkehrsregeln dargestellt. Aus diesem Grund kann die Streckenführung beispielsweise entgegengesetzt einer Einbahnstraße verlaufen.
+
 \todo{Beispielsweise dass wir keine Ausfahrten im Datenbestand haben und dass die verlinkten Straßen auch weit auseinander liegen können }
 
 \section{Anhang}
