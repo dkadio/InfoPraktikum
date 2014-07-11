@@ -102,13 +102,6 @@
 %Package um die \ref{} zu verlinken. Die Links werden nicht als solche markiert
 \usepackage[hidelinks]{hyperref}
 
-%Eigene Kommandos
-
-\newcommand{\todo}[1]{\fcolorbox{red}{yellow}{ \parbox{0.75\linewidth}{#1}}} %To mark tasks can be done, but are not done 
-\newcommand{\later}[1]{\fcolorbox{red}{orange}{\parbox{0.75\linewidth}{#1}}} %To mark tasks in the future. Can't be done now (e.g. missing information)
-\newcommand{\checked}[1]{\fcolorbox{green}{green}{\parbox{0.75\linewidth}{#1}}} %To mark tasks, containing checked information
-\newcommand{\crap}[1]{\fcolorbox{red}{red}{\parbox{0.75\linewidth}{#1}}} %To mark tasks, being absolutely bullshit
-
 \begin{document}
 \begin{titlepage}
 \includegraphics[width=\linewidth]{Grafiken/htwsaar_Logo_inwi_head_VF_4C_crop}
@@ -117,11 +110,11 @@
     \hfill
     \vfill
     \begingroup
-      \Large\bfseries Dokumentation des Projekt GEO  \\ \bigskip
+      \Large\bfseries Dokumentation des Projektes GEO  \\ \bigskip
     \endgroup
 
   \vfill
-  Christoph Drost und Deniz Cadiogullari
+  Christoph Drost und Deniz Kadiogullari
   \vfill
   Betreuer: Prof. Dr.-Ing. Weber \\
 \vfill                      
@@ -133,23 +126,11 @@
 \tableofcontents 
 \newpage
 
-\section{Verfügbare Status Marker}
-
-\later{I'm the box marking a task what can not be done at this stadium of the document}
-
-\todo{I'm the box marking a task can be done at this stadium of the document but is not done yet}
-
-\checked{My information are accurate}
-
-\crap{i be the box marks somethimg wrong}
  
-
-
-
 \section{Einleitung}
 \glqq Der Weg ist das Ziel\grqq~(Konfuzius) \bigskip
 
-Das folgende Dokument beschreibt die Software, die von uns im Rahmen des Informatik Praktikums entwickelt wurde. Ziel des Praktikums war es, die bereitgestellten Datensätze der Bundesanstalt für Straßenwesen (BASt) zu verstehen und auf deren Basis einen Routenplaner zu entwickeln. 
+Das folgende Dokument beschreibt die Software, die von uns im Rahmen des Kommunikationsinformatik Praktikums entwickelt wurde. Ziel des Praktikums war es, die bereitgestellten Datensätze der Bundesanstalt für Straßenwesen (BASt) zu verstehen und auf deren Basis einen Routenplaner zu entwickeln. 
 
 \subsection{Hintergrund der Datensätze}
 Die Bundesanstalt für Straßenwesen (BASt) koordiniert im Auftrag des Bundesministeriums für Verkehr und digitale Infrastruktur (BMVI) die Fortschreibung von Location Code List (LCL)  und Event Code List (ECL). Für die LCL werden dazu die von den Bundesländern gepflegten Einzellisten zusammengefügt und Qualitätsprüfungen unterzogen. Die ECL wird ebenfalls kontinuierlich erweitert und um fehlende oder neue Ereignisse ergänzt.
@@ -293,7 +274,7 @@ Name: Saarbrücken-Sankt Arnual ,
 49.2197 7.01755
 \end{lstlisting}
 
-Nachdem die Route ausgegeben wurde erscheint wieder die gleiche Ausgabe wie in \ref{menueAusgabeAlle} beschrieben. Es besteht die Möglichkeit, das Programm zu beenden, die Distanzen von einem neuen Startpunkt aus zu berechnen und vom aktuellen Startpunkt aus eine neue Route zu suchen.
+Nachdem die Route ausgegeben wurde, erscheint wieder die gleiche Ausgabe, wie in \ref{menueAusgabeAlle} beschrieben. Es besteht die Möglichkeit, das Programm zu beenden, die Distanzen von einem neuen Startpunkt aus zu berechnen und vom aktuellen Startpunkt aus eine neue Route zu suchen.
 
 \subsection{Änderungsvorschläge}
 Die folgenden Änderungsvorschläge sind ohne großen Aufwand zu implementieren und verändern die Grundfunktionalität der Software nicht. Die  Änderungen werden erst nach dem neu Kompilieren des Programms und einem Neustart wirksam. 
@@ -321,7 +302,7 @@ string Punktlokation::toString() {...}
 \end{lstlisting}
 sind dort im Einzelnen anhand der gewünschten Ausgabe anzupassen.
 
-Im Aktuellen Release der Software werden keine Lokationen direkt ausgegeben. 
+Im aktuellen Release der Software werden keine Lokationen direkt ausgegeben. 
 
 \paragraph{Ausgabe von Knoten}
 Die Ausgabe der Knoten kann in der Klasse Knoten (\ref{class:Knoten}) in der Methode 
@@ -339,7 +320,7 @@ angepasst werden.
 
 
 \section{Use Cases}
-Im Folgenden wird beschrieben, welche Use Cases das Programm in seiner Release Version bedienen kann. Die Aktoren dieser Use Cases sind \glqq Routenplaner \grqq~und \glqq User \grqq. Der Routenplaner ist das Programm, der User ist der Bediener. Use Cases, die alleine vom Routenplaner ausgeführt werden, werden automatisiert ausgeführt.
+Im Folgenden wird beschrieben, welche Use Cases das Programm in seiner Release Version bedienen kann. Die Aktoren dieser Use Cases sind \glqq Routenplaner\grqq~und \glqq User\grqq. Der Routenplaner ist das Programm, der User ist der Bediener. Use Cases, die alleine vom Routenplaner ausgeführt werden, werden automatisiert ausgeführt.
 
 Die Übersicht und Beschreibung der Use Cases sollen das Verständnis fördern, welche Grundfunktionalitäten die Software abseits der Benutzerführung bietet.
 
@@ -361,6 +342,8 @@ Die Übersicht und Beschreibung der Use Cases sollen das Verständnis fördern, 
 	\upostcondition{Der Inhalt der Datei befindet sich im Arbeitsspeicher}
 \end{usecase}
 
+\newpage %Wenn der Text geändert wird, muss dieses Kommando wieder entfernt werden
+
 \subsubsection{Datei verarbeiten \label{uc:DateiVerarbeiten}}
 \begin{usecase}
 	\utitle{Datei verarbeiten}
@@ -374,7 +357,7 @@ Die Übersicht und Beschreibung der Use Cases sollen das Verständnis fördern, 
 \subsubsection{Distanzen berechnen \label{uc:RouteBerechnen}}
 \begin{usecase}
 	\utitle{Distanzen berechnen}
-	\udescription{Der Routenplaner berechnet die kürzesten Wege vom Startpunkt zu allen anderen Punkten}
+	\udescription{Der Routenplaner berechnet die kürzesten Wege vom Startpunkt zu allen anderen Punkten.}
 	\uactor{Routenplaner}
 	\utrigger{Use Case \ref{uc:StartpunktWaehlen}} 
 	\uprecondition{Use Case \ref{uc:DateiVerarbeiten}}
@@ -384,7 +367,7 @@ Die Übersicht und Beschreibung der Use Cases sollen das Verständnis fördern, 
 \subsubsection{Startpunkt wählen \label{uc:StartpunktWaehlen}}
 \begin{usecase}
 	\utitle{Startpunkt wählen}
-	\udescription{Der User wählt den Startpunkt der Routenberechnung aus}
+	\udescription{Der User wählt den Startpunkt der Routenberechnung aus.}
 	\uactor{User}
 	\uprecondition{Use case \ref{uc:DateiVerarbeiten}, Der Startpunkt ist ein gültiger Punkt}
 	\upostcondition{Die Route wird berechnet}
@@ -393,7 +376,7 @@ Die Übersicht und Beschreibung der Use Cases sollen das Verständnis fördern, 
 \subsubsection{Startpunkt ändern \label{uc:StartpunktAendern}}
 \begin{usecase}
 	\utitle{Startpunkt ändern}
-	\udescription{Der User ändert den Startpunkt einer bereits berechneten Route}
+	\udescription{Der User ändert den Startpunkt einer bereits berechneten Route.}
 	\uactor{User}
 	\uprecondition{Use case \ref{uc:DateiVerarbeiten}, Der Startpunkt ist ein gültiger Punkt}
 	\upostcondition{Die Route wird neu berechnet}
@@ -411,7 +394,7 @@ Die Übersicht und Beschreibung der Use Cases sollen das Verständnis fördern, 
 \subsubsection{Route ausgeben \label{uc:RouteAusgeben}}
 \begin{usecase}
 	\utitle{Route ausgeben}
-	\udescription{Die kürzeste Route vom Start- zum Zielpunkt wird ausgegeben}
+	\udescription{Die kürzeste Route vom Start- zum Zielpunkt wird ausgegeben.}
 	\uactor{Routenplaner}
 	\uprecondition{Use Case \ref{uc:RouteBerechnen},Use Case \ref{uc:ZielpunktAendern}}
 \end{usecase}
@@ -477,22 +460,22 @@ Die Beschreibung von Lokationen kann weiter herunter gebrochen werden. Die Besch
 	\drequired{nö}
 	\dtype{Aktualitaet*}
 	\dmapping{ACTUALITY}{aktualitaet}
-	\dbeschreibung{Die aktualitaet beschreibt vermutlich das Erstelldatum der Lokation. In \ref{bundAttributListe} ist dieses Datenfeld nicht dokumentiert. Anhand den aufgetretenen Werten wurde ermittelt, dass es sich dabei um ein Datum handeln muss. Der Wertebereich liegt grob zwischen 2008 und 2013. Die Vermutung, dass dieses Datenfeld das Erstelldatum oder Einpfegedatum der Lokation ist, stützt sich auf den Namen und den Wertebereich. Die Aktualitaet Klasse  \ref{class:Aktualitaet} im Programm stützt sich auf ein \glqq tm *zeit\grqq~struct, ist aber komfortabler zu nutzen.}
+	\dbeschreibung{Die aktualitaet beschreibt vermutlich das Erstelldatum der Lokation. In \ref{bundAttributListe} ist dieses Datenfeld nicht dokumentiert. Anhand der aufgetretenen Werten wurde ermittelt, dass es sich dabei um ein Datum handeln muss. Der Wertebereich liegt grob zwischen 2008 und 2013. Die Vermutung, dass dieses Datenfeld das Erstelldatum oder Einpfegedatum der Lokation ist, stützt sich auf den Namen und den Wertebereich. Die Aktualitaet Klasse  \ref{class:Aktualitaet} im Programm stützt sich auf ein \glqq tm *zeit\grqq~struct, ist aber komfortabler zu nutzen.}
 \end{attribut}
 
 \begin{attribut}{linLocations}
 	\drequired{nope}
 	\dtype{vector\textless Linearlokation*\textgreater}
-	\dbeschreibung{Jede Gebietslokation hat die Linearlokationen \ref{linearLokation}, die diese Gebietslokation als übergeordnet angegeben hat in einem Vector gespeichert.}
+	\dbeschreibung{Jede Gebietslokation hat die Linearlokationen \ref{linearLokation}, die diese Gebietslokation als übergeordnet angegeben haben, in einem Vector gespeichert.}
 \end{attribut}
 
 \subsection{Linearlokation \label{linearLokation}}
-Eine Linearlokation ist eine Straße. Dieser Typ von Lokation hat deutlich mehr Attribute als eine Gebietslokation. Jede Linearlokation hat eine Referenz auf die ihr übergeordnete Gebietslokation und beinhaltet wieder Punktloaktionen. 
+Eine Linearlokation ist eine Straße. Dieser Typ von Lokation hat deutlich mehr Attribute als eine Gebietslokation. Jede Linearlokation hat eine Referenz auf die ihr übergeordnete Gebietslokation und beinhaltet selber Punktloaktionen. 
 \begin{attribut}{roadNumber}
 	\drequired{nein}
 	\dtype{string}
 	\dmapping{ROADNUMBER}{roadNumber}
-	\dbeschreibung{Die roadNumber gibt die Nummer der Straße nach der Einteilung von Bund und Ländern an. Sie ist mit einem führenden Buchstaben und einer Nummer angegeben. Ein Beispiel für eine roadNumber ist \glqq A620\grqq. Neben den bekannten Bezeichnungen ist auch die Bezeichnung \glqq GDD\grqq aufgetreten. Diese Bezeichnung stammt von einem privaten Anbieter. Näheres dazu gibt es im Kapitel \ref{bundGDD}}
+	\dbeschreibung{Die roadNumber gibt die Nummer der Straße nach der Einteilung von Bund und Ländern an. Sie ist mit einem führenden Buchstaben und einer Nummer angegeben. Ein Beispiel für eine roadNumber ist \glqq A620\grqq. Neben den bekannten Bezeichnungen ist auch die Bezeichnung \glqq GDD\grqq~aufgetreten. Diese Bezeichnung stammt von einem privaten Anbieter. Näheres dazu gibt es im Kapitel \ref{bundGDD}}
 \end{attribut}
 
 \begin{attribut}{roadName}
@@ -506,7 +489,7 @@ Eine Linearlokation ist eine Straße. Dieser Typ von Lokation hat deutlich mehr 
 	\drequired{nein}
 	\dtype{string}
 	\dmapping{SECOND\_NAME}{secondName}
-	\dbeschreibung{Der secondName ist ein zusätzlicher Name einer Lokation. Ein Beispiel hierfür ist die Straße \glqq GDD12\grqq, \glqq Budapester Straße\grqq, \glqq Georgplatz\grqq, wobei die dritte Angabe der secondName ist.}
+	\dbeschreibung{Der secondName ist ein zusätzlicher Name einer Lokation. Ein Beispiel hierfür ist die Straße \glqq GDD12\grqq, \glqq Budapester Straße\grqq, \glqq Georgplatz\grqq, (roadNumber, roadName, secondName).}
 \end{attribut}
 
 \begin{attribut}{areaReference}
@@ -550,7 +533,7 @@ Eine Linearlokation ist eine Straße. Dieser Typ von Lokation hat deutlich mehr 
 	\drequired{nein}
 	\dtype{Linearlokation*}
 	\dmapping{INTERRUPTS\_ROAD}{interruptsRoad}
-	\dbeschreibung{Zeigt auf die nächste Punktlokation nach einer Unterbrechung im Straßenverlauf, wie z.b. durch den intersectioncode.}
+	\dbeschreibung{Zeigt auf die nächste Punktlokation nach einer Unterbrechung im Straßenverlauf, wie z.b. durch den intersectioncode. Durch Versuche hat sich ergeben, dass dieses Attribut nicht zur Routenführung zu gebrauchen ist.}
 \end{attribut}
 
 \begin{attribut}{inPositive}
@@ -705,7 +688,7 @@ Um einen sicheren Zugriff auf die Elemente einer Spalte zu garantieren, sind in 
 
 Die Objekte werden dynamisch allokiert und Pointer auf sie werden in einer Map gespeichert.  
 
-Diese Objekte bieten den Grund Datenbestand. Auf diesen Datenbestand werden können Suchen ausgeführt werden und aus diesem Datenbestand werden die Informationen für die Ausgaben entnommen. Außerdem basiert der Graph auf diesem Datenbestand.
+Diese Objekte bilden den Grund Datenbestand. Auf diesen Datenbestand können Suchen ausgeführt werden und aus diesem Datenbestand werden die Informationen für die Ausgaben entnommen. Außerdem basiert der Graph auf diesem Datenbestand.
 
 \paragraph{Gebietslokationen erstellen \label{par:gebietsLokationenErstellen}}
 Im ersten Schritt des Durchlaufs werden die Gebietslokationen eingelesen. Dazu wird der Vector zeilenweise durchlaufen. Wenn der Typ einer Zeile mit einem \glqq A\grqq~beginnt, wird aus dieser Zeile ein Gebietslokation Objekt erstellt.
@@ -788,7 +771,7 @@ Die Aktion Ergebnis aufbereiten beinhaltet, dass vom Zielpunkt so lange durch di
 Das Ergebnis wird dem Benutzer angezeigt.
 
 \subsubsection{Warten auf Benutzereingabe}
-Das Programm wartet eine Benutzereingabe. Möglich sind eine Neuberechnung der Strecken, die Ausgabe einer Route mit einem anderen Zielpunkt oder die Beendung des Programms.
+Das Programm wartet auf eine Benutzereingabe. Möglich sind eine Neuberechnung der Strecken, die Ausgabe einer Route mit einem anderen Zielpunkt oder die Beendung des Programms.
 
 \section{Pakete}
 Das gesamte Programm besteht aus fünf Pakten. Die Klassen, die nicht primär am Programm beteiligt sind, werden an dieser Stelle nicht weiter erläutert. Die Dokumentation aller Klassen befindet sich direkt im Quelltext, bzw. kann mit Doxygen ausgegeben werden.
@@ -867,12 +850,12 @@ Die Punktlokationen im Datensatz können weit auseinander liegen. Da bei der Ber
 In den Datensätzen sind keine Auf- und Abfahrten vorhanden. Aus diesem Grund wird bei der Routenberechnung angenommen, dass Straßen die sich kreuzen auch miteinander verbunden sind. Die tatsächlichen Abfahrmöglichkeiten können sich aber von den Kreuzungen unterscheiden.
 
 \subsection{Abfahrten Abstand}
-Beim Überprüfen der Datensätze ist uns ebenfalls aufgefallen, dass die Kreuzungen der Straßen, die wir als Abfahrt behandeln, nicht unbedingt genau an dieser Stelle tatsächlich existieren. Das bedeutet, dass jedes Mal ,wenn eine Straße gewechselt wird, eine Ungenauigkeit von einigen hundert Metern in die Berechnung einfließen kann. Diese Stellen sind aber eher selten, von daher kann diese Ungenauigkeit vernachlässigt werden. Als Beispiel für eine solche Stelle dient hier die Abfahrt Saarbrücken-Unner die als Intersectioncode die B406 hat. Jedoch kann man auf der folgenden Grafik erkennen, wie weit sich die eigentliche Ausfahrt von der der Datensätze unterscheidet.
+Beim Überprüfen der Datensätze ist uns ebenfalls aufgefallen, dass die Kreuzungen der Straßen, die wir als Abfahrt behandeln, nicht unbedingt genau an dieser Stelle tatsächlich existieren. Das bedeutet, dass jedes Mal ,wenn eine Straße gewechselt wird, eine Ungenauigkeit von einigen hundert Metern in die Berechnung einfließen kann. Da diese Stellen aber eher selten sind, kann diese Ungenauigkeit vernachlässigt werden. Als Beispiel für eine solche Stelle dient hier die Abfahrt Saarbrücken-Unner die als Intersectioncode die B406 hat. Jedoch kann man auf auf Abbildung \ref{fig:entfernungabfahrt} erkennen, wie weit sich die eigentliche Ausfahrt von der der Datensätze unterscheidet.
 
 \begin{figure}[htbp] 
   \centering
      \includegraphics[width=0.9\textwidth]{Grafiken/entfernung.png}
-  \caption{Entfernung zwsichen der Ausfahrt die die Daten angeben und die die Google-Maps zeigt}
+  \caption{Entfernung zwischen der in den Daten beschriebenen Ausfahrt und der von Google-Maps Angezeigten}
   \label{fig:entfernungabfahrt}
 \end{figure}
 
