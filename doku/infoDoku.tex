@@ -154,12 +154,12 @@ Das folgende Dokument beschreibt die Software, die von uns im Rahmen des Informa
 \subsection{Hintergrund der Datensätze}
 Die Bundesanstalt für Straßenwesen (BASt) koordiniert im Auftrag des Bundesministeriums für Verkehr und digitale Infrastruktur (BMVI) die Fortschreibung von Location Code List (LCL)  und Event Code List (ECL). Für die LCL werden dazu die von den Bundesländern gepflegten Einzellisten zusammengefügt und Qualitätsprüfungen unterzogen. Die ECL wird ebenfalls kontinuierlich erweitert und um fehlende oder neue Ereignisse ergänzt.
 
-Diese Listen sind die Grundlage für eine automatisierte Meldung von Verkehrsmeldungen. Diese Meldungen werden über den Traffic Message Channel (TMC) verbreitet. Der TMC wird im nicht hörbaren Bereich über das Radio übertragen. Bekannt ist dieser Dienst von Navigationssystemen die anhand der Meldungen des TMC ihre Routen anpassen. TMC Meldungen bestehen aus einem Location Code und einem Event Code. Die Bedeutungen des Location Codes und der Event Codes können aus den Listen abgeleitet werden.
+Diese Listen sind die Grundlage für eine automatisierte Meldung von Verkehrsmeldungen. Diese Meldungen werden über den Traffic Message Channel (TMC) verbreitet. Der TMC wird im nicht hörbaren Bereich über das Radio übertragen. Bekannt ist dieser Dienst beispielsweise von Navigationssystemen, die anhand der Meldungen des TMC ihre Routen anpassen. TMC Meldungen bestehen aus einem Location Code und einem Event Code. Die Bedeutungen des Location Codes und der Event Codes können aus den Listen abgeleitet werden.
 
-Da die LCL einen umfassenden Datensatz der deutschen Straßen darstellen bieten sie eine mögliche Grundlage für einen Routenplaner. 
+Da die LCL einen umfassenden Datensatz der deutschen Straßen darstellen, bieten sie eine mögliche Grundlage für einen Routenplaner. 
 
 \subsection{Überblick über das Programm}
-Nach dem Starten des Programms liest es automatisch den Location Code List ein. Wenn das Einlesen abgeschlossen ist, steht dem Benutzer die Funktionalität zur Verfügung. Die Funktionalität umfasst das Berechnen einer Route von einem vom Benutzer definierten Startpunkt bis zu einem vom Benutzer definierten Endpunkt, sowie das Ausgeben dieser Route auf die Komandozeile. Die Berechnung der Route geschieht über den Dijkstra Algorithmus.
+Nach dem Starten des Programms liest es automatisch die Location Code List ein. Wenn das Einlesen abgeschlossen ist, steht dem Benutzer die Funktionalität zur Ver\-fügung. Die Funktionalität umfasst das Berechnen einer Route von einem vom Benutzer definierten Startpunkt bis zu einem vom Benutzer definierten Endpunkt, sowie das Ausgeben dieser Route auf die Komandozeile. Die Berechnung der Route geschieht über den Dijkstra Algorithmus.
 
 \subsection{Installationsanleitung und Vorraussetzungen}
 Das Programm wurde in C++ realisiert. 
@@ -201,9 +201,13 @@ Der Quellcode wird in einem Paket ausgeliefert. Vor der Benutzung der Software m
 	\item Starten des Programms mit \textit{./Routenplaner}
 \end{enumerate}
 
-Im Ordner \textit{Routenplaner} des Programms muss die Datei \textit{utf8.csv} liegen. Anpassungen von Dateipfad und -Namen können in \ref{hello} erfolgen. Nach dem Entpacken und Kompilieren des ausgelieferten Archivs kann das Programm aber ohne Änderungen gestartet werden.
+Im Ordner \textit{Routenplaner} des Programms muss die Datei \textit{utf8.csv} liegen. Anpassungen von Dateipfad und -Namen können in \ref{hello} erfolgen. Nach dem Entpacken und Kompilieren des ausgelieferten Pakets kann das Programm aber ohne Änderungen gestartet werden.
 
-Nach dem Entpacken des Pakets liegt die Datei im Ordner \textit{Routenplaner}. Sollte die Datei beschädigt oder nicht mehr vorhanden sein, muss sie von der Bundesanstalt für Straßenwesen neu angefordert werden. Die Anforderung ist kostenlos, es muss lediglich ein Verwendungszweck angegeben werden.
+Nach dem Entpacken des Pakets liegt die Datei im Ordner \textit{Routenplaner}. Sollte die Datei beschädigt oder nicht mehr vorhanden sein, muss sie von der Bundesanstalt für Straßenwesen neu angefordert werden. Die Anforderung ist kostenlos, es müssen lediglich ein Verwendungszweck und Adressdaten angegeben, sowie ein Fragebogen ausgefüllt werden.
+
+Der aktuelle Link zu den Datensätzen ist:  
+
+\href{http://www.bast.de/DE/FB-V/Fachthemen/v2-LCL/location-code-list\_node.html}{http://www.bast.de/DE/FB-V/Fachthemen/v2-LCL/location-code-list\_node.html}
 
 \smallskip
 Mögliche Fehler bei der Programminstallation:
@@ -292,7 +296,7 @@ Name: Saarbrücken-Sankt Arnual ,
 Nachdem die Route ausgegeben wurde erscheint wieder die gleiche Ausgabe wie in \ref{menueAusgabeAlle} beschrieben. Es besteht die Möglichkeit, das Programm zu beenden, die Distanzen von einem neuen Startpunkt aus zu berechnen und vom aktuellen Startpunkt aus eine neue Route zu suchen.
 
 \subsection{Änderungsvorschläge}
-Die folgenden Änderungsvorschläge sind ohne großen Aufwand zu implementieren und Verändern die Funktionalität der Software nicht. Die  Änderungen werden erst nach dem neu Kompilieren des Programms und einem Neustart wirksam. 
+Die folgenden Änderungsvorschläge sind ohne großen Aufwand zu implementieren und verändern die Grundfunktionalität der Software nicht. Die  Änderungen werden erst nach dem neu Kompilieren des Programms und einem Neustart wirksam. 
 
 \subsubsection{Anpassung von Dateipfad und -name}
 In der Datei Routenplaner.cpp (\ref{hello}) kann in der Zeile 
@@ -305,7 +309,7 @@ Der Dateipfad, sowie der Dateiname geändert werden.
 Die Menüführung ist in der Klasse UserInterface \ref{UserInterface} implementiert. 
 
 \subsubsection{Ausgabe der Lokationen}
-Bei der Ausgabe der Lokationen müssen 3 Ausgaben unterschieden werden. Weiterhin erfolgt in den folgenden Methoden keine Ausgabe, es wird lediglich ein String erzeugt, der in der Klasse UserInterface (\ref{UserInterface}) ausgegeben wird.
+Bei der Ausgabe der Lokationen müssen 3 Ausgaben unterschieden werden. Es können Lokationen, Knoten und Konten mit Routeninformationen ausgegeben werden. Weiterhin erfolgt in den folgenden Methoden keine Ausgabe, es wird lediglich ein String erzeugt, der in der Klasse UserInterface (\ref{UserInterface}) ausgegeben wird.
 \paragraph{Ausgabe einer Lokation}
 Die Ausgabe einer Lokation kann in den Klassen \ref{class:Gebietslokation}, \ref{class:Linearlokation}, \ref{class:Punktlokation} geändert werden. Bei Änderungen ist die Vererbungshierarchie \ref{fig:klassendiagrammLokations} zu beachten. 
 
@@ -350,7 +354,7 @@ Die Übersicht und Beschreibung der Use Cases sollen das Verständnis fördern, 
 \subsubsection{Datei einlesen \label{uc:DateiEinlesen}}
 \begin{usecase}
 	\utitle{Datei einlesen}
-	\udescription{Nachdem das Programm gestartet wird, wird die csv Datei mit den Streckeninformationen eingelesen.}
+	\udescription{Nachdem das Programm gestartet wird, wird die .csv Datei mit den Streckeninformationen eingelesen.}
 	\uactor{Routenplaner}
 	\utrigger{Der Start des Programms}
 	\uprecondition{Eine gültige Datei mit den Streckeninformationen muss vorliegen, Der richtige Dateiname und -Pfad muss im Programm angegeben sein}
@@ -417,6 +421,7 @@ Der Routenplaner verarbeitet sämtliche Daten, die im Datensatz vorhanden sind. 
 
 Daten, die mit \textit{mandatory} gekennzeichnet sind, sind bei der Routenberechnung unerlässlich. Sie können nicht wegoptimiert werden.
 
+Der originale Datensatz wurde in drei Klassen nachgebildet. Diese entsprechen auch den verschiedenen Location, die in der original Dokumentation des Bundes beschrieben sind.
 Die Abbildung \ref{fig:klassendiagrammLokations} zeigt die Hierarchie der Lokationen und deren Attribute.
 
 \begin{figure}[htbp] 
@@ -426,7 +431,6 @@ Die Abbildung \ref{fig:klassendiagrammLokations} zeigt die Hierarchie der Lokati
   \label{fig:klassendiagrammLokations}
 \end{figure}
 
-Der originale Datensatz wurde in drei Klassen nachgebildet. Diese entsprechen auch den verschiedenen Location, die in der original Dokumentation des Bundes beschrieben sind.
 \subsection{Gebietslokation \label{AreaLocation}}
 Eine Area Location, oder Gebietslokation, ist ein grobes Gebiet. Gebiete können beispielsweise Kontinente, Länder, Bundesländer oder Ballungsgebiete sein. Sie stellt den Grundtyp der anderen Lokalionen dar.
 
@@ -483,7 +487,7 @@ Die Beschreibung von Lokationen kann weiter herunter gebrochen werden. Die Besch
 \end{attribut}
 
 \subsection{Linearlokation \label{linearLokation}}
-
+Eine Linearlokation ist eine Straße. Dieser Typ von Lokation hat deutlich mehr Attribute als eine Gebietslokation. Jede Linearlokation hat eine Referenz auf die ihr übergeordnete Gebietslokation und beinhaltet wieder Punktloaktionen. 
 \begin{attribut}{roadNumber}
 	\drequired{nein}
 	\dtype{string}
@@ -502,7 +506,7 @@ Die Beschreibung von Lokationen kann weiter herunter gebrochen werden. Die Besch
 	\drequired{nein}
 	\dtype{string}
 	\dmapping{SECOND\_NAME}{secondName}
-	\dbeschreibung{Der secondName ist ein zusätzlicher Name einer Lokation. Ein Beispiel hierfür ist die Straße \glqq GDD12\grqq, \glqq Budapester Straße\grqq, \glqq Georgplatz\grqq, wobei die dritte Angabe der socondName ist.}
+	\dbeschreibung{Der secondName ist ein zusätzlicher Name einer Lokation. Ein Beispiel hierfür ist die Straße \glqq GDD12\grqq, \glqq Budapester Straße\grqq, \glqq Georgplatz\grqq, wobei die dritte Angabe der secondName ist.}
 \end{attribut}
 
 \begin{attribut}{areaReference}
@@ -516,7 +520,7 @@ Die Beschreibung von Lokationen kann weiter herunter gebrochen werden. Die Besch
 	\drequired{ja}
 	\dtype{Linearlokation*}
 	\dmapping{NEGATIVE\_OFFSET}{negativeOffset}
-	\dbeschreibung{Der negativeOffset ist grundsätzlich eine vorangehende oder nachfolgende Linear Location. Laut der Beschreibung des Bundes eine Vorgängerlokation bezogen auf die Erfassungsrichtung. Das Attribut ist als Pointer angelegt und erlaubt eine Bewegung durch die Lokationen. Für die Distanzberechnung wurde angenommen, dass es zwischen den Offset eine direkte Verbindung gibt.}
+	\dbeschreibung{Der negativeOffset ist grundsätzlich eine vorangehende oder nachfolgende Linear Location. Laut der Beschreibung des Bundes eine Vorgängerlokation bezogen auf die Erfassungsrichtung. Das Attribut ist als Pointer angelegt und erlaubt ein Iterieren durch die Lokationen. Für die Distanzberechnung wurde angenommen, dass es zwischen den Offset eine direkte Verbindung gibt. Zwischen negativ und positiv wurde bei der Suche der Nachfolger kein Unterschied gemacht.}
 \end{attribut}
 
 \begin{attribut}{positiveOffset}
@@ -546,7 +550,7 @@ Die Beschreibung von Lokationen kann weiter herunter gebrochen werden. Die Besch
 	\drequired{nein}
 	\dtype{Linearlokation*}
 	\dmapping{INTERRUPTS\_ROAD}{interruptsRoad}
-	\dbeschreibung{Zeigt auf die nächste Punktlokation nach einer Unterbrechnung im Straßenverlauf, wie z.b. durch den intersectioncode}
+	\dbeschreibung{Zeigt auf die nächste Punktlokation nach einer Unterbrechung im Straßenverlauf, wie z.b. durch den intersectioncode.}
 \end{attribut}
 
 \begin{attribut}{inPositive}
@@ -634,6 +638,7 @@ Die Beschreibung von Lokationen kann weiter herunter gebrochen werden. Die Besch
 \end{attribut}
 	
 \subsection{Punktlokation \label{Punklokation}}
+Eine Punktlokation ist eine Lokation, die weder ein Gebiet noch eine Straße ist. Punktlokationen haben eine übergeordnete Linearlokation.
 \begin{attribut}{linearReference}
 	\drequired{nein}
 	\dtype{Linearlokation*}
@@ -690,7 +695,7 @@ Die Aktivität Datei öffnen besteht aus zwei Aktionen. Der erste Schritt ist, d
 
 Datei Pfad und -Name sind fest in das Programm einkodiert und können vom Enduser nicht geändert werden. Wenn das Einlesen der Datei fehlschlägt, wird das Programm mit einer Fehlermeldung beendet.
 
-Die Klassen die Das Einlesen der Datei übernimmt heißt FileOpener (\ref{class:FileOpener})
+Die Klassen die das Einlesen der Datei übernimmt heißt FileOpener (\ref{class:FileOpener})
 \subsubsection{Objekte erstellen \label{objekteErstellen}}
 Die Erstellung und Verwaltung der Lokationsobjekte findet in der Klasse \textit{LokationsVerwaltung} statt. 
 
@@ -703,13 +708,13 @@ Die Objekte werden dynamisch allokiert und Pointer auf sie werden in einer Map g
 Diese Objekte bieten den Grund Datenbestand. Auf diesen Datenbestand werden können Suchen ausgeführt werden und aus diesem Datenbestand werden die Informationen für die Ausgaben entnommen. Außerdem basiert der Graph auf diesem Datenbestand.
 
 \paragraph{Gebietslokationen erstellen \label{par:gebietsLokationenErstellen}}
-Im ersten Schritt des Durchlaufs werden die Gebietslokationen eingelesen. Dazu wird der Vector zeilenweise durchlaufen. Wenn der Typ einer Zeile mit einem \glqq A\grqq  beginnt wird ein Gebietslokation Objekt erstellt.
+Im ersten Schritt des Durchlaufs werden die Gebietslokationen eingelesen. Dazu wird der Vector zeilenweise durchlaufen. Wenn der Typ einer Zeile mit einem \glqq A\grqq~beginnt, wird aus dieser Zeile ein Gebietslokation Objekt erstellt.
 
 \paragraph{Linearlokationen erstellen}
-Nach der Erstellung der Gebietslokationen werden die Linearlokationen erstellt. Die Pointer dieser Linearlokationen werden direkt in die Listen der übergeordneten Gebietslokationen eingepflegt. Parallel dazu werden die Pointer der übergeordneten Gebietslokationen \ref{dt:areaReference} in die Linearlokationen eingetragen. Der Prozess des Einlesens läuft analog zu \ref{par:gebietsLokationenErstellen}. Die Zeilen müssen aber mit \glqq L \grqq beginnen. 
+Nach der Erstellung der Gebietslokationen werden die Linearlokationen erstellt. Die Pointer dieser Linearlokationen werden direkt in die Listen der übergeordneten Gebietslokationen eingepflegt. Parallel dazu werden die Pointer der übergeordneten Gebietslokationen \ref{dt:areaReference} in die Linearlokationen eingetragen. Der Prozess des Einlesens läuft analog zu \ref{par:gebietsLokationenErstellen}. Die Zeilen müssen aber mit \glqq L\grqq~beginnen. 
 
 \paragraph{Punktlokationen erstellen}
-Nach den Linearlokationen werden die Punktlokationen erstellt. Die Pointer der erstellten Punktlokationen werden direkt in die Listen der übergeordneten Linearlokationen eingetragen. Beim Erstellen der Punktloationen werden die Pointer auf übergeordneten Linearlokationen \ref{dt:linearReference} direkt eingetragen. Der Prozess des Einlesens läuft analog zu \ref{par:gebietsLokationenErstellen}. Die Zeilen müssen aber mit \glqq P \grqq beginnen. 
+Nach den Linearlokationen werden die Punktlokationen erstellt. Die Pointer der erstellten Punktlokationen werden direkt in die Listen der übergeordneten Linearlokationen eingetragen. Beim Erstellen der Punktloationen werden die Pointer auf übergeordneten Linearlokationen \ref{dt:linearReference} direkt eingetragen. Der Prozess des Einlesens läuft analog zu \ref{par:gebietsLokationenErstellen}. Die Zeilen müssen aber mit \glqq P\grqq~beginnen. 
 
 
 \paragraph{Abhängigkeiten verlinken} 
@@ -719,9 +724,9 @@ Der vierte Schritt ist das Verlinken der Ab\-häng\-ig\-keit\-en. In diesem Schr
 Der Graph ist ähnlich aufgebaut, wie der Grunddatenbestand. Er besteht aus einer Liste mit Knoten. Zusätzlich bietet die Klasse \textit{Graph}  Methoden um den Graph aufzubauen und zu pflegen. Das Erstellen des Graphen läuft schrittweise ab.
 
 \paragraph{Erstellen der Knoten \label{knotenErstellen}}
-Ein Knoten ist ein eigenes Objekt. Er enthält einen Pointer auf die Punktlokation, die der Knoten darstellt. Weiterhin hat ein Knoten eine Liste mit Pointern von weiteren Knoten, die vom Streckenverlauf her seine Nachfolger sind, einen Pointer auf seinen Vorgänger, eine Distanz zum Startknoten und ein Flag, ob er bereits besucht wurde. Nachfolger sind die Knoten, die er direkt erreichen kann, bzw. die Punktlokationen, die von seiner Punktloaktion aus erreicht werden können. Die Richtung, die in den originalen Datensätzen beschrieben wird spielt hierbei keine Rolle.
+Ein Knoten ist ein eigenes Objekt. Er enthält einen Pointer auf die Punktlokation, die der Knoten darstellt. Weiterhin hat ein Knoten eine Liste mit Pointern von weiteren Knoten, die vom Streckenverlauf her seine Nachfolger sind, einen Pointer auf seinen Vorgänger, eine Distanz zum Startknoten und ein Flag, ob er bereits besucht wurde. Nachfolger sind die Knoten, die er direkt erreichen kann, bzw. die Punktlokationen, die von seiner Punktloaktion aus erreicht werden können. Die Richtung, die in den originalen Datensätzen beschrieben wird, spielt hierbei keine Rolle.
 
-Bei der Erstellung der Knoten wird der Grunddatenbestand durchlaufen. Wenn eine Lokation eine Punktlokation ist, wird mit ihr ein Knoten erstellt. 
+Bei der Erstellung der Knoten wird der Grunddatenbestand durchlaufen. Wenn eine Lokation eine Punktlokation ist, wird aus ihr ein Knoten erstellt. 
 
 
 Vorgänger und Nachfolger werden erst im weiteren Verlauf des Programms eingetragen. Der Vorgänger kann erst bei der Distanzberechnung \ref{distanzenBerechnen} eingetragen werden. Die Nachfolger werden im Schritt \ref{verlinkenDerKnoten} eingetragen.
@@ -749,7 +754,6 @@ Um die Distanzen zu berechnen reicht der Startpunkt.
 
 \subsubsection{Distanzen berechnen \label{distanzenBerechnen}}
 Beim Berechnen der Distanzen werden vom Startknoten aus die Distanzen zu allen Knoten berechnet.
-\todo{Eventuell hierfür eine Grafik basteln}
 
 \paragraph{Graph bereinigen}
 Vor Beginn der Distanzberechnung wird der Graph bereinigt. Bereinigen bedeutet, dass alle Knoten des Graphen bereinigt werden. Was beim Bereinigen geschehen muss:
@@ -787,7 +791,7 @@ Das Ergebnis wird dem Benutzer angezeigt.
 Das Programm wartet eine Benutzereingabe. Möglich sind eine Neuberechnung der Strecken, die Ausgabe einer Route mit einem anderen Zielpunkt oder die Beendung des Programms.
 
 \section{Pakete}
-Das gesamte Programm besteht aus fünf Pakten. Die Klassen, die nicht primär am Programm beteiligt sind, werden an dieser Stelle nicht weiter erläutert. Die Dokumentation dieser Klassen befindet sich direkt im Quelltext, bzw. kann mit Doxygen ausgegeben werden.
+Das gesamte Programm besteht aus fünf Pakten. Die Klassen, die nicht primär am Programm beteiligt sind, werden an dieser Stelle nicht weiter erläutert. Die Dokumentation aller Klassen befindet sich direkt im Quelltext, bzw. kann mit Doxygen ausgegeben werden.
 
 In dieser Dokumentation sind \textit{deprecated} Methoden und Klassen nicht aufgeführt. Sie werden im Programm nicht (mehr) genutzt, sind aber weiterhin als Quellcode vorhanden und in der Doxygen Dokumentation entsprechend  dokumentiert.
 
@@ -823,7 +827,7 @@ Diese Klasse stellt den Graph dar und beinhaltet Methoden um ihn aufzubauen, sow
 
 
 \subsubsection{Knoten \label{class:Knoten}}
-Die Klasse \textit{Knoten} stellt einen Knoten aus der Graphentheorie dar. In unserer Implementierung baut ein Knoten auf einer Punktlokation auf. Die Verbindungen zu den Punktlokationen werden durch einen Pointer auf die zugrundeliegende Punktlokation dargestellt. Diese Verbindung ermöglicht es, ohne zusätzlichen Speicheraufwand detaillierte Informationen zu dem Knoten zu bekommen. Zusätzlich zu den Grundinformationen hat ein Knoten Pointer auf seinen Vorgänger und seine Nachfolger. Der Vorgänger wird besonders wichtig, wenn aus den berechneten Distanzen eine Route gesucht werden soll. Die Nachfolger werden zur Berechnung der Distanzen benötigt. Weiterhin speichert ein Knoten seine Distanz zum Startknoten und ob er bereits besucht wurde. In \ref{priorityQueueErstellen} wurde beschrieben, wie diese Informationen verarbeitet werden.
+Die Klasse \textit{Knoten} stellt einen Knoten aus der Graphentheorie dar. In unserer Implementierung baut ein Knoten auf einer Punktlokation auf. Die Verbindungen zu den Punktlokationen werden durch einen Pointer auf die zugrundeliegende Punktlokation dargestellt. Diese Verbindung ermöglicht es, ohne nennenswerten Speicheraufwand detaillierte Informationen zu dem Knoten zu bekommen. Zusätzlich zu den Grundinformationen hat ein Knoten Pointer auf seinen Vorgänger und seine Nachfolger. Der Vorgänger wird besonders wichtig, wenn aus den berechneten Distanzen eine Route gesucht werden soll. Die Nachfolger werden zur Berechnung der Distanzen benötigt. Weiterhin speichert ein Knoten seine Distanz zum Startknoten und ob er bereits besucht wurde. In \ref{priorityQueueErstellen} wurde beschrieben, wie diese Informationen verarbeitet werden.
 
 
 \subsubsection{Priority Queue}
@@ -835,7 +839,7 @@ Dieses Paket beinhaltet eine Ansammlung von Klassen, die nicht direkt mit der Ro
 Diese Klasse basiert auf dem \glqq tm *zeit\grqq~struct. Sie wird benötigt um das Attribut \ref{dt:aktualitaet} zu speichern und zu verwalten. Zusätzlich zu dem Struct bietet sie Methoden um die Zeit aus dem Datensatz auszulesen und zu validieren.
 
 \subsubsection{Geokoordinate}
-Diese Klasse wird für das Attribut \ref{st:geoKoordinate} benötigt. Sie enthält Methoden um aus einem String ein WGS84 Datum auszulesen, sowie mit GPS Daten zu rechnen. In ihr sind sowohl die X-Koordinate, als auch die Y-Koordinate des GPS Datums gespeichert.
+Diese Klasse wird für das Attribut \ref{dt:geoKoordinate} benötigt. Sie enthält Methoden um aus einem String ein WGS84 Datum auszulesen, sowie mit GPS Daten zu rechnen. In ihr sind sowohl die X-Koordinate, als auch die Y-Koordinate des GPS Datums gespeichert.
 
 \subsubsection{SicherLesen}
 Dieses Header File bietet Funktionen um die grundsätzlichen Datentypen sicher über die Konsole einzulesen. Sicher bedeutet, dass der Eingabestrom überprüft und bei einem Fehler zurückgesetzt wird.
@@ -851,19 +855,19 @@ Diese Klasse öffnet den Dateistream und zerlegt die .csv Datei in einen Vector.
 \subsection{Root Ordner}
 Der Root Ordner des Programms enthält die Ordner mit den beschriebenen packages.
 
-\subsubsection{Hello \label{hello}}
+\subsubsection{Routenplaner \label{hello}}
 Diese Klasse ist die Main Klasse des Programms. In dieser Klasse wird die Dateiverarbeitung inklusive dem Konstruieren des Graphen initiiert. Der Dateipfad und -Name kann hier geändert werden. Zusätzlich wird hier das Benutzerinterface gestartet.
 
 
 \section{Probleme bei der Routenberechnung \label{Probleme}}
 \subsection{Ungenauigkeiten bei der Berechnung}
-Die Datensätze sind stellenweise nicht genau skaliert. Da bei der Berechnung nur die Luftlinien zwischen Punkten berechnet werden ergibt sich eine Ungenauigkeit in den Berechnungen. Diese Ungenauigkeit ist aber zu vernachlässigen.
+Die Punktlokationen im Datensatz können weit auseinander liegen. Da bei der Berechnung nur die Luftlinien zwischen den Punktlokationen berechnet werden, ergibt sich, besonders in Kurven, eine Ungenauigkeit in den Berechnungen. Diese Ungenauigkeit ist aber zu vernachlässigen.
 
 \subsection{Fehlende Abfahrten}
 In den Datensätzen sind keine Auf- und Abfahrten vorhanden. Aus diesem Grund wird bei der Routenberechnung angenommen, dass Straßen die sich kreuzen auch miteinander verbunden sind. Die tatsächlichen Abfahrmöglichkeiten können sich aber von den Kreuzungen unterscheiden.
 
 \subsection{Abfahrten Abstand}
-Beim Überprüfen der Datensätze ist uns ebenfalls aufgefallen das die Kreuzungen der Straßen, die wir als Abfahrt behandeln, nicht unbedingt genau an dieser Stelle tatsächlich existieren. Das bedeutet das jedes Mal wenn eine Straße gewechselt wird die Berechnung eventuell sich um einige hundert Meter unterscheiden können. Dies ist jedoch eher selten der Fall. Als Beispiel dient hier die Abfahrt Saarbrücken Unner die als Intersectioncode die B406 hat. jedoch kann man auf dem folgenden Bild sehen wie weit sich die eigentliche Ausfahrt von der der Datensätze unterscheidet.
+Beim Überprüfen der Datensätze ist uns ebenfalls aufgefallen, dass die Kreuzungen der Straßen, die wir als Abfahrt behandeln, nicht unbedingt genau an dieser Stelle tatsächlich existieren. Das bedeutet, dass jedes Mal ,wenn eine Straße gewechselt wird, eine Ungenauigkeit von einigen hundert Metern in die Berechnung einfließen kann. Diese Stellen sind aber eher selten, von daher kann diese Ungenauigkeit vernachlässigt werden. Als Beispiel für eine solche Stelle dient hier die Abfahrt Saarbrücken-Unner die als Intersectioncode die B406 hat. Jedoch kann man auf der folgenden Grafik erkennen, wie weit sich die eigentliche Ausfahrt von der der Datensätze unterscheidet.
 
 \begin{figure}[htbp] 
   \centering
@@ -872,7 +876,7 @@ Beim Überprüfen der Datensätze ist uns ebenfalls aufgefallen das die Kreuzung
   \label{fig:entfernungabfahrt}
 \end{figure}
 
-Bei dem oben gezeigten Szenario handelt es sich um die folgende Punktlokation.
+In der Grafik \ref{fig:entfernungabfahrtplk} ist die Punktlokation beschrieben, die als Beispiel für Ungenauigkeiten im Datensatz angeführt wurde.
 
 \begin{figure}[htbp] 
   \centering
@@ -901,12 +905,17 @@ Je nach Konstruktor der Prioirty Queue konnte die berechnete Distanz um -1 Kilom
 Die Makefiles wurden von Eclipse managed makefiles zu handgeschriebenen makefiles geändert. In sämtlichen Klassen wurde die Methode \textit{stoi} zu durch die Methode \textit{atoi} ersetzt.
 
 \subsection{Attributliste \label{bundAttributListe}}
+Die Attributliste entspricht der Originaldokumentation der Bundesanstalt. Die beschreibt die einzelnen Attribute, die im Datensatz vorhanden sind.
 \includepdf[pages={1-2}]{Grafiken/RelatedDocuments/Attributliste_zur_LCL12.pdf}
 
 \subsection{Typen und Untertypen der Lokationen \label{bundFeinDoku}}
+Diese Liste stammt ebenfalls von der Bundesanstalt. In ihr werden die Typen der Lokationen genauer beschrieben.
 \includepdf[pages={1-14}]{Grafiken/RelatedDocuments/Typenliste_V08_2010-03-03.pdf}
 
 \subsection{Broschüre eines privaten Anbieters für Straßenverwaltungssoftware \label{bundGDD}}
+Diese Broschüre stammt von einem privaten Anbieter von Straßenverwaltungssoftware. Sie wurde angehängt um darzustellen, dass die Straßennummern nicht immer dem gewohnten Schema entsprechen müssen.
+
+In diesem Beispiel wird die Straßennummer GDD verwendet.
 \includepdf[pages=1-1]{Grafiken/RelatedDocuments/GDD-Strasse_PI.PDF}
 
 
